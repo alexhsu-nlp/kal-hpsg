@@ -1,1 +1,1 @@
-*.tdl linguist-detectable=true
+*.lisp linguist-detectable=false
