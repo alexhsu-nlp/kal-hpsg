@@ -1,0 +1,9 @@
+; generic_card_ne := numeral-adj-lex &
+;   [ STEM < "_generic_card_ne_" >,
+;     TOKENS.+LIST < [ +CLASS card_ne, +CARG #carg ] >, 
+;     SYNSEM.LKEYS.KEYREL.CARG #carg ].
+
+generic_card_ne := numeral-adj-lex &
+  [ STEM < "_generic_card_ne_" >,
+    TOKENS.+LIST < [ +CLASS card_ne, +CARG #carg ] >, 
+    SYNSEM.LKEYS.KEYREL.CARG #carg ].

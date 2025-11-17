@@ -1,0 +1,1013 @@
+;;; -*- Mode: TDL; Coding: utf-8 -*-
+;;; Inflecting Lexical Rule Instances
+
+sg_erg-suffix :=
+%suffix (* -p)
+sg_erg-lex-rule.
+
+sg_ins-suffix :=
+%suffix (* -mik)
+sg_ins-lex-rule.
+
+pl_abs+erg-suffix :=
+%suffix (* -t)
+pl_abs+erg-lex-rule.
+
+;;;pl_erg-suffix :=
+;;;%suffix (* -t)
+;;;pl_erg-lex-rule.
+
+pl_ins-suffix :=
+%suffix (* -nik)
+pl_ins-lex-rule.
+
+sg_abl-suffix :=
+%suffix (* -mit)
+sg_abl-lex-rule.
+
+sg_abl-suffix2 :=
+%suffix (* -miit)
+sg_abl-lex-rule.
+
+pl_abl-suffix :=
+%suffix (* -nit)
+pl_abl-lex-rule.
+
+pl_abl-suffix2 :=
+%suffix (* -niit)
+pl_abl-lex-rule.
+
+sg_loc-suffix :=
+%suffix (* -mi)
+sg_loc-lex-rule.
+
+pl_loc-suffix :=
+%suffix (* -ni)
+pl_loc-lex-rule.
+
+sg_all-suffix :=
+%suffix (* -mut)
+sg_all-lex-rule.
+
+pl_all-suffix :=
+%suffix (* -nut)
+pl_all-lex-rule.
+
+1sg_sg_abs-suffix :=
+%suffix (* -ga)
+1sg_sg_abs-lex-rule.
+
+1pl_sg_abs-suffix :=
+%suffix (* -q^vut)
+1pl_sg_abs-lex-rule.
+
+1pl_sg_erg-suffix :=
+%suffix (* -tta)
+1pl_sg_erg-lex-rule.
+
+3sg_sg_loc-suffix :=
+%suffix (* -ani)
+3sg_sg_loc-lex-rule.
+
+3pl_sg_loc-suffix :=
+%suffix (* -anni)
+3pl_sg_loc-lex-rule.
+
+3pl_pl_loc-suffix :=
+%suffix (* -itni)
+3pl_pl_loc-lex-rule.
+
+3sg_sg_ins-suffix :=
+%suffix (* -anik)
+3sg_sg_ins-lex-rule.
+
+1sg_sg_erg-suffix :=
+%suffix (* -ma)
+1sg_sg_erg-lex-rule.
+
+1pl_pron_sg_erg-suffix :=
+%suffix (* -tta)
+1pl_pron_sg_erg-lex-rule.
+
+1pl_pron_sg_abs-suffix :=
+%suffix (* -q^vut)
+1pl_pron_sg_abs-lex-rule.
+
+1pl_pron_sg_loc-suffix :=
+%suffix (* -ttənni)
+1pl_pron_sg_loc-lex-rule.
+
+1sg_pron_sg_erg-suffix :=
+%suffix (* -ma)
+1sg_pron_sg_erg-lex-rule.
+
+1sg_pron_sg_abs-suffix :=
+%suffix (* -ga)
+1sg_pron_sg_abs-lex-rule.
+
+1sg_pron_sg_loc-suffix :=
+%suffix (* -nni)
+1sg_pron_sg_loc-lex-rule.
+
+2sg_pron_sg_loc-suffix :=
+%suffix (* -nni)
+2sg_pron_sg_loc-lex-rule.
+
+1pl_pron_pl_abs-suffix :=
+%suffix (* -vut)
+1pl_pron_pl_abs-lex-rule.
+
+2sg_pron_sg_abs-suffix :=
+%suffix (* -t)
+2sg_pron_sg_abs-lex-rule.
+
+2sg_sg_abs-suffix :=
+%suffix (* -t)
+2sg_sg_abs-lex-rule.
+
+3sg_pl_abs-suffix :=
+%suffix (* -i)
+3sg_pl_abs-lex-rule.
+
+3sg_sg_abs-suffix :=
+%suffix (* -a)
+3sg_sg_abs-lex-rule.
+
+3sg_sg_abl-suffix :=
+%suffix (* -anit)
+3sg_sg_abl-lex-rule.
+
+3pl_sg_abl-suffix :=
+%suffix (* -annit)
+3pl_sg_abl-lex-rule.
+
+3pl_sg_abs-suffix :=
+%suffix (* -at)
+3pl_sg_abs-lex-rule.
+
+3pl_pron_sg_abs-suffix :=
+%suffix (* -at)
+3pl_pron_sg_abs-lex-rule.
+
+3pl_pron_pl_abs-suffix :=
+%suffix (* -it)
+3pl_pron_pl_abs-lex-rule.
+
+3sg_pron_sg_abs-suffix :=
+%suffix (* -a)
+3sg_pron_sg_abs-lex-rule.
+
+3sg_pron_pl_abs-suffix :=
+%suffix (* -i)
+3sg_pron_pl_abs-lex-rule.
+
+3sg_pron_sg_all-suffix :=
+%suffix (* -anut)
+3sg_pron_sg_all-lex-rule.
+
+1sg_pl_abs-suffix :=
+%suffix (* -kka)
+1sg_pl_abs-lex-rule.
+
+1sg_pron_pl_abs-suffix :=
+%suffix (* -kka)
+1sg_pron_pl_abs-lex-rule.
+
+3pl_pl_abs-suffix :=
+%suffix (* -it)
+3pl_pl_abs-lex-rule.
+
+3sg_sg_erg-suffix :=
+%suffix (* -ata)
+3sg_sg_erg-lex-rule.
+
+3sg_pron_sg_erg-suffix :=
+%suffix (* -ata)
+3sg_pron_sg_erg-lex-rule.
+
+4sg_pron_sg_loc-suffix :=
+%suffix (* -mini)
+4sg_pron_sg_loc-lex-rule.
+
+4sg_pron_sg_all-suffix :=
+%suffix (* -minut)
+4sg_pron_sg_all-lex-rule.
+
+4sg_pron_pl_all-suffix :=
+%suffix (* -minut)
+4sg_pron_pl_all-lex-rule.
+
+4pl_pron_pl_ins-suffix :=
+%suffix (* -minnik)
+4pl_pron_pl_ins-lex-rule.
+
+4sg_pron_sg_abs-suffix :=
+%suffix (* -ni)
+4sg_pron_sg_abs-lex-rule.
+
+4sg_pron_pl_abs-suffix :=
+%suffix (* -ni)
+4sg_pron_pl_abs-lex-rule.
+
+4sg_pron_sg_erg-suffix :=
+%suffix (* -mi)
+4sg_pron_sg_erg-lex-rule.
+
+4pl_pron_sg_abs-suffix :=
+%suffix (* -q^tək)
+4pl_pron_sg_abs-lex-rule.
+
+ind+int_1sg_verb-suffix :=
+%suffix (* -vuŋa)
+ind+int_1sg_verb-lex-rule.
+
+ind_2sg_verb-suffix :=
+%suffix (* -vutət)
+ind_2sg_verb-lex-rule.
+
+ind_3sg_verb-suffix :=
+%suffix (* -vuq)
+ind_3sg_verb-lex-rule.
+
+ind_3pl_verb-suffix :=
+%suffix (* -v^vut)
+ind_3pl_verb-lex-rule.
+
+ind+int_1sg_3sg_verb-suffix :=
+%suffix (* -vara)
+ind+int_1sg_3sg_verb-lex-rule.
+
+;;ind+int_1sg_claus_verb-suffix :=
+;;%suffix (* -vara)
+;;ind+int_1sg_claus_verb-lex-rule.
+
+ind_2sg_1sg_verb-suffix :=
+%suffix (* -vaqma)
+ind_2sg_1sg_verb-lex-rule.
+
+ind_2sg_3sg_verb-suffix :=
+%suffix (* -vat)
+ind_2sg_3sg_verb-lex-rule.
+
+ind_2sg_3pl_verb-suffix :=
+%suffix (* -vatət)
+ind_2sg_3pl_verb-lex-rule.
+
+ind+int_3sg_1sg_verb-suffix :=
+%suffix (* -vaaŋa)
+ind+int_3sg_1sg_verb-lex-rule.
+
+ind+int_3sg_1pl_verb-suffix :=
+%suffix (* -vaatigut)
+ind+int_3sg_1pl_verb-lex-rule.
+
+ind+int_3sg_2sg_verb-suffix :=
+%suffix (* -vaatət)
+ind+int_3sg_2sg_verb-lex-rule.
+
+int_2sg_verb-suffix :=
+%suffix (* -vit)
+int_2sg_verb-lex-rule.
+
+int_2pl_verb-suffix :=
+%suffix (* -visi)
+int_2pl_verb-lex-rule.
+
+int_3sg_verb-suffix :=
+%suffix (* -va)
+int_3sg_verb-lex-rule.
+
+int_3pl_verb-suffix :=
+%suffix (* -v^vat)
+int_3pl_verb-lex-rule.
+
+part_1sg_verb-suffix :=
+%suffix (* -ðuŋa)
+part_1sg_verb-lex-rule.
+
+part_2sg_verb-suffix :=
+%suffix (* -ðutət)
+part_2sg_verb-lex-rule.
+
+part_3sg_verb-suffix :=
+%suffix (* -ðuq)
+part_3sg_verb-lex-rule.
+
+iter_3sg_verb-suffix :=
+%suffix (* -gaaŋat)
+iter_3sg_verb-lex-rule.
+
+patient-part-suffix :=
+%suffix (* -ðaq)
+patient_participle-lex-rule.
+
+intrans_participle-suffix :=
+%suffix (* -ðuq)
+intrans_participle-lex-rule.
+
+pp_participle-suffix := 
+%suffix (* -f^fik)
+pp_participle-lex-rule.
+
+part_1sg_3sg_verb-suffix :=
+%suffix (* -gəga)
+part_1sg_3sg_verb-lex-rule.
+
+part_1sg_4sg_verb-suffix :=
+%suffix (* -gəmni)
+part_1sg_4sg_verb-lex-rule.
+
+part_3sg_1sg_verb-suffix :=
+%suffix (* -gəaŋa)
+part_3sg_1sg_verb-lex-rule.
+
+cntp_1sg_subj_verb-suffix :=
+%suffix (* -l^luŋa)
+cntp_1sg_subj_verb-lex-rule.
+
+cntp_1pl_subj_verb-suffix :=
+%suffix (* -l^luta)
+cntp_1pl_subj_verb-lex-rule.
+
+cntp_4sg_subj_verb-suffix :=
+%suffix (* -l^luni)
+cntp_4sg_subj_verb-lex-rule.
+
+cntp_3sg_obj_verb-suffix :=
+%suffix (* -l^lugu)
+cntp_3sg_obj_verb-lex-rule.
+
+caus_1sg_verb-suffix :=
+%suffix (* -gama)
+caus_1sg_verb-lex-rule.
+
+caus_1pl_verb-suffix :=
+%suffix (* -gamta)
+caus_1pl_verb-lex-rule.
+
+caus_2sg_verb-suffix :=
+%suffix (* -gavət)
+caus_2sg_verb-lex-rule.
+
+caus_2pl_verb-suffix :=
+%suffix (* -gassi)
+caus_2pl_verb-lex-rule.
+
+caus_3sg_verb-suffix :=
+%suffix (* -m^mat)
+caus_3sg_verb-lex-rule.
+
+caus_3pl_verb-suffix :=
+%suffix (* -m^mata)
+caus_3pl_verb-lex-rule.
+
+caus_4sg_verb-suffix :=
+%suffix (* -gami)
+caus_4sg_verb-lex-rule.
+
+caus_4pl_verb-suffix :=
+%suffix (* -gamik)
+caus_4pl_verb-lex-rule.
+
+caus_3pl_1pl_verb-suffix :=
+%suffix (* -gamtəgət)
+caus_3pl_1pl_verb-lex-rule.
+
+caus_1sg_3sg_verb-suffix :=
+%suffix (* -gakku)
+caus_1sg_3sg_verb-lex-rule.
+
+caus_3sg_3sg_verb-suffix :=
+%suffix (* -m^magit)
+caus_3sg_3sg_verb-lex-rule.
+
+caus_3sg_3pl_verb-suffix :=
+%suffix (* -m^magu)
+caus_3sg_3pl_verb-lex-rule.
+
+caus_4sg_3sg_verb-suffix :=
+%suffix (* -gamijuk)
+caus_4sg_3sg_verb-lex-rule.
+
+int_2sg_3sg_verb-suffix :=
+%suffix (* -vijuk)
+int_2sg_3sg_verb-lex-rule.
+
+ind+int_3pl_3p_verb-suffix :=
+%suffix (* -vaat)
+ind+int_3pl_3p_verb-lex-rule.
+
+int_2pl_3sg_verb-suffix := 
+%suffix (* -visiuk)
+int_2pl_3sg_verb-lex-rule.
+
+part_3pl_3pl_verb-suffix :=
+%suffix (* -gaat)
+part_3pl_3pl_verb-lex-rule.
+
+ind_2pl_verb-suffix :=
+%suffix (* -vusi)
+ind_2pl_verb-lex-rule.
+
+ind+int_1pl_verb-suffix :=
+%suffix (* -vugut)
+ind+int_1pl_verb-lex-rule.
+
+ind+int_1sg_2sg_verb-suffix :=
+%suffix (* -vamgət)
+ind+int_1sg_2sg_verb-lex-rule.
+
+ind+int_1sg_2sg_verb-suffix_2 :=
+%suffix (* -vagət)
+ind+int_1sg_2sg_verb-lex-rule.
+
+ind+int_1p_2pl_verb-suffix :=
+%suffix (* -vamsi)
+ind+int_1p_2pl_verb-lex-rule.
+
+ind+int_1pl_3pl_verb-suffix :=
+%suffix (* -vavut)
+ind+int_1pl_3pl_verb-lex-rule.
+
+part_2sg_3sg_verb-suffix :=
+%suffix (* -gət)
+part_2sg_3sg_verb-lex-rule.
+
+;;part_2sg_claus_verb-suffix :=
+;;%suffix (* -gət)
+;;part_2sg_claus_verb-lex-rule.
+
+ind+int_1sg_3pl_verb-suffix :=
+%suffix (* -vakka)
+ind+int_1sg_3pl_verb-lex-rule.
+
+ind+int_1pl_3sg_verb-suffix :=
+%suffix (* -vaqvut)
+ind+int_1pl_3sg_verb-lex-rule.
+
+ind_2pl_3sg_verb-suffix :=
+%suffix (* -vaqsi)
+ind_2pl_3sg_verb-lex-rule.
+
+ind+int_3sg_3pl_verb-suffix :=
+%suffix (* -vai)
+ind+int_3sg_3pl_verb-lex-rule.
+
+part_3pl_verb-suffix :=
+%suffix (* -ðut)
+part_3pl_verb-lex-rule.
+
+cntp_4pl_verb-suffix :=
+%suffix (* -l^lutik)
+cntp_4pl_verb-lex-rule.
+
+cntp_3pl_obj_verb-suffix :=
+%suffix (* -l^lugit)
+cntp_3pl_obj_verb-lex-rule.
+
+ind+int_3sg_3sg_verb-suffix :=
+%suffix (* -vaa)
+ind+int_3sg_3sg_verb-lex-rule.
+
+;;;mod March 7th, 2025
+;;ind+int_3sg_claus_verb-suffix :=
+;;%suffix (* -vaa)
+;;ind+int_3sg_claus_verb-lex-rule.
+
+future-suffix :=
+%suffix (* -ssa)
+future-lex-rule.
+
+pfv-suffix :=
+%suffix (* -sima)
+pfv-lex-rule.
+
+hab-suffix :=
+%suffix (* -ðaq)
+hab-lex-rule.
+
+cont-suffix :=
+%suffix (* -juaq)
+cont-lex-rule.
+
+yunnaaq-suffix :=
+%suffix (* -yunnaaq)
+yunnaaq-lex-rule.
+
+incep-suffix :=
+%suffix (* -liq)
+incep-lex-rule.
+
+pfv_tord-suffix :=
+%suffix (* -riiq)
+pfv_tord-lex-rule.
+
+neg-suffix :=
+%suffix (* -ŋŋit)
+neg-lex-rule.
+
+ind+int_1sg_verb_neg-suffix :=
+%suffix (* -laŋa)
+ind+int_1sg_verb_neg-lex-rule.
+
+ind+int_1pl_verb_neg-suffix :=
+%suffix (* -lagut)
+ind+int_1pl_verb_neg-lex-rule.
+
+ind_3sg_verb_neg-suffix :=
+%suffix (* -laq)
+ind_3sg_verb_neg-lex-rule.
+
+ind+int_2sg_verb_neg-suffix :=
+%suffix (* -latət)
+ind+int_2sg_verb_neg-lex-rule.
+
+ind+int_3pl_verb_neg-suffix :=
+%suffix (* -l^lat)
+ind+int_3pl_verb_neg-lex-rule.
+
+ind+int_1sg_3sg_verb_neg-suffix :=
+%suffix (* -lara)
+ind+int_1sg_3sg_verb_neg-lex-rule.
+
+ind+int_1sg_3pl_verb_neg-suffix :=
+%suffix (* -lakka)
+ind+int_1sg_3pl_verb_neg-lex-rule.
+
+ind+int_1sg_2sg_verb_neg-suffix :=
+%suffix (* -lakkit)
+ind+int_1sg_2sg_verb_neg-lex-rule.
+
+;;ind+int_1sg_claus_verb_neg-suffix :=
+;;%suffix (* -lara)
+;;ind+int_1sg_claus_verb_neg-lex-rule.
+
+ind_3sg_3sg_verb_neg-suffix :=
+%suffix (* -laa)
+ind_3sg_3sg_verb_neg-lex-rule.
+
+;;ind+int_3sg_claus_verb_neg-suffix :=
+;;%suffix (* -laa)
+;;ind+int_3sg_claus_verb_neg-lex-rule.
+
+ind+int_1pl_3pl_verb_neg-suffix :=
+%suffix (* -lavut)
+ind+int_1pl_3pl_verb_neg-lex-rule.
+
+ind_2pl_3sg_verb_neg-suffix :=
+%suffix (* -laqsi)
+ind_2pl_3sg_verb_neg-lex-rule.
+
+ind_3sg_3pl_verb_neg-suffix :=
+%suffix (* -lai)
+ind_3sg_3pl_verb_neg-lex-rule.
+
+int_3sg_verb_neg-suffix :=
+%suffix (* -la)
+int_3sg_verb_neg-lex-rule.
+
+int_2pl_3sg_verb_neg-suffix :=
+%suffix (* -lisiuk)
+int_2pl_3sg_verb_neg-lex-rule.
+
+int_2sg_3sg_verb_neg-suffix :=
+%suffix (* -lijuk)
+int_2sg_3sg_verb_neg-lex-rule.
+
+int_2sg_3pl_verb_neg-suffix :=
+%suffix (* -ligət)
+int_2sg_3pl_verb_neg-lex-rule.
+
+caus_3sg_verb_neg-suffix :=
+%suffix (* -m^mat)
+caus_3sg_verb_neg-lex-rule.
+
+caus_3pl_verb_neg-suffix :=
+%suffix (* -m^mata)
+caus_3pl_verb_neg-lex-rule.
+
+caus_2sg_3sg_verb_neg-suffix :=
+%suffix (* -nakgu)
+caus_2sg_3sg_verb_neg-lex-rule.
+
+cntp_1sg_subj_verb_neg-suffix :=
+%suffix (* -naŋa)
+cntp_1sg_subj_verb_neg-lex-rule.
+
+cntp_3sg_subj_verb_neg-suffix :=
+%suffix (* -nani)
+cntp_3sg_subj_verb_neg-lex-rule.
+
+cntp_3sg_obj_verb_neg-suffix :=
+%suffix (* -nagu)
+cntp_3sg_obj_verb_neg-lex-rule.
+
+ind+int_3pl_3p_verb_neg-suffix :=
+%suffix (* -laat)
+ind+int_3pl_3p_verb_neg-lex-rule.
+
+imp_2sg_verb-suffix := 
+%suffix (* -git)
+imp_2sg_verb-lex-rule.
+
+imp_2pl_verb-suffix := 
+%suffix (* -gitci)
+imp_2pl_verb-lex-rule.
+
+imp_2sg_3sg_verb-suffix := 
+%suffix (* -guk)
+imp_2sg_3sg_verb-lex-rule.
+
+imp_2sg_3pl_verb-suffix := 
+%suffix (* -kkit)
+imp_2sg_3pl_verb-lex-rule.
+
+passive-suffix :=
+%suffix (* -nəqaq)
+passive-lex-rule.
+
+ti_antipass-suffix :=
+%suffix (* -ði)
+ti_antipass-lex-rule.
+
+trans_caus_pass-suffix :=
+%suffix (* -nəqaq)
+trans_caus_pass-lex-rule.
+
+nnik_antipass-suffix :=
+%suffix (* -nnək)
+nnik_antipass-lex-rule.
+
+caus_valchg-suffix :=
+%suffix (* -tət)
+caus_valchg-lex-rule.
+
+ask_valchg-suffix :=
+%suffix (* -qqu)
+ask_valchg-lex-rule.
+
+sima-suffix :=
+%suffix (* -sima)
+sima-lex-rule.
+
+trans_caus_valchg-suffix :=
+%suffix (* -tət)
+trans_caus_valchg-lex-rule.
+
+trans_ask_valchg-suffix :=
+%suffix (* -qqu)
+trans_ask_valchg-lex-rule.
+
+niq-suffix :=
+%suffix (* -niq)
+niq-lex-rule.
+
+sg_erg_ques-suffix :=
+%suffix (* -p)
+sg_erg_ques-lex-rule.
+
+common_attr-suffix :=
+%suffix (* -ðuq)
+common_attr-lex-rule.
+
+pl_abs_attr_adj-suffix :=
+%suffix (* -t)
+pl_abs_attr_adj-lex-rule.
+
+sg_erg_attr_adj-suffix :=
+%suffix (* -p)
+sg_erg_attr_adj-lex-rule.
+
+pl_erg_attr_adj-suffix :=
+%suffix (* -t)
+pl_erg_attr_adj-lex-rule.
+
+sg_ins_attr_adj-suffix :=
+%suffix (* -mik)
+sg_ins_attr_adj-lex-rule.
+
+pl_ins_attr_adj-suffix :=
+%suffix (* -nik)
+pl_ins_attr_adj-lex-rule.
+
+sg_incorp_real_v_attr_adj-suffix :=
+%suffix (* -mik)
+sg_incorp_real_v_attr_adj-lex-rule.
+
+pl_incorp_real_v_attr_adj-suffix :=
+%suffix (* -nik)
+pl_incorp_real_v_attr_adj-lex-rule.
+
+pl_incorp_npred_attr_adj-suffix :=
+%suffix (* -t)
+pl_incorp_npred_attr_adj-lex-rule.
+
+;;;mod [TODO: choices]
+sg_loc_attr_adj-suffix :=
+%suffix (* -mi)
+sg_loc_attr_adj-lex-rule.
+
+pl_loc_attr_adj-suffix :=
+%suffix (* -ni)
+pl_loc_attr_adj-lex-rule.
+;;;endmod
+
+suuq_adj-suffix :=
+%suffix (* -suuq)
+suuq_adj-lex-rule.
+
+tu_adj-suffix :=
+%suffix (* -uq)
+tu_adj-lex-rule.
+
+adj_pred_u-suffix :=
+%suffix (* -u)
+adj_pred_u-lex-rule.
+
+noun_pred_u-suffix :=
+%suffix (* -u)
+noun_pred_u-lex-rule.
+
+noun_pred_nnguq-suffix :=
+%suffix (* -ŋŋuq)
+noun_pred_nnguq-lex-rule.
+
+noun_pred_irute-suffix :=
+%suffix (* -irutə)
+noun_pred_irute-lex-rule.
+
+qaq-incorp-suffix :=
+%suffix (* -qaq)
+qaq-incorp-lex-rule.
+
+lik-part-suffix :=
+%suffix (* -lək)
+lik-part-lex-rule.
+
+siaq-part-suffix :=
+%suffix (* -siaq)
+siaq-part-lex-rule.
+
+lijaq-part-suffix :=
+%suffix (* -lijaq)
+lijaq-part-lex-rule.
+
+tuq-incorp-suffix :=
+%suffix (* -tuq)
+tuq-incorp-lex-rule.
+
+siuq-incorp-suffix :=
+%suffix (* -siuq)
+siuq-incorp-lex-rule.
+
+si-incorp-suffix :=
+%suffix (* -si)
+si-incorp-lex-rule.
+
+t-catch-incorp-suffix :=
+%suffix (* -t^)
+t-catch-incorp-lex-rule.
+
+liaq-incorp-suffix :=
+%suffix (* -liaq)
+liaq-incorp-lex-rule.
+
+liuq-incorp-suffix :=
+%suffix (* -liuq)
+liuq-incorp-lex-rule.
+
+int_2sg_1sg_verb-suffix :=
+%suffix (* -viŋa)
+int_2sg_1sg_verb-lex-rule.
+
+can-suffix := 
+%suffix (* -sinnau)
+can-lex-rule.
+
+must-suffix := 
+%suffix (* -ðarijaqaq)
+must-lex-rule.
+
+be-supposed-to-suffix := 
+%suffix (* -ðukcau)
+be-supposed-to-lex-rule.
+
+want-to-suffix := 
+%suffix (* -yuma)
+want-to-lex-rule.
+
+desire-to-suffix :=
+%suffix (* -q^gusuk)
+desire-to-lex-rule.
+
+intend-to-suffix := 
+%suffix (* -niaq)
+intend-to-lex-rule.
+
+go-and-suffix := 
+%suffix (* -gi^jaqtuq)
+go-and-lex-rule.
+
+little-suffix := 
+%suffix (* -ŋŋuaq)
+little-lex-rule.
+
+big-suffix :=
+%suffix (* -q^cuaq)
+big-lex-rule.
+
+tit-suffix :=
+%suffix (* -tət)
+tit-lex-rule.
+
+new-suffix :=
+%suffix (* -taaq)
+new-lex-rule.
+
+old-suffix :=
+%suffix (* -tuqaq)
+old-lex-rule.
+
+real-suffix :=
+%suffix (* -vik)
+real-lex-rule.
+
+passuit-suffix :=
+%suffix (* -q^vakcuaq)
+passuit-lex-rule.
+
+;abs_part-suffix :=
+;%suffix (* -nəq)
+;abs_part-lex-rule.
+
+abs-part-anc-suffix :=
+%suffix (* -nəq)
+abs-part-anc-lex-rule.
+
+poss-abs-part-anc-suffix :=
+%suffix (* -nəq)
+poss-abs-part-anc-lex-rule.
+
+;neq-nonpossess-suffix :=
+;%suffix (* -nəq)
+;neq-nonpossessive-intrans-lex-rule.
+
+incorp-poss-suffix :=
+%suffix (* -gə)
+incorp-poss-verb-lex-rule.
+
+liq-provide-suffix := 
+%suffix (* -liq)
+liq-provide-lex-rule.
+
+part-pl-abs-suffix :=
+%suffix (* -t)
+part-pl-abs-lex-rule.
+
+part-sg-erg-suffix :=
+%suffix (* -p)
+part-sg-erg-lex-rule.
+
+part-sg-all-suffix :=
+%suffix (* -mut)
+part-sg-all-lex-rule.
+
+part-sg-ins-suffix :=
+%suffix (* -mik)
+part-sg-ins-lex-rule.
+
+part-1sg-poss-sg-abs-suffix :=
+%suffix (* -ga)
+part-1sg-poss-sg-abs-lex-rule.
+
+part-1sg-poss-sg-erg-suffix :=
+%suffix (* -ma)
+part-1sg-poss-sg-erg-lex-rule.
+
+part-3sg-poss-pl-abs-suffix :=
+%suffix (* -i)
+part-3sg-poss-pl-abs-lex-rule.
+
+part-3sg-poss-sg-abs-suffix :=
+%suffix (* -a)
+part-3sg-poss-sg-abs-lex-rule.
+
+sg_abs-dem-suffix := 
+%suffix (* -na)
+sg_abs-dem-lex-rule.
+
+sg_erg-dem-suffix := 
+%suffix (* -suma)
+sg_erg-dem-lex-rule.
+
+pl_erg-dem-suffix := 
+%suffix (* -kkua)
+pl_erg-dem-lex-rule.
+
+sg_abs-dem-pron-suffix := 
+%suffix (* -na)
+sg_abs-dem-pron-lex-rule.
+
+sg_erg-dem-pron-suffix := 
+%suffix (* -suma)
+sg_erg-dem-pron-lex-rule.
+
+pl_erg-dem-pron-suffix := 
+%suffix (* -kkua)
+pl_erg-dem-pron-lex-rule.
+
+loc-dem-pron-suffix := 
+%suffix (* ani)
+loc-dem-pron-lex-rule.
+
+abl-dem-pron-suffix := 
+%suffix (* aŋŋa)
+abl-dem-pron-lex-rule.
+
+all-dem-pron-suffix := 
+%suffix (* uŋŋa)
+all-dem-pron-lex-rule.
+
+ins-dem-pron-suffix := 
+%suffix (* iŋŋa)
+ins-dem-pron-lex-rule.
+
+loc-dem-adv-suffix :=
+%suffix (* ani)
+loc-dem-adv-lex-rule.
+
+abl-dem-adv-suffix :=
+%suffix (* aŋŋa)
+abl-dem-adv-lex-rule.
+
+all-dem-adv-suffix :=
+%suffix (* aŋa)
+all-dem-adv-lex-rule.
+
+3pl_sg_all-suffix :=
+%suffix (* -annut)
+3pl_sg_all-lex-rule.
+
+qatigiik-suffix :=
+%suffix (* -qatəgiik)
+qatigiik-lex-rule.
+
+laaq-suffix := 
+%suffix (* -laaq)
+laaq-lex-rule.
+
+ngaaq-suffix := 
+%suffix (* -ŋaaq)
+ngaaq-lex-rule.
+
+vik-v-suffix := 
+%suffix (* -vik)
+vik-v-lex-rule.
+
+innaq-suffix := 
+%suffix (* -g^innaq)
+innaq-lex-rule.
+
+lluaq-suffix := 
+%suffix (* -l^luaq)
+lluaq-lex-rule.
+
+vallaaq-suffix := 
+%suffix (* -vallaaq)
+vallaaq-lex-rule.
+
+nqik-suffix := 
+%suffix (* -nqik)
+nqik-lex-rule.
+
+tac-prefix := 
+%prefix (* tac-)
+tac-lex-rule.
+
+tac-pron-prefix := 
+%prefix (* tac-)
+tac-pron-lex-rule.
+
+tac-adv-prefix := 
+%prefix (* tac-)
+tac-pron-adv-lex-rule.
+
+kkuq-suffix := 
+%suffix (* -kkuq)
+kkuq-lex-rule.
+
+miuq-suffix := 
+%suffix (* -miuq)
+miuq-lex-rule.
+
+sg_via-suffix := 
+%suffix (* -kkut)
+sg_via-lex-rule.
+
+pl_via-suffix :=
+%suffix (* -təgut)
+pl_via-lex-rule.
+
+sg_equ-suffix := 
+%suffix (* -tut)
+sg_equ-lex-rule.

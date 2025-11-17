@@ -1,0 +1,143 @@
+;;; -*- Mode: TDL; Coding: utf-8 -*-
+
+loc-pp := locative-pp-phrase.
+
+;instr-pp := instrumental-pp-phrase.
+
+allat-pp := allative-pp-phrase.
+
+ablat-pp := ablative-pp-phrase.
+
+via-pp := vialis-pp-phrase.
+
+head-adj-int := head-adj-int-phrase2.
+
+adj-head-int := adj-head-int-phrase2.
+
+decl-head-opt-subj := decl-head-opt-subj-phrase.
+
+imp-head-opt-subj := imp-head-opt-subj-phrase.
+
+;;;raw-head-opt-subj := raw-decl-head-opt-subj-phrase.
+
+basic-head-opt-comp := basic-head-opt-comp-phrase.
+
+comp-head := comp-head-phrase.
+
+subj-head := subj-head-phrase.
+
+quote-subj-head := quote-subj-head-phrase.
+
+;;; 2025-03-25
+head-subj := head-subj-phrase.
+
+spec-head := spec-head-phrase.
+
+adj-spec-head := adj-spec-head-phrase.
+
+noun-poss-unary-1 := noun-poss-unary-phrase-1.
+
+head-spec := head-spec-phrase.
+
+bare-np := bare-np-phrase.
+
+unexpr-np-top-coord := unexpr-3rd-np-top-coord-rule.
+
+np1-any-any-pl-same-same-same-1st-any-1st-top-coord := np1-any-any-pl-same-same-same-1st-any-1st-top-coord-rule.
+
+np1-any-any-pl-same-same-same-2nd+3rd-1st-1st-top-coord := np1-any-any-pl-same-same-same-2nd+3rd-1st-1st-top-coord-rule.
+
+np1-any-any-pl-same-same-same-2nd-3rd-2nd-top-coord := np1-any-any-pl-same-same-same-2nd-3rd-2nd-top-coord-rule.
+
+np1-any-any-pl-same-same-same-3rd-2nd-2nd-top-coord := np1-any-any-pl-same-same-same-3rd-2nd-2nd-top-coord-rule.
+
+np1-any-any-pl-same-same-same-3rd-3rd-3rd-top-coord := np1-any-any-pl-same-same-same-3rd-3rd-3rd-top-coord-rule.
+
+np1-any-any-pl-same-same-same-1st-any-1st-mid-coord := np1-any-any-pl-same-same-same-1st-any-1st-mid-coord-rule.
+
+np1-any-any-pl-same-same-same-2nd+3rd-1st-1st-mid-coord := np1-any-any-pl-same-same-same-2nd+3rd-1st-1st-mid-coord-rule.
+
+np1-any-any-pl-same-same-same-2nd-3rd-2nd-mid-coord := np1-any-any-pl-same-same-same-2nd-3rd-2nd-mid-coord-rule.
+
+np1-any-any-pl-same-same-same-3rd-2nd-2nd-mid-coord := np1-any-any-pl-same-same-same-3rd-2nd-2nd-mid-coord-rule.
+
+np1-any-any-pl-same-same-same-3rd-3rd-3rd-mid-coord := np1-any-any-pl-same-same-same-3rd-3rd-3rd-mid-coord-rule.
+
+np1-bottom-coord := np1-bottom-coord-rule.
+
+vp1-top-coord := vp1-top-coord-rule.
+
+vp1-bottom-coord := vp1-bottom-coord-rule.
+
+right-cntp-s2-top-coord := right-cntp-s2-top-coord-rule.
+
+both-ind-s1-top-coord := both-ind-s1-top-coord-rule.
+
+runon-top-coord := runon-top-coord-rule.
+
+s1-and-bottom-coord := s1-and-bottom-coord-rule.
+
+s1-but-bottom-coord := s1-but-bottom-coord-rule.
+
+s2-bottom-coord := s2-bottom-coord-rule.
+
+s-runon-bottom-coord := s-runon-bottom-coord-rule.
+
+;;;mod
+adj1-top-coord := adj1-top-coord-rule.
+;;;mod
+adj1-bottom-coord := adj1-bottom-coord-rule.
+
+caus-prehead-s-attach-mod-cl := causative-prehead-s-attach-modifying-clause-phrase.
+
+cntp-prehead-s-attach-mod-cl := cntp-prehead-s-attach-modifying-clause-phrase.
+
+while-prehead-s-attach-mod-cl := while-cntp-prehead-s-attach-modifying-clause-phrase.
+
+adj-head-scop-nocrf := nocrf-adj-head-scop-phrase.
+
+adj-head-scop-crf := crf-adj-head-scop-phrase.
+
+head-comp := head-comp-phrase.
+
+in-situ-ques := insitu-int-cl.
+
+incorp-adj-head-int := incorp-adj-head-int-phrase.
+
+incorp-head-adj-int := incorp-head-adj-int-phrase.
+
+;nom-cl := high-nominalized-clause-phrase.
+
+adj2adv := adv-from-adj-unary-phrase.
+
+ext-rel-mod := ext-rel-mod-phrase.
+
+incorp-rel-mod := incorp-rel-mod-phrase.
+
+title := title-phrase.
+
+abs-time := abs-time-pp-phrase.
+
+equ-pp := equative-pp-phrase.
+
+noun-mod-incorp := noun-mod-incorp-unary-phrase.
+
+noun-mod := noun-mod-unary-phrase.
+
+;;crf-h-head := crf-h-head-phrase.
+
+crf-h-unary := crf-h-unary-phrase.
+
+crf-unary := crf-unary-phrase.
+
+num-n := numeral-noun-phrase.
+
+num-meas := numeral-measure-phrase.
+
+part-to-noun-with-rel := part-to-noun-with-rel-phrase.
+
+part-to-noun-no-ccont-rel := part-to-noun-no-ccont-phrase.
+
+punct-right := punct-right-rule.
+
+punct-left := punct-left-rule.

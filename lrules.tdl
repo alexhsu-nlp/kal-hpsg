@@ -1,0 +1,47 @@
+;;; -*- Mode: TDL; Coding: utf-8 -*-
+sg_abs-lex := sg_abs-lex-rule.
+
+nonfuture-lex := nonfuture-lex-rule.
+
+cl_cntp_1st_2nd_subj-lex := clausal_cntp_1st_2nd_subj-lex-rule.
+
+cl_cntp_3rd_4th_subj-lex := clausal_cntp_3rd_4th_subj-lex-rule.
+
+cl_part_1st_subj-lex := clausal_part_1st_subj-lex-rule.
+
+cl_part_2nd_subj-lex := clausal_part_2nd_subj-lex-rule.
+
+cl_part_3rd_4th_subj-lex := clausal_part_3rd_4th_subj-lex-rule.
+
+null_antipass-lex := null_antipass-lex-rule.
+
+active-lex := active-lex-rule.
+
+;;ti_normal-lex := ti_normal-lex-rule.
+
+;;nnik_normal-lex := nnik_normal-lex-rule.
+
+sg_abs_attr_adj-lex := sg_abs_attr_adj-lex-rule.
+
+sg_incorp_npred_attr_adj-lex := sg_incorp_npred_attr_adj-lex-rule.
+
+;;;incorp-attr-adj-lex := incorp-attr-adj-lex-rule.
+
+
+;;;sg_abs_part-lex := sg_abs_part-lex-rule.
+
+part-sg-abs-lex := part-sg-abs-lex-rule.
+
+; active-no-case-lex := active-no-case-lex-rule.
+
+ditrans-active-lex := ditrans-active-lex-rule.
+
+ditrans-active-pp-lex := ditrans-active-pp-lex-rule.
+
+clitic-active-lex := clitic-active-lex-rule.
+
+patient-pass-1st-lex := patient-pass-1st-lex-rule.
+
+; patient-pass-2nd-lex := patient-pass-2nd-lex-rule.
+
+both_p_reflex-lex := both_p_reflex-lex-rule.

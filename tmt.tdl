@@ -1,0 +1,94 @@
+; borrowed from erg-2025/tmt.tdl and modified
+
+
+; sort := *top*.
+token_class := sort.
+no_class := token_class.
+bridge_class := token_class.
+regular_class := token_class &
+  [ +INITIAL luk ].
+named_entity := regular_class.
+non_ne := regular_class.
+card_ne := named_entity.
+token_min := avm.
+
+;; DPF 2018-03-28 - Added +ONSET
+token := token_min &
+[ +FORM string,
+  +CLASS token_class,
+  +TRAIT token_trait,
+  +PRED predsort,
+  +CARG string,
+  +ID diff-list,
+  +FROM string,
+  +TO string,
+  +TICK bool].
+
+token_trait := *top* &
+[ +LB bracket_list, +RB bracket_list,
+  +LD bracket_list, +RD bracket_list,
+  +HD token_head ].
+
+bracket_list := diff-list.
+
+token_head := sort &
+[ +TI string, 
+  ; +LL ctype, 
+  +TG string ].
+
+; basic_ctype := sort.
+; unary_ctype := basic_ctype.
+; ctype := basic_ctype & [ -CTYPE- string ].
+; anti_ctype := basic_ctype.
+
+chart_mapping_rule := *top* &
+[ +CONTEXT list,
+  +INPUT list,
+  +OUTPUT list,
+  +POSITION string,
+  +JUMP string ].
+
+token_mapping_rule := chart_mapping_rule.
+
+basic_one_one_tmt := token_mapping_rule &
+[ +INPUT.FIRST [ +ID #id, +FROM #from, +TO #to ],
+  +OUTPUT.FIRST [ +ID #id, +FROM #from, +TO #to ] ].
+
+one_one_tmt := basic_one_one_tmt &
+[ +INPUT < [] >,
+  +OUTPUT < [] >,
+  +POSITION "O1@I1" ].
+
+; basic_ne_tmt := one_one_tmt &
+; [ +INPUT < [ +FORM #form, +CLASS non_ne, 
+; 	           +TRAIT [ +LB #lb, +RB #rb, +LD #ld, +RD #rd ],
+;              +PRED #pred, +CARG #carg] >,
+;   +OUTPUT < [ +FORM #form, +CLASS named_entity,
+;               +TRAIT [ +LB #lb, +RB #rb, +LD #ld, +RD #rd ],
+;               +PRED #pred, +CARG #carg ] >,
+;   +CONTEXT <> ].
+
+basic_ne_tmt := one_one_tmt &
+[ +INPUT < [ +FORM #form, +CLASS no_class, 
+	           +TRAIT [ +LB #lb, +RB #rb, +LD #ld, +RD #rd ],
+             +PRED #pred, +CARG #carg] >,
+  +OUTPUT < [ +FORM #form, +CLASS named_entity,
+              +TRAIT [ +LB #lb, +RB #rb, +LD #ld, +RD #rd ],
+              +PRED #pred, +CARG #carg ] >,
+  +CONTEXT <> ].
+
+tokens := *top* &
+[ +LIST list, 
+  +LAST token ].
+
+word-or-lexrule :+ [ TOKENS tokens ].
+
+lex-rule :+ [ TOKENS #tokens, 
+              ARGS.FIRST.TOKENS #tokens ].
+
+one_one_form_tmt := one_one_tmt &
+[ +INPUT < [ +CLASS #class, +TRAIT #trait,
+             +PRED #pred, +CARG #carg ] >,
+  +OUTPUT < [ +CLASS #class, +TRAIT #trait,
+              +PRED #pred, +CARG #carg ] >,
+  +CONTEXT <> ].

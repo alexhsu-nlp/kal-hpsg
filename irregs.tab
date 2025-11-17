@@ -1,0 +1,36 @@
+"
+; Irregs.tab is used to define irregular forms
+; The syntax is as follows:
+; irreg_form IRREG_TYPE reg_form
+; e.g.:
+; ate VERB_eat PAST
+; 2025-09-30 CCH NOTE: there can be only one separating space
+
+kia sg_erg-suffix ki
+taav tac-pron-prefix uv
+taav tac-prefix uv
+tass tac-adv-prefix uv
+uuŋa all-dem-adv-suffix uv
+tamat tac-pron-prefix mat
+tamat tac-prefix mat
+taassum tac-pron-prefix uum
+taakkun tac-prefix ukun
+tamatum tac-pron-prefix matum
+tamakkun tac-prefix makkun
+taanna sg_abs-dem-pron-suffix taav
+taanna sg_abs-dem-suffix taav
+taassuma sg_erg-dem-pron-suffix taav
+taassuma sg_erg-dem-suffix taav
+manna sg_abs-dem-pron-suffix mat
+manna sg_abs-dem-suffix mat
+una sg_abs-dem-pron-suffix uv
+una sg_abs-dem-suffix uv
+uku pl_abs-dem-pron-suffix uv
+uku pl_abs-dem-suffix uv
+taakku pl_abs-dem-pron-suffix taav
+taakku pl_abs-dem-suffix taav
+taakkua pl_erg-dem-pron-suffix taav
+taakkua pl_erg-dem-suffix taav
+maani loc-dem-adv-suffix mat
+maaŋa all-dem-adv-suffix mat
+"
