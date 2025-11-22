@@ -260,6 +260,8 @@ future := tense
 
 ;;; Aspect
 
+;;; CCH 2025-11-21 idea: use non-habitual aspect to filter out -ŋŋit, so that it is not an inflection requirement anymore?
+;;; or is that purely a morphological requirement
 perfective := aspect
 """-sima""".
 habitual := aspect
@@ -1098,7 +1100,7 @@ suuq_verby_adj-adj-lex := verby_adj-adj-lex &
 
 tu_verby_adj-adj-lex := verby_adj-adj-lex &
   [ INFLECTED.NUM_CASE_END-FLAG - ]
-"""A special class of adjectives ending in -tu that directly takes verb endigns as predicates but needs the nominalization morpheme -uq instead.""".
+"""A special class of adjectives ending in -tu that directly takes verb endings as predicates but needs the nominalization morpheme -uq instead.""".
 
 ; Basic attributive adjective definition
 
@@ -1338,7 +1340,7 @@ kkuq-lex-rule := noun-intro-lex-rule-super & noun-intro-lex-rule &
   [ C-CONT.RELS.LIST.FIRST [ PRED "_kkut_n_rel", 
                              ARG0.PNG.NUM pl ] ].
 
-miuq-lex-rule := noun-intro-lex-rule-super & noun-intro-lex-rule &
+miuq-lex-rule := noun-intro-lex-rule-super & noun-intro-lex-rule & noun_pred_affix-lex-rule-dtr & 
   [ C-CONT.RELS.LIST.FIRST.PRED "_inhabitant_of_n_rel" ].
 
 num_case-lex-rule-super := add-only-no-ccont-rule & 
@@ -1674,6 +1676,8 @@ sg_erg_poss-lex-rule := erg_case-lex-rule & sg_possessum-lex-rule.
 
 1sg_pron_sg_loc-lex-rule := 1sg_poss_pron-lex-rule & sg_loc_poss-lex-rule.
 
+1sg_pron_sg_all-lex-rule := 1sg_poss_pron-lex-rule & sg_all_poss-lex-rule.
+
 2sg_pron_sg_loc-lex-rule := 2sg_poss_pron-lex-rule & sg_loc_poss-lex-rule.
 
 1pl_pron_pl_abs-lex-rule := 1pl_poss_pron-lex-rule & pl_abs_poss-lex-rule.
@@ -1821,6 +1825,9 @@ part-erg-lex-rule := part_num_case-lex-rule-super &
 part-all-lex-rule := part_num_case-lex-rule-super & 
   [ SYNSEM.NON-LOCAL.SLASH.LIST.FIRST.CAT.HEAD.CASE all ].
 
+part-abl-lex-rule := part_num_case-lex-rule-super & 
+  [ SYNSEM.NON-LOCAL.SLASH.LIST.FIRST.CAT.HEAD.CASE abl ].
+
 part-ins-lex-rule := part_num_case-lex-rule-super & 
   [ SYNSEM.NON-LOCAL.SLASH.LIST.FIRST.CAT.HEAD.CASE ins ].
 
@@ -1838,6 +1845,10 @@ part-1sg-poss-sg-abs-lex-rule := infl-lex-rule & part-sg-lex-rule & part-abs-lex
   [ SYNSEM.LOCAL.CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX.PNG [ PER 1st, NUM sg ], 
                                   NON-LOCAL.CRF-H.LIST < > ] > ].
 
+part-1sg-poss-pl-abs-lex-rule := part-pl-lex-rule & part-abs-lex-rule & part-nonposs-lex-rule & 
+  [ SYNSEM.LOCAL.CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX.PNG [ PER 1st, NUM sg ], 
+                                  NON-LOCAL.CRF-H.LIST < > ] > ].
+
 part-1sg-poss-sg-erg-lex-rule := infl-lex-rule & part-sg-lex-rule & part-erg-lex-rule & part-nonposs-lex-rule & 
   [ SYNSEM.LOCAL.CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX.PNG [ PER 1st, NUM sg ], 
                                   NON-LOCAL.CRF-H.LIST < > ] > ].
@@ -1848,6 +1859,14 @@ part-3sg-poss-pl-abs-lex-rule := part-pl-lex-rule & part-abs-lex-rule & part-non
 
 part-3sg-poss-sg-abs-lex-rule := infl-lex-rule & part-sg-lex-rule & part-abs-lex-rule & part-nonposs-lex-rule & 
   [ SYNSEM.LOCAL.CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX.PNG [ PER 3rd, NUM sg ], 
+                                  NON-LOCAL.CRF-H.LIST < > ] > ].
+
+part-3sg-poss-sg-abl-lex-rule := infl-lex-rule & part-sg-lex-rule & part-abl-lex-rule & part-nonposs-lex-rule & 
+  [ SYNSEM.LOCAL.CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX.PNG [ PER 3rd, NUM sg ], 
+                                  NON-LOCAL.CRF-H.LIST < > ] > ].
+
+part-1sg-poss-sg-all-lex-rule := infl-lex-rule & part-sg-lex-rule & part-all-lex-rule & part-nonposs-lex-rule & 
+  [ SYNSEM.LOCAL.CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX.PNG [ PER 1st, NUM sg ], 
                                   NON-LOCAL.CRF-H.LIST < > ] > ].
 
 ;;;mod   1. HEAD.PRD na-or-+; 2. change NUM_CASE_END-FLAG for self and DTR
@@ -1916,7 +1935,8 @@ participle-lex-rule := infl-lex-rule & part_num_case-rule-dtr & v_end-lex-rule-s
   [ SYNSEM [ LOCAL.CAT [ HEAD verb & [ PRD -, 
                                        REF -, 
                                        DUR - ] ], 
-             NON-LOCAL [ QUE #que, 
+             NON-LOCAL [ SLASH.LIST cons,
+                         QUE #que, 
                          REL #rel, 
                          CONJP #conjp ] ], 
     C-CONT.HOOK.INDEX [ SF prop, 
@@ -1927,19 +1947,26 @@ participle-lex-rule := infl-lex-rule & part_num_case-rule-dtr & v_end-lex-rule-s
                              CONJP #conjp ] ] ].
 
 intrans_participle-lex-rule := participle-lex-rule & same-comps-lex-rule & no-ccont-lex-rule & 
-  [ SYNSEM [ LOCAL.CAT.VAL [ SUBJ < >, 
-                             --KEYCOMP non-synsem ], 
+  [ SYNSEM [ LOCAL.CAT.VAL [ SUBJ < >
+                            ;  --KEYCOMP non-synsem
+                             ], 
              NON-LOCAL.SLASH.LIST < #slash > ], 
     DTR [ SYNSEM.LOCAL.CAT.VAL [ SUBJ < gap & [ NON-LOCAL.SLASH.LIST < #slash > ] >, 
                                  --KEYCOMP non-synsem ] ] ].
 
 part-poss-rule-dtr := word-or-lexrule.
 
+; patient_participle-lex-rule := participle-lex-rule & same-subj-lex-rule & part-poss-rule-dtr & no-ccont-lex-rule & 
+;   [ SYNSEM [ LOCAL.CAT.VAL [ SUBJ < [ LOCAL.CAT.HEAD.CASE erg ] >, 
+;                              COMPS < > ], 
+;              NON-LOCAL.SLASH.LIST < #slash > ], 
+;     DTR [ SYNSEM.LOCAL.CAT.VAL.COMPS < gap & [ NON-LOCAL.SLASH.LIST < #slash > ] > ] ].
+
 patient_participle-lex-rule := participle-lex-rule & same-subj-lex-rule & part-poss-rule-dtr & no-ccont-lex-rule & 
-  [ SYNSEM [ LOCAL.CAT.VAL [ SUBJ < [ LOCAL.CAT.HEAD.CASE erg ] >, 
-                             COMPS < > ], 
+  [ SYNSEM [ LOCAL.CAT.VAL.COMPS #rest, 
              NON-LOCAL.SLASH.LIST < #slash > ], 
-    DTR [ SYNSEM.LOCAL.CAT.VAL.COMPS < gap & [ NON-LOCAL.SLASH.LIST < #slash > ] > ] ].
+    DTR [ SYNSEM.LOCAL.CAT.VAL [ COMPS < #keycomp . #rest >, 
+                                 --KEYCOMP #keycomp & gap & [ NON-LOCAL.SLASH.LIST < #slash > ] ] ] ].
 
 ;;; TODO: this sentence has unexpected identification of indices of speak and see: iglu uqaluk-f^fik-a taku-vara
 pp_participle-lex-rule := participle-lex-rule & same-subj-lex-rule & same-comps-lex-rule & 
@@ -1950,7 +1977,7 @@ pp_participle-lex-rule := participle-lex-rule & same-subj-lex-rule & same-comps-
                                                   INDEX #n-ind ] ] > ], 
     C-CONT [ HOOK [ LTOP #ltop, 
                     INDEX #ev ], 
-             RELS.LIST < arg12-ev-relation & [ PRED "unk_pp_rel", 
+             RELS.LIST < arg12-ev-relation & [ PRED "unk_p_rel", 
                                                LBL #ltop, 
                                                ARG1 #ev, 
                                                ARG2 #n-ind ] >, 
@@ -3331,8 +3358,11 @@ basic-head-comp-phrase :+ [ SYNSEM.LOCAL.CAT.VAL [ INCORP-N #incorp,
                             HEAD-DTR.SYNSEM.LOCAL.CAT.VAL [INCORP-N #incorp, 
                                                            --KEYCOMP #keycomp ] ].
 
-head-mod-phrase :+ [ SYNSEM.LOCAL.CAT.VAL.INCORP-N #incorp, 
+basic-head-mod-phrase-simple :+ [ SYNSEM.LOCAL.CAT.VAL.INCORP-N #incorp, 
    HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.INCORP-N #incorp ].
+
+; head-mod-phrase :+ [ SYNSEM.LOCAL.CAT.VAL.INCORP-N #incorp, 
+;    HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.INCORP-N #incorp ].
 
 basic-head-subj-phrase :+ [ SYNSEM.LOCAL.CAT.VAL.INCORP-N < > ].
 
@@ -4169,37 +4199,33 @@ incorp-part-lex-rule := incorp-lex-rule-super & common-incorp-lex-rule & part_nu
              NON-LOCAL [ QUE #que, 
                          REL #rel, 
                          CRF.LIST #crf, 
-                         CRF-H.LIST #crf-h ] ],
+                         CRF-H.LIST #crf-h, 
+                         SLASH.LIST < [ CAT cat-sat & [ HEAD noun, 
+                                                      VAL.SPR < > ] ] >, 
+                         CONJP #conjp ] ],
     C-CONT.HOOK.INDEX.SF prop, 
     DTR.SYNSEM.NON-LOCAL [ QUE #que, 
                            REL #rel, 
                            CRF.LIST #crf & < >, 
-                           CRF-H.LIST #crf-h & < > ] ].
+                           CRF-H.LIST #crf-h & < >, 
+                           SLASH.LIST < > ], 
+    DTR [ SYNSEM [ NON-LOCAL [ SLASH.LIST < >, 
+                               CONJP #conjp ] ] ]    ].
 
 intrans-part-like-incorp-lex-rule := incorp-part-lex-rule & 
   [ SYNSEM [ LOCAL.CAT [ HEAD.REF -, 
                          VAL.SUBJ < > ], 
-             NON-LOCAL [ SLASH.LIST < [ CAT cat-sat & [ HEAD noun, 
-                                                        VAL.SPR < > ],
-                                        CONT.HOOK.INDEX #xarg ] >, 
-                         CONJP #conjp ] ], 
-    C-CONT.HOOK.XARG #xarg, 
-    DTR [ SYNSEM [ NON-LOCAL [ SLASH.LIST < >, 
-                               CONJP #conjp ] ] ] ].
+             NON-LOCAL.SLASH.LIST < [ CONT.HOOK.INDEX #xarg ] > ], 
+    C-CONT.HOOK.XARG #xarg ].
 
 pass-part-like-incorp-lex-rule := incorp-part-lex-rule & 
   [ SYNSEM [ LOCAL.CAT [ HEAD.REF +, 
                          VAL.SUBJ < [ LOCAL [ CAT cat-sat & [ HEAD noun & [ CASE erg ], 
                                                             VAL.SPR < > ],
                                             CONT.HOOK.INDEX #xarg ] ] > ], 
-             NON-LOCAL [ SLASH.LIST < [ CAT cat-sat & [ HEAD noun, 
-                                                        VAL.SPR < > ],
-                                        CONT.HOOK.INDEX #arg2 ] >, 
-                         CONJP #conjp ] ], 
+             NON-LOCAL.SLASH.LIST < [ CONT.HOOK.INDEX #arg2 ] >], 
     C-CONT.HOOK.XARG #xarg, 
-    DTR [ SYNSEM [ LOCAL.CONT.HOOK.INDEX #arg2, 
-                   NON-LOCAL [ SLASH.LIST < >, 
-                               CONJP #conjp ] ] ] ].
+    DTR.SYNSEM.LOCAL.CONT.HOOK.INDEX #arg2 ].
 
 lik-part-lex-rule := intrans-part-like-incorp-lex-rule & 
   [ C-CONT.RELS.LIST.FIRST.PRED "_have_v_rel" ].
@@ -4313,18 +4339,18 @@ lex-item :+ [ SYNSEM.LOCAL.CAT.VAL.INCORP-N < > ].
 verb-lex :+ [ SYNSEM.LOCAL.CAT.HEAD [ INCORP -, DUR - ] ].
 adj-lex :+ [ SYNSEM.LOCAL.CAT.HEAD.INCORP - ].
 
-incorp-head-mod-phrase := headed-phrase & 
-  [ SYNSEM [ LOCAL.CAT.VAL [ SUBJ #subj,
-                             SPR #spr,
-                             COMPS #comps, SPEC #spec ],
-             MODIFIED hasmod,
-             NON-LOCAL.REL.LIST < > ],
-    HEAD-DTR.SYNSEM [ LOCAL.CAT.VAL [ SUBJ #subj,
-                                      SPR #spr,
-                                      COMPS #comps, SPEC #spec ],
-                      NON-LOCAL.REL.LIST < > ] ].
+; incorp-head-mod-phrase := headed-phrase & 
+;   [ SYNSEM [ LOCAL.CAT.VAL [ SUBJ #subj,
+;                              SPR #spr,
+;                              COMPS #comps, SPEC #spec ],
+;              MODIFIED hasmod,
+;              NON-LOCAL.REL.LIST < > ],
+;     HEAD-DTR.SYNSEM [ LOCAL.CAT.VAL [ SUBJ #subj,
+;                                       SPR #spr,
+;                                       COMPS #comps, SPEC #spec ],
+;                       NON-LOCAL.REL.LIST < > ] ].
 
-incorp-head-mod-phrase-simple := incorp-head-mod-phrase & binary-nonloc-phrase & binary-headed-phrase & 
+incorp-head-mod-phrase-simple := head-mod-phrase & binary-nonloc-phrase & binary-headed-phrase & 
   [ 
     SYNSEM.LOCAL.CAT.VAL.INCORP-N.FIRST [ LOCAL [ CAT [ 
                             HEAD #head, 
@@ -4406,7 +4432,8 @@ ext-rel-mod-phrase := rel-mod-phrase &
                        POSTHEAD + ] ].
 
 incorp-rel-mod-phrase := rel-mod-phrase & 
-  [ SYNSEM.LOCAL.CAT [ HEAD.INCORP +, 
+  [ SYNSEM.LOCAL.CAT [ HEAD [ INCORP +, 
+                              MOD.FIRST.LOCAL.CAT.HEAD.CASE ins ], 
                        POSTHEAD - ] ].
 
 rel-mod-phrase := unary-slash-phrase & same-crf-unary-phrase &
@@ -4458,25 +4485,29 @@ rel-mod-phrase := unary-slash-phrase & same-crf-unary-phrase &
 ;;; how about -kcaq? it sometimes refer to the futureness of existence (being), but it sometimes might refer to
 ;;; the futureness of possession or inalienable relation (true?)
 part-to-noun-phrase := unary-slash-phrase & same-crf-unary-phrase & phrasal & 
-  [ SYNSEM [ LOCAL [ COORD #coord, 
+  [ SYNSEM [ LOCAL [ COORD -, 
                      CAT [ HEAD #head & noun & [ MIN nontime-noun-relation, 
                                                  MOD < > ], 
                             VAL [ SUBJ < >, 
                                   COMPS < >, 
                                   SPEC < > ], 
                            POSSESSUM nonpossessive ], 
-                     CONT.HOOK #hook & [ INDEX.PNG.PER 3rd ] ], 
+                     CONT.HOOK.INDEX.PNG.PER 3rd ], 
              NON-LOCAL [ SLASH.LIST < >, 
                          CONJP #conjp ] ], 
-    C-CONT [ HOOK #hook, 
+    C-CONT [ HOOK [ LTOP #ltop, 
+                    INDEX #index, 
+                    XARG #xarg ], 
              HCONS.LIST < >, 
              ICONS.LIST < > ],
     ARGS < [ SYNSEM [ LOCAL [ CAT [ HEAD verb & [ PRD - ],
                                     VAL [ SUBJ < >, 
                                           COMPS < > ] ], 
-                              COORD #coord ], 
+                              COORD - ], 
                       NON-LOCAL [ SLASH.LIST < [ CAT.HEAD #head, 
-                                                 CONT.HOOK #hook ] >, 
+                                                 CONT.HOOK [ LTOP #ltop, 
+                                                             INDEX #index, 
+                                                             XARG #xarg ] ] >, 
                                   CONJP #conjp ] ] ] > ].
 
 part-to-noun-with-rel-phrase := part-to-noun-phrase & 
@@ -4743,6 +4774,7 @@ num_hour := predsort.
 
 ;;; TODO: qeq in HCONS
 title-phrase := head-compositional & head-final &
+"""Example: 'teacher John' in English, `ilinniartitsisoq Piitaq` in Kalaallisut."""
   [
     SYNSEM [ LOCAL.CAT #cat,
              NON-LOCAL non-local-none & [ CRF.LIST < >, CRF-H.LIST < > ] ], 
@@ -4765,8 +4797,7 @@ title-phrase := head-compositional & head-final &
                                             COMPS < > ], 
                                       POSSESSUM nonpossessive ],
                                 CONT.HOOK.INDEX #ttl-idx & [ PNG #png ] ], 
-                          NON-LOCAL non-local-none & [ CRF.LIST < >, CRF-H.LIST < > ] ] ]
-"""Example: 'teacher John' in English, `ilinniartitsisoq Piitaq` in Kalaallisut.""".
+                          NON-LOCAL non-local-none & [ CRF.LIST < >, CRF-H.LIST < > ] ] ].
 
 ;;; TODO: compound-relation does not seem to be quite correct
 ;;; TODO: new binary phrase instead of 
@@ -4775,6 +4806,7 @@ title-phrase := head-compositional & head-final &
 ;;; 2025-03-25: try COG-ST fam-or-less (this should not ban names, right?)
 ;;; 2025-03-26: Temporarily set the modified noun to be non-pronoun. But this may get changed.
 ;;; 2025-11-16 relax ARGS...SPR
+;;; 2025-11-21 cannot constrain HEAD.MIN further because of ateqarpoq/atilik
 noun-compound-unary-phrase := unary-phrase & 
   [ SYNSEM [ LOCAL.CAT [HEAD noun & [ CASE #case,
                                       MIN noncard, 
@@ -5183,6 +5215,11 @@ local-min :+ [ CRF-UP logical-or ].
 ;;; Probably go for CRF instead, with crf-h-unary always applied (but wasted).
 
 crf-h-unary-phrase := unary-phrase & 
+"""
+For 4th person resolution binding to the subject in a *higher* level clause.
+This phrase should be involved before becoming the object of a verb taking a clausal complement 
+(current `CRF-UP` takes care of this).
+"""
   [ SYNSEM [ LOCAL [ CAT #cat, COORD -, CRF-UP.BOOL + ], 
              NON-LOCAL [ CRF #crf, 
                          CRF-H.LIST < >, 
@@ -5233,6 +5270,10 @@ unexpressed :+ [ NON-LOCAL [ CRF.LIST < > ] ].
 ;;; 2025-03-31 NOTE: need to relax this in the future because of -qqu
 
 crf-unary-phrase := unary-phrase & 
+"""
+For 4th person resolution binding to the subject in the clause of the *same* level of clause.
+This include 4th persons introduced in adjuncts. 
+"""
   [ SYNSEM [ LOCAL [ CAT #cat, COORD - ], 
              NON-LOCAL [ CRF.LIST #crf, 
                          CRF-H #crfh, 
@@ -5427,11 +5468,18 @@ imp-head-opt-subj-phrase :+
     HEAD-DTR.SYNSEM.LOCAL.CAT.MC #mc ].
 
 ;;; TODO: what about TAM?
-tassa-lex := base-transitive-verb-lex & 
+;;; TODO: tassauvoq
+;;; 2025-11-12 soorlu sometimes act like this, but we also add SUBJ < [ OPT -] > 
+particle-v-lex := base-transitive-verb-lex & 
+"""For verb-like tassa as in the construction `(A) tassa B`."""
   [ SYNSEM [ LOCAL [ CAT [ HEAD [ PRD na-or-+, 
-                                  INIT + ],
+                                  INIT +, 
+                                  SPEC-INIT + ],
                        VAL [ SUBJ < [ LOCAL.CAT.HEAD.CASE abs, 
-                                      NON-LOCAL non-local-none & [ CRF.LIST < >, 
+                                      NON-LOCAL [ 
+                                          QUE.LIST < >, 
+                                          REL.LIST < >,
+                                          CRF.LIST < >, 
                                           CRF-H.LIST < > ] ] >, 
                              COMPS < [ LOCAL.CAT.HEAD.CASE abs, 
                                        NON-LOCAL non-local-none & [ CRF.LIST < >, 
@@ -5444,12 +5492,27 @@ tassa-lex := base-transitive-verb-lex &
              NON-LOCAL non-local-none & [ CRF.LIST < >, 
                                           CRF-H.LIST < > ] ] ].
 
+;;; 2025-11-12 tassaanngilaq and tassaannginnerpa has been tested
+particle-v-cop-lex-rule-super := add-only-no-ccont-rule & v_neg-rule-dtr & v_end-rule-dtr & 
+  [ INFLECTED [ V_END-OR-V_END_NEG-FLAG -, 
+                NEG_V_END_FLAG na-or-- ], 
+    DTR tassa-lex ].
+
+particle-v-cop-lex-rule := particle-v-cop-lex-rule-super.
+
+tassa-lex := particle-v-lex.
+
+
+suurlu-lex := particle-v-lex.
+
 headed-phrase :+ 
   [ SYNSEM.PUNCT.MPUNCT #mpunct, 
     HEAD-DTR.SYNSEM.PUNCT.MPUNCT #mpunct ].
 
 wh-q-verb-lex := basic-verb-lex-super & aspect-rule-dtr & tense-rule-dtr & basic-intransitive-lex-item & non-mod-lex-item & basic-wh-word-lex & norm-hook-lex-item & non-conjp-word & 
-  [ SYNSEM [ LOCAL [ CAT [ VAL [ SUBJ < #subj >, 
+"""A verbal LE introducing a wh-element as its sole semantic object, without any additional external syntactic objects."""
+  [ SYNSEM [ LOCAL [ CAT [ HEAD.SPEC-INIT +, 
+                           VAL [ SUBJ < #subj >, 
                                  COMPS < >, 
                                  SPR < >, 
                                  SPEC < >, 
@@ -5482,6 +5545,7 @@ wh-q-verb-lex := basic-verb-lex-super & aspect-rule-dtr & tense-rule-dtr & basic
                 NEG_V_END_FLAG na-or-- ] ].
 
 su-lex := wh-q-verb-lex & 
+"""Example: *Sutorpit?*"""
   [ SYNSEM.LOCAL.CONT.RELS.LIST < [ ARG2 #obj ], 
                                   [ PRED "_thing_n_rel",  
                                     ARG0 #obj ], 
@@ -5489,6 +5553,7 @@ su-lex := wh-q-verb-lex &
 
 ;;; CCH 2025-11-16 TODO: this might be adjective?
 qanuq-it-lex := wh-q-verb-lex & 
+"""Example: *Qanoq ippit?*"""
   [ SYNSEM.LOCAL.CONT.RELS.LIST < [ LBL #lbl ], 
                                   [ PRED "_property_n_rel", 
                                     ARG0 #obj ], 

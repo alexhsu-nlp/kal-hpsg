@@ -113,6 +113,10 @@ pl_all-lex-rule.
 %suffix (* -nni)
 2sg_pron_sg_loc-lex-rule.
 
+1sg_pron_sg_all-suffix :=
+%suffix (* -nnut)
+1sg_pron_sg_all-lex-rule.
+
 1pl_pron_pl_abs-suffix :=
 %suffix (* -vut)
 1pl_pron_pl_abs-lex-rule.
@@ -135,6 +139,10 @@ pl_all-lex-rule.
 
 3sg_sg_abl-suffix :=
 %suffix (* -anit)
+3sg_sg_abl-lex-rule.
+
+3sg_sg_abl-suffix_2 :=
+%suffix (* -aniit)
 3sg_sg_abl-lex-rule.
 
 3pl_sg_abl-suffix :=
@@ -876,9 +884,17 @@ part-sg-ins-suffix :=
 %suffix (* -mik)
 part-sg-ins-lex-rule.
 
+part-1sg-poss-sg-all-suffix :=
+%suffix (* -nnut)
+part-1sg-poss-sg-all-lex-rule.
+
 part-1sg-poss-sg-abs-suffix :=
 %suffix (* -ga)
 part-1sg-poss-sg-abs-lex-rule.
+
+part-1sg-poss-pl-abs-suffix :=
+%suffix (* -kka)
+part-1sg-poss-pl-abs-lex-rule.
 
 part-1sg-poss-sg-erg-suffix :=
 %suffix (* -ma)
@@ -891,6 +907,14 @@ part-3sg-poss-pl-abs-lex-rule.
 part-3sg-poss-sg-abs-suffix :=
 %suffix (* -a)
 part-3sg-poss-sg-abs-lex-rule.
+
+part-3sg-poss-sg-abl-suffix :=
+%suffix (* -anit)
+part-3sg-poss-sg-abl-lex-rule.
+
+part-3sg-poss-sg-abl-suffix2 :=
+%suffix (* -aniit)
+part-3sg-poss-sg-abl-lex-rule.
 
 sg_abs-dem-suffix := 
 %suffix (* -na)
@@ -1011,3 +1035,7 @@ pl_via-lex-rule.
 sg_equ-suffix := 
 %suffix (* -tut)
 sg_equ-lex-rule.
+
+particle-v-cop-suffix := 
+%suffix (* -u)
+particle-v-cop-lex-rule.
