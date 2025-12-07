@@ -23,6 +23,8 @@ taassuma sg_erg-dem-pron-suffix taav
 taassuma sg_erg-dem-suffix taav
 manna sg_abs-dem-pron-suffix mat
 manna sg_abs-dem-suffix mat
+tamanna sg_abs-dem-pron-suffix tamat
+tamanna sg_abs-dem-suffix tamat
 una sg_abs-dem-pron-suffix uv
 una sg_abs-dem-suffix uv
 uku pl_abs-dem-pron-suffix uv
@@ -33,4 +35,9 @@ taakkua pl_erg-dem-pron-suffix taav
 taakkua pl_erg-dem-suffix taav
 maani loc-dem-adv-suffix mat
 maaŋa all-dem-adv-suffix mat
+arfinillit pl_abs_attr_adj-suffix arfinillit
+arfinillit pl_erg_attr_adj-suffix arfinillit
+arfinillit pl_incorp_npred_attr_adj-suffix arfinillit
+kikkut pl_abs+erg-suffix ki
+suut pl_abs+erg-suffix su
 "

@@ -45,3 +45,11 @@ patient-pass-1st-lex := patient-pass-1st-lex-rule.
 ; patient-pass-2nd-lex := patient-pass-2nd-lex-rule.
 
 both_p_reflex-lex := both_p_reflex-lex-rule.
+
+ext-numeral-noun-lex := ext-numeral-noun-lex-rule.
+
+incorp-numeral-noun-lex := incorp-numeral-noun-lex-rule.
+
+case-pass := case-pass-rule.
+
+measure-numeral-lex := measure-numeral-lex-rule.

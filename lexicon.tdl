@@ -5,6 +5,10 @@
 
 ;;; TODO: this seems not to be able to get a modifier?
 
+taamani := time-noun-lex & 
+  [ STEM < "taamani" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_at+that+time_n_rel" ].
+
 ippassaq := time-noun-lex & 
   [ STEM < "ippassaq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_yesterday_n_rel" ].
@@ -16,6 +20,10 @@ uvlaaq := time-noun-lex &
 uvali_27q := time-noun-lex & 
   [ STEM < "uvaləq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_afternoon_n_rel" ].
+
+uvaliru := time-noun-lex & 
+  [ STEM < "uvaliru" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_coming+afternoon_n_rel" ].
 
 unnugu := time-noun-lex & 
   [ STEM < "unnugu" >,
@@ -70,6 +78,10 @@ aucaq := time-noun-lex &
   [ STEM < "aucaq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_summer_n_rel" ].
 
+aucaru := time-noun-lex & 
+  [ STEM < "aucaru" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_coming+summer_n_rel" ].
+
 ukiaq := time-noun-lex & 
   [ STEM < "ukiaq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_autumn_n_rel" ].
@@ -77,6 +89,30 @@ ukiaq := time-noun-lex &
 uvluq := time-noun-lex & 
   [ STEM < "uvluq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_day_n_rel" ].
+
+Kangerlussuatsiaq := name-lex &
+  [ STEM < "Kaŋirlussuatciaq" >,
+    SYNSEM.LKEYS.KEYREL.CARG "Kangerlussuatsiaq" ].
+
+Inngik := name-lex &
+  [ STEM < "Iŋŋik" >,
+    SYNSEM.LKEYS.KEYREL.CARG "Inngik" ].
+
+Sirmirsuu := pl-name-lex &
+  [ STEM < "Sirmirsuu" >,
+    SYNSEM.LKEYS.KEYREL.CARG "Sermersuut" ].
+
+Ikkamiuq := pl-name-lex &
+  [ STEM < "Ikkamiuq" >,
+    SYNSEM.LKEYS.KEYREL.CARG "Ikkamiut" ].
+
+Appamiuq := pl-name-lex &
+  [ STEM < "Appamiuq" >,
+    SYNSEM.LKEYS.KEYREL.CARG "Appamiut" ].
+
+Nassuttuuq := name-lex &
+  [ STEM < "Nassuttuuq" >,
+    SYNSEM.LKEYS.KEYREL.CARG "Nassuttooq" ].
 
 Tuumasi := name-lex &
   [ STEM < "Tuumasi" >,
@@ -110,9 +146,21 @@ Kristine := name-lex &
   [ STEM < "Kristine" >,
     SYNSEM.LKEYS.KEYREL.CARG "Kristine" ].
 
+Orliina := name-lex &
+  [ STEM < "Orliina" >,
+    SYNSEM.LKEYS.KEYREL.CARG "Orliina" ].
+
+Parnuuna := name-lex &
+  [ STEM < "Parnuuna" >,
+    SYNSEM.LKEYS.KEYREL.CARG "Parnuuna" ].
+
 B_225 := name-lex &
   [ STEM < "B", "225" >,
     SYNSEM.LKEYS.KEYREL.CARG "B_225" ].
+
+Qaquqtuq := name-lex &
+  [ STEM < "Qaquqtuq" >,
+    SYNSEM.LKEYS.KEYREL.CARG "Qaqortoq" ].
 
 Saqqaq := name-lex &
   [ STEM < "Saqqaq" >,
@@ -187,6 +235,10 @@ Kastrupi := name-lex &
   [ STEM < "Kastrupi" >,
     SYNSEM.LKEYS.KEYREL.CARG "Kastrup" ].
 
+Isurtuq := name-lex &
+  [ STEM < "Isurtuq" >,
+    SYNSEM.LKEYS.KEYREL.CARG "Isortoq" ].
+
 Amerika := name-lex &
   [ STEM < "Amerika" >,
     SYNSEM.LKEYS.KEYREL.CARG "Amerika" ].
@@ -194,6 +246,14 @@ Amerika := name-lex &
 England := name-lex &
   [ STEM < "England" >,
     SYNSEM.LKEYS.KEYREL.CARG "England" ].
+
+Bergeni := name-lex &
+  [ STEM < "Bergeni" >,
+    SYNSEM.LKEYS.KEYREL.CARG "Bergen" ].
+
+Norge := name-lex &
+  [ STEM < "Norge" >,
+    SYNSEM.LKEYS.KEYREL.CARG "Norway" ].
 
 Danmark := name-lex &
   [ STEM < "Danmark" >,
@@ -239,9 +299,29 @@ Jakob-Petersen := name-lex &
   [ STEM < "Jakob", "Petersen" >,
     SYNSEM.LKEYS.KEYREL.CARG "Jakob Petersen" ].
 
+Hans-Egede := name-lex &
+  [ STEM < "Hans", "Egede" >,
+    SYNSEM.LKEYS.KEYREL.CARG "Hans Egede" ].
+
+Biibi := name-lex &
+  [ STEM < "Biibi" >,
+    SYNSEM.LKEYS.KEYREL.CARG "Biibi" ].
+
+Ane := name-lex &
+  [ STEM < "Ane" >,
+    SYNSEM.LKEYS.KEYREL.CARG "Ane" ].
+
+Mala := name-lex &
+  [ STEM < "Mala" >,
+    SYNSEM.LKEYS.KEYREL.CARG "Mala" ].
+
 Jensen := name-lex &
   [ STEM < "Jensen" >,
     SYNSEM.LKEYS.KEYREL.CARG "Jensen" ].
+
+Sara := name-lex &
+  [ STEM < "Sara" >,
+    SYNSEM.LKEYS.KEYREL.CARG "Sara" ].
 
 Kattak := name-lex &
   [ STEM < "Kattak" >,
@@ -275,6 +355,18 @@ Kaali := name-lex &
 Lene := name-lex &
   [ STEM < "Lene" >,
     SYNSEM.LKEYS.KEYREL.CARG "Lene" ].
+
+Gertrud-Rask := name-lex &
+  [ STEM < "Gertrud", "Rask" >,
+    SYNSEM.LKEYS.KEYREL.CARG "Gertrud Rask" ].
+
+Grønland := name-lex &
+  [ STEM < "Grønland" >,
+    SYNSEM.LKEYS.KEYREL.CARG "Greenland" ].
+
+Lars-Tobiassen := name-lex &
+  [ STEM < "Lars", "Tobiassen" >,
+    SYNSEM.LKEYS.KEYREL.CARG "Lars Tobiassen" ].
 
 Hans-Jensen := name-lex &
   [ STEM < "Hans", "Jensen" >,
@@ -320,6 +412,27 @@ ilissi := 2pl_pron-noun-lex &
   [ STEM < "ilissi" >,
     SYNSEM.LKEYS.KEYREL.PRED "pron_rel" ].
 
+hoejttaleri := usual_common_n-noun-lex &
+  [ STEM < "højttaleri" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_loudspeaker_n_rel" ].
+
+;;; CCH 2025-12-05 TODO: inherently plural?
+taquaq := usual_common_n-noun-lex &
+  [ STEM < "taquaq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_travel+provision_n_rel" ].
+
+basalti := usual_common_n-noun-lex &
+  [ STEM < "basalti" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_basalt_n_rel" ].
+
+misissuiffik := usual_common_n-noun-lex &
+  [ STEM < "misissuiffik" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_laboratory_n_rel" ].
+
+ilisimatuuq := usual_common_n-noun-lex &
+  [ STEM < "ilisimatuuq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_scientist_n_rel" ].
+
 siqmiqcuaq := usual_common_n-noun-lex &
   [ STEM < "siqmiqcuaq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_inland+ice+cap_n_rel" ].
@@ -328,9 +441,17 @@ piqati_27giik := usual_common_n-noun-lex &
   [ STEM < "piqatəgiik" >,
     SYNSEM.LKEYS.KEYREL.PRED "_association_n_rel" ].
 
+kan_27irluk := usual_common_n-noun-lex &
+  [ STEM < "kaŋirluk" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_fjord_n_rel" ].
+
 aamaruutissaq := usual_common_n-noun-lex &
   [ STEM < "aamaruutissaq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_coal_n_rel" ].
+
+nakcuk := usual_common_n-noun-lex &
+  [ STEM < "nakcuk" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_horn_n_rel" ].
 
 aki := usual_common_n-noun-lex &
   [ STEM < "aki" >,
@@ -349,9 +470,18 @@ naalagiaq := usual_common_n-noun-lex &
   [ STEM < "naalagiaq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_church+goer_n_rel" ].
 
+;;; CCH 2025-11-22 TODO: better translation of the meaning
+naalagiaq_2 := intrans_v-verb-lex &
+  [ STEM < "naalagiaq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_go+to+service_v_rel" ].
+
 skoleinspektoer := usual_common_n-noun-lex &
   [ STEM < "skoleinspektør" >,
     SYNSEM.LKEYS.KEYREL.PRED "_school+principal_n_rel" ].
+
+skoledirektør := usual_common_n-noun-lex &
+  [ STEM < "skoledirektør" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_school+director_n_rel" ].
 
 ;;; 2025-11-15 TODO: vehicles including ships may be plural, but in the corpus
 ;;; there has no sign that ship-related lexicon are used in this fashion.
@@ -368,6 +498,10 @@ umiarcuaq := usual_common_n-noun-lex &
 katirsurtarfik := usual_common_n-noun-lex &
   [ STEM < "katirsurtarfik" >,
     SYNSEM.LKEYS.KEYREL.PRED "_assembly+hall_n_rel" ].
+
+elevatori := usual_common_n-noun-lex &
+  [ STEM < "elevatori" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_elevator_n_rel" ].
 
 iffiaq := usual_common_n-noun-lex &
   [ STEM < "iffiaq" >,
@@ -422,6 +556,14 @@ imigassaq := usual_common_n-noun-lex &
   [ STEM < "imigassaq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_liquor_n_rel" ].
 
+tasiq := usual_common_n-noun-lex &
+  [ STEM < "tasiq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_lake_n_rel" ].
+
+min_27n_27uq := usual_common_n-noun-lex &
+  [ STEM < "miŋŋuq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_diving+beetle_n_rel" ].
+
 ippik := usual_common_n-noun-lex &
   [ STEM < "ippik" >,
     SYNSEM.LKEYS.KEYREL.PRED "_sea+facing+cliff_n_rel" ].
@@ -442,8 +584,12 @@ karsi := usual_common_n-noun-lex &
   [ STEM < "karsi" >,
     SYNSEM.LKEYS.KEYREL.PRED "_box_n_rel" ].
 
+sarfaq := usual_common_n-noun-lex &
+  [ STEM < "sarfaq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_current_n_rel" ].
+
 sutuqniaqtarfik := usual_common_n-noun-lex &
-  [ STEM < "sutuqniaqtarfik " >,
+  [ STEM < "sutuqniaqtarfik" >,
     SYNSEM.LKEYS.KEYREL.PRED "_restaurant_n_rel" ].
 
 nirisarfik := usual_common_n-noun-lex &
@@ -470,6 +616,10 @@ danski := usual_common_n-noun-lex &
   [ STEM < "danski" >,
     SYNSEM.LKEYS.KEYREL.PRED "_Danish_n_rel" ].
 
+qallunaaq := usual_common_n-noun-lex &
+  [ STEM < "qallunaaq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_Dane_n_rel" ].
+
 hoejskoli := usual_common_n-noun-lex &
   [ STEM < "højskoli" >,
     SYNSEM.LKEYS.KEYREL.PRED "_high+school_n_rel" ].
@@ -478,10 +628,26 @@ efterskoli := usual_common_n-noun-lex &
   [ STEM < "efterskoli" >,
     SYNSEM.LKEYS.KEYREL.PRED "_efterskole_n_rel" ].
 
+klassi := usual_common_n-noun-lex &
+  [ STEM < "klassi" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_class_n_rel" ].
+
+historia := usual_common_n-noun-lex &
+  [ STEM < "historia" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_history_n_rel" ].
+
+tummiraq := usual_common_n-noun-lex &
+  [ STEM < "tummiraq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_stair+step_n_rel" ].
+
 ;; for lighting/heating
 ikitsit := usual_common_n-noun-lex &
   [ STEM < "ikətcitə" >,
     SYNSEM.LKEYS.KEYREL.PRED "_match_n_rel" ].
+
+kursusi := usual_common_n-noun-lex &
+  [ STEM < "kursusi" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_course_n_rel" ].
 
 nakursiaq := intrans_v-verb-lex & 
   [ STEM < "nakursiaq" >,
@@ -512,17 +678,45 @@ nirrivik := usual_common_n-noun-lex &
   [ STEM < "nirrivik" >,
     SYNSEM.LKEYS.KEYREL.PRED "_table_n_rel" ].
 
-kroni := usual_common_n-noun-lex &
+kroni := unit-noun-lex &
   [ STEM < "kroni" >,
     SYNSEM.LKEYS.KEYREL.PRED "_krone_n_rel" ].
+
+kr := unit-noun-lex &
+  [ STEM < "kr" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_krone_n_rel" ].
+
+fodi := unit-noun-lex &
+  [ STEM < "fodi" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_feet_n_rel" ].
+
+kg := unit-noun-lex &
+  [ STEM < "kg" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_kilogram_n_rel" ].
 
 kriminalromani := usual_common_n-noun-lex &
   [ STEM < "kriminalromani" >,
     SYNSEM.LKEYS.KEYREL.PRED "_crime+novel_n_rel" ].
 
+qaiqsuq := usual_common_n-noun-lex &
+  [ STEM < "qaiqsuq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_rock_n_rel" ].
+
+ujarak := usual_common_n-noun-lex &
+  [ STEM < "ujarak" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_stone_n_rel" ].
+
+auk := usual_common_n-noun-lex &
+  [ STEM < "auk" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_blood_n_rel" ].
+
 tii := usual_common_n-noun-lex &
   [ STEM < "tii" >,
     SYNSEM.LKEYS.KEYREL.PRED "_tea_n_rel" ].
+
+ilaucuq := usual_common_n-noun-lex &
+  [ STEM < "ilaucuq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_passenger_n_rel" ].
 
 ini := usual_common_n-noun-lex &
   [ STEM < "inə" >,
@@ -539,6 +733,10 @@ imaq := usual_common_n-noun-lex &
 napparsimmavik := usual_common_n-noun-lex &
   [ STEM < "napparsimmavik" >,
     SYNSEM.LKEYS.KEYREL.PRED "_hospital_n_rel" ].
+
+nakursiartarfik := usual_common_n-noun-lex &
+  [ STEM < "nakursiartarfik" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_outpatient+clinic_n_rel" ].
 
 napparsimacuq := usual_common_n-noun-lex &
   [ STEM < "napparsimacuq" >,
@@ -771,6 +969,10 @@ sinittarfik := usual_common_n-noun-lex &
   [ STEM < "sinittarfik" >,
     SYNSEM.LKEYS.KEYREL.PRED "_bedroom_n_rel" ].
 
+anitsiarfik := usual_common_n-noun-lex &
+  [ STEM < "anitsiarfik" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_recess_n_rel" ].
+
 atuvan_27n_27iffik := usual_common_n-noun-lex &
   [ STEM < "atuvaŋŋiffik" >,
     SYNSEM.LKEYS.KEYREL.PRED "_school+holiday_n_rel" ].
@@ -790,6 +992,10 @@ qat_27qaq := usual_common_n-noun-lex &
 i_27litniaqt_27uq := usual_common_n-noun-lex &
   [ STEM < "əlitniaqðuq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_student_n_rel" ].
+
+studenti := usual_common_n-noun-lex &
+  [ STEM < "studenti" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_high+school+graduate_n_rel" ].
 
 sulit_27uq := usual_common_n-noun-lex &
   [ STEM < "suliðuq" >,
@@ -846,6 +1052,10 @@ matu := usual_common_n-noun-lex &
 inuuniq := usual_common_n-noun-lex &
   [ STEM < "inuuniq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_life_n_rel" ].
+
+ilinniarfissuaq := usual_common_n-noun-lex &
+  [ STEM < "ilinniarfissuaq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_seminary_n_rel" ].
 
 ilinniaqti_27tticuq := rel-noun-lex &
   [ STEM < "ilinniaqtətticuq" >,
@@ -1075,13 +1285,21 @@ kina := sg_abs_ques_noun-noun-lex &
   [ STEM < "kina" >,
     SYNSEM.LKEYS.KEYREL.PRED "_person_n_rel" ].
 
-kikkut := pl_erg_abs_ques_noun-noun-lex &
-  [ STEM < "kikkut" >,
-    SYNSEM.LKEYS.KEYREL.PRED "_person_n_rel" ].
+; kikkut := pl_erg_abs_ques_noun-noun-lex &
+;   [ STEM < "kikkut" >,
+;     SYNSEM.LKEYS.KEYREL.PRED "_person_n_rel" ].
 
-suut := pl_erg_abs_ques_noun-noun-lex &
-  [ STEM < "suut" >,
-    SYNSEM.LKEYS.KEYREL.PRED "_thing_n_rel" ].
+; suut := pl_erg_abs_ques_noun-noun-lex &
+;   [ STEM < "suut" >,
+;     SYNSEM.LKEYS.KEYREL.PRED "_thing_n_rel" ].
+
+landstingi := usual_common_n-noun-lex &
+  [ STEM < "landstingi" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_country+council_n_rel" ].
+
+siulittaasuq := usual_common_n-noun-lex &
+  [ STEM < "siulittaasuq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_chairman_n_rel" ].
 
 saaruglik := usual_common_n-noun-lex &
   [ STEM < "saaruglik" >,
@@ -1118,6 +1336,10 @@ aullaaqsimaffik := usual_common_n-noun-lex &
 qajaq := usual_common_n-noun-lex &
   [ STEM < "qajaq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_kayak_n_rel" ].
+
+qajaa := intrans_v-verb-lex &
+  [ STEM < "qajaa" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_die+in+kayak_v_rel" ].
 
 ;;ukiaq := usual_common_n-noun-lex &
 ;;  [ STEM < "ukiaq" >,
@@ -1163,6 +1385,10 @@ aputi_27 := usual_common_n-noun-lex &
   [ STEM < "aputə" >,
     SYNSEM.LKEYS.KEYREL.PRED "_snow_n_rel" ].
 
+api := intrans_v-verb-lex & 
+  [ STEM < "api" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_snow_v_rel" ].
+
 kaffi := usual_common_n-noun-lex &
   [ STEM < "kaffi" >,
     SYNSEM.LKEYS.KEYREL.PRED "_coffee_n_rel" ].
@@ -1170,6 +1396,10 @@ kaffi := usual_common_n-noun-lex &
 siku := usual_common_n-noun-lex &
   [ STEM < "siku" >,
     SYNSEM.LKEYS.KEYREL.PRED "_ice_n_rel" ].
+
+siku_2 := intrans_v-verb-lex &
+  [ STEM < "siku" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_be+frozen_v_rel" ].
 
 ; kan_27i := usual_common_n-noun-lex &
 ;   [ STEM < "kaŋi" >,
@@ -1183,6 +1413,10 @@ ilulijaq := usual_common_n-noun-lex &
 qimuksiq := usual_common_n-noun-lex &
   [ STEM < "qimuksiq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_dogsled_n_rel" ].
+
+qimuksiq_2 := intrans_v-verb-lex & 
+  [ STEM < "qimuksiq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_ride+on+dogsled_v_rel" ].
 
 ilitquq := usual_common_n-noun-lex &
   [ STEM < "ilitquq" >,
@@ -1213,6 +1447,10 @@ puuq := usual_common_n-noun-lex &
   [ STEM < "puuq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_bag_n_rel" ].
 
+puuqtugaq := usual_common_n-noun-lex &
+  [ STEM < "puuqtugaq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_package_n_rel" ].
+
 kalaallisut := language-noun-lex & 
   [ STEM < "kalaallisut" >,
     SYNSEM.LKEYS.KEYREL.PRED "_Kalaallisut_n_rel" ].
@@ -1241,6 +1479,15 @@ qaliq := usual_common_n-noun-lex &
   [ STEM < "qaliq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_tablecloth_n_rel" ].
 
+inuttaq := usual_common_n-noun-lex &
+  [ STEM < "inuttaq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_owner_n_rel" ].
+
+;;; CCH 2025-11-27 TODO: temporary noun type. Maybe we should have dofw.
+sapaati := usual_common_n-noun-lex &
+  [ STEM < "sapaati" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_Sunday_n_rel" ].
+
 minutsi := usual_common_n-noun-lex &
   [ STEM < "minutsi" >,
     SYNSEM.LKEYS.KEYREL.PRED "_minute_n_rel" ].
@@ -1249,21 +1496,104 @@ tiimi := usual_common_n-noun-lex &
   [ STEM < "tiimi" >,
     SYNSEM.LKEYS.KEYREL.PRED "_hour_n_rel" ].
 
+qaammati_27 := usual_common_n-noun-lex &
+  [ STEM < "qaammatə" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_month_n_rel" ].
+
 nalunaaqutaq := usual_common_n-noun-lex &
   [ STEM < "nalunaaqutaq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_clock_n_rel" ].
+
+nalunaaqutaq_2 := clock-spr-lex &
+  [ STEM < "nalunaaqutaq" > ].
 
 atausiq_2 := hour-lex &
   [ STEM < "atausiq" >,
     SYNSEM.LKEYS.KEYREL.CARG "1" ].
 
+januari := month-noun-lex &
+  [ STEM < "januari" >,
+    SYNSEM.LKEYS.KEYREL.CARG "1" ].
+
+februari := month-noun-lex &
+  [ STEM < "februari" >,
+    SYNSEM.LKEYS.KEYREL.CARG "2" ].
+
+martsi := month-noun-lex &
+  [ STEM < "martsi" >,
+    SYNSEM.LKEYS.KEYREL.CARG "3" ].
+
+aprili := month-noun-lex &
+  [ STEM < "aprili" >,
+    SYNSEM.LKEYS.KEYREL.CARG "4" ].
+
+maji := month-noun-lex &
+  [ STEM < "maji" >,
+    SYNSEM.LKEYS.KEYREL.CARG "5" ].
+
+juni := month-noun-lex &
+  [ STEM < "juni" >,
+    SYNSEM.LKEYS.KEYREL.CARG "6" ].
+
+juli := month-noun-lex &
+  [ STEM < "juli" >,
+    SYNSEM.LKEYS.KEYREL.CARG "7" ].
+
+augusti := month-noun-lex &
+  [ STEM < "augusti" >,
+    SYNSEM.LKEYS.KEYREL.CARG "8" ].
+
+augustusi := month-noun-lex &
+  [ STEM < "augustusi" >,
+    SYNSEM.LKEYS.KEYREL.CARG "8" ].
+
+septemberi := month-noun-lex &
+  [ STEM < "septemberi" >,
+    SYNSEM.LKEYS.KEYREL.CARG "9" ].
+
+oktober := month-noun-lex &
+  [ STEM < "oktober" >,
+    SYNSEM.LKEYS.KEYREL.CARG "10" ].
+
+november := month-noun-lex &
+  [ STEM < "november" >,
+    SYNSEM.LKEYS.KEYREL.CARG "11" ].
+
+
+
+;;; CCH 2025-11-22 TODO: there might need some way to distinguish this with the purely numeral marluk, 
+;;; as the orthography makes a bit of distinction here
+marluk_3 := hour-lex &
+  [ STEM < "marluk" >,
+    SYNSEM.LKEYS.KEYREL.CARG "2" ].
+
+pin_27asu_2 := pl-hour-lex &
+  [ STEM < "piŋasu" >,
+    SYNSEM.LKEYS.KEYREL.CARG "3" ].
+
+sisama_2 := pl-hour-lex &
+  [ STEM < "sisama" >,
+    SYNSEM.LKEYS.KEYREL.CARG "4" ].
+
 tallima_2 := pl-hour-lex &
   [ STEM < "tallima" >,
     SYNSEM.LKEYS.KEYREL.CARG "5" ].
 
+arfiniq_2 := pl-hour-lex &
+  [ STEM < "arfinəq" >,
+    SYNSEM.LKEYS.KEYREL.CARG "6" ].
+
+arfiniq-marluk_2 := pl-hour-lex &
+  [ STEM < "arfinəq~marluk" >,
+    SYNSEM.LKEYS.KEYREL.CARG "7" ].
+
 quli_2 := pl-hour-lex &
   [ STEM < "quli" >,
     SYNSEM.LKEYS.KEYREL.CARG "10" ].
+
+qulaalua := pl-hour-lex &
+  [ STEM < "qulaalua" >,
+    SYNSEM.LKEYS.KEYREL.CARG "9" ].
 
 ;;; Adjectives
 
@@ -1287,6 +1617,10 @@ marluk_2 := two-adj-lex &
   [ STEM < "marluk" >,
     SYNSEM.LKEYS.KEYREL.CARG "2" ].
 
+arfinillit := pl-numeral-adj-lex &
+  [ STEM < "arfinillit" >,
+    SYNSEM.LKEYS.KEYREL.CARG "6" ].
+
 tallima := pl-numeral-adj-lex &
   [ STEM < "tallima" >,
     SYNSEM.LKEYS.KEYREL.CARG "5" ].
@@ -1304,9 +1638,23 @@ aqqanilik := pl-numeral-adj-lex &
 ;;    SYNSEM.LKEYS.KEYREL.CARG "25" ].
 
 ;;; 2025-11-13 CCH TODO: is this numeral-adj or a common adj? Its most prominent use is as an adverb
-siulli_27q := common_verby_adj-adj-lex &
+;;; 2025-11-22 CCH: fixed this, not common_verby_adj
+siulli_27q := nouny_adj-adj-lex &
   [ STEM < "siulləq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_first_a_rel" ].
+
+;;; 2025-11-22 CCH TODO: lack support of its predicative use
+alla := nouny_adj-adj-lex &
+  [ STEM < "alla" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_other_a_rel" ].
+
+uiqnaq := common_verby_adj-adj-lex &
+  [ STEM < "uiqnaq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_sleepy_a_rel" ].
+
+annilaaq := common_verby_adj-adj-lex &
+  [ STEM < "annilaaq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_frightened_a_rel" ].
 
 ;;; 2025-11-12 CCH: this seems to take an ALL complement
 un_27asik := common_verby_adj-adj-lex &
@@ -1341,6 +1689,10 @@ nuannaaq := common_verby_adj-adj-lex &
   [ STEM < "nuannaaq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_pleased_a_rel" ].
 
+pitcaa := common_verby_adj-adj-lex &
+  [ STEM < "pitcaa" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_good_a_rel" ].
+
 ;;; 2025-11-12 CCH: TODO: verb or adj?
 nuanniq := common_verby_adj-adj-lex &
   [ STEM < "nuanniq" >,
@@ -1353,6 +1705,10 @@ ipiit := common_verby_adj-adj-lex &
 ajuq := common_verby_adj-adj-lex &
   [ STEM < "ajuq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_bad_a_rel" ].
+
+;;; 2025-12-04
+ajuq_2 := ajuq-verb-lex & 
+  [ STEM < "ajuq" > ].
 
 kiak := common_verby_adj-adj-lex &
   [ STEM < "kiak" >,
@@ -1458,6 +1814,10 @@ pinniq := common_verby_adj-adj-lex &
   [ STEM < "pinniq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_beautiful_a_rel" ].
 
+aliasuk := common_verby_adj-adj-lex &
+  [ STEM < "aliasuk" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_sad_a_rel" ].
+
 alianait := common_verby_adj-adj-lex &
   [ STEM < "alianait" >,
     SYNSEM.LKEYS.KEYREL.PRED "_wonderful_a_rel" ].
@@ -1504,6 +1864,14 @@ sivitu := tu_verby_adj-adj-lex &
   [ STEM < "sivitu" >,
     SYNSEM.LKEYS.KEYREL.PRED "_long+term_a_rel" ].
 
+sivikit := common_verby_adj-adj-lex &
+  [ STEM < "sivikit" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_short+term_a_rel" ].
+
+pukkit := common_verby_adj-adj-lex &
+  [ STEM < "pukkit" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_low_a_rel" ].
+
 ;;; Verbs
 
 tuni := ditrans_v-verb-lex &
@@ -1521,6 +1889,47 @@ naksit := ditrans_v-verb-lex &
 tunniuti_27 := ditrans_v-pp-verb-lex &
   [ STEM < "tunniutə" >,
     SYNSEM.LKEYS.KEYREL.PRED "_give_v_rel" ].
+
+nagliq := trans_only_v-verb-lex &
+  [ STEM < "nagliq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_reach_v_rel" ].
+
+puiuq := trans_only_v-verb-lex &
+  [ STEM < "puiuq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_forget_v_rel" ].
+
+qaiqqu := trans_only_v-verb-lex &
+  [ STEM < "qaiqqu" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_call+up_v_rel" ].
+
+;; miss the target
+uniuq := trans_only_v-verb-lex &
+  [ STEM < "uniuq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_miss_v_rel" ].
+
+nakkaq := intrans_v-verb-lex &
+  [ STEM < "nakkaq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_fall+down_v_rel" ].
+
+takkut := intrans_v-verb-lex &
+  [ STEM < "takkut" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_appear_v_rel" ].
+
+malliq := intrans_v-verb-lex &
+  [ STEM < "malliq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_sea+be+rough_v_rel" ].
+
+tin_27i := intrans_v-verb-lex &
+  [ STEM < "tiŋi" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_fly_v_rel" ].
+
+qasuirsiq := intrans_v-verb-lex &
+  [ STEM < "qasuirsiq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_rest_v_rel" ].
+
+aavaq := intrans_v-verb-lex &
+  [ STEM < "aavaq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_hunt+reindeer_v_rel" ].
 
 quja := intrans_v-verb-lex &
   [ STEM < "quja" >,
@@ -1545,6 +1954,12 @@ unin_27n_27a := intrans_v-verb-lex &
 tuaviuq := intrans_v-verb-lex &
   [ STEM < "tuaviuq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_hurry_v_rel" ].
+
+;;; 2025-11-12 TODO: this may be more like adj
+;;; 2025-12-06 redefined to adj
+mamaq := common_verby_adj-adj-lex & 
+  [ STEM < "mamaq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_taste+good_v_rel"].
 
 ;;; CCH 2025-11-16 there is a slight possibility of tusarnaarpaa; should that be NPP?
 tusaqnaaq := intrans_v-verb-lex &
@@ -1608,6 +2023,10 @@ ilau := intrans_v-verb-lex &
   [ STEM < "ilau" >,
     SYNSEM.LKEYS.KEYREL.PRED "_be+on+board_v_rel" ].
 
+ikaaq := intrans_v-verb-lex &
+  [ STEM < "ikaaq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_go+on+board_v_rel" ].
+
 majuaq := intrans_v-verb-lex &
   [ STEM < "majuaq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_go+up_v_rel" ].
@@ -1615,6 +2034,10 @@ majuaq := intrans_v-verb-lex &
 uti_27q := intrans_v-verb-lex &
   [ STEM < "utəq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_return_v_rel" ].
+
+siqquq := intrans_v-verb-lex &
+  [ STEM < "siqquq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_shoot_v_rel" ].
 
 ;;;2025-09-28 TODO: these two should be able to take clausal complements 
 ;;;(complete sentence with quotes?)
@@ -1733,13 +2156,21 @@ qia := intrans_v-verb-lex &
   [ STEM < "qia" >,
     SYNSEM.LKEYS.KEYREL.PRED "_cry_v_rel" ].
 
-sianiq := intrans_v-verb-lex &
-  [ STEM < "sianiq" >,
+siani_27q := intrans_v-verb-lex &
+  [ STEM < "sianəq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_ring_v_rel" ].
+
+siani_27q_2 := usual_common_n-noun-lex &
+  [ STEM < "sianəq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_bell_v_rel" ].
 
 i_27ti_27q := intrans_v-verb-lex &
   [ STEM < "ətəq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_wake+up_v_rel" ].
+
+i_27ti_27qsaq := trans_only_v-verb-lex & 
+  [ STEM < "ətəqsaq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_rouse_v_rel" ].
 
 isi_27q := intrans_v-verb-lex &
   [ STEM < "isəq" >,
@@ -1813,9 +2244,26 @@ pujurtaq := intrans_v-verb-lex &
   [ STEM < "pujurtaq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_smoke_v_rel" ].
 
+qipin_27n_27uluk := intrans_v-verb-lex &
+  [ STEM < "qipiŋŋuluk" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_have+appendicitis_v_rel" ].
+
+;;; CCH 2025-12-05 TODO: this might be an adjective
+aalajan_27iq := cl_intrans_v-verb-lex &
+  [ STEM < "aalajaŋiq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_be+determined_v_rel" ].
+
 uqaluttuaq_v := cl_intrans_v-verb-lex &
   [ STEM < "uqaluttuaq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_tell_v_rel" ].
+
+uqaluttuaq_2 := intrans_v-verb-lex &
+  [ STEM < "uqaluttuaq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_tell_v_rel" ].
+
+uqaluttuari_27 := trans_only_v-verb-lex &
+  [ STEM < "uqaluttuarə" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_tell+of_v_rel" ].
 
 ;;;mod
 isumaqaq := cl_intrans_v-verb-lex &
@@ -1827,19 +2275,36 @@ niriuk := cl_intrans_v-verb-lex &
     SYNSEM.LKEYS.KEYREL.PRED "_hope_v_rel" ].
 
 ;;;mod
-nalu := cl_trans_v-verb-lex &
+
+taku_2 := cl-pseudo-trans_v-verb-lex &
+  [ STEM < "taku" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_see_v_rel" ].
+
+nalu := cl-pseudo-trans_v-verb-lex &
   [ STEM < "nalu" >,
     SYNSEM.LKEYS.KEYREL.PRED "_not+know_v_rel" ].
 
-iqqai := cl_trans_v-verb-lex &
+nalu_2 := trans_only_v-verb-lex &
+  [ STEM < "nalu" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_not+know_v_rel" ].
+
+iqqai := cl-pseudo-trans_v-verb-lex &
   [ STEM < "iqqai" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_remember_v_rel" ].
+
+iqqaima := trans_only_v-verb-lex &
+  [ STEM < "iqqaima" >,
     SYNSEM.LKEYS.KEYREL.PRED "_remember_v_rel" ].
 
 apiri_27 := cl_q_trans_v-verb-lex &
   [ STEM < "apirə" >,
     SYNSEM.LKEYS.KEYREL.PRED "_ask_v_rel" ].
 
-tusaq := cl_trans_v-verb-lex &
+nalunaarfigi_27 := cl_trans_v-verb-lex &
+  [ STEM < "nalunaarfigə" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_inform_v_rel" ].
+
+tusaq := cl-pseudo-trans_v-verb-lex &
   [ STEM < "tusaq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_hear_v_rel" ].
 
@@ -1918,6 +2383,10 @@ katircuq := ti_htr_nonagent_p_v-verb-lex &
   [ STEM < "katircuq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_gather_v_rel" ].
 
+kisit := ti_htr_v-verb-lex &
+  [ STEM < "kisit" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_count_v_rel" ].
+
 ikiuq := ti_htr_v-verb-lex &
   [ STEM < "ikiuq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_help_v_rel" ].
@@ -1977,6 +2446,11 @@ isigi_27 := nnik_htr_v-verb-lex &
   [ STEM < "isigə" >,
     SYNSEM.LKEYS.KEYREL.PRED "_behold_v_rel" ].
 
+;;; CCH 2025-12-06 TODO: ins-obj-verb-lex or intrans_v-verb-lex?
+simiq := ins-obj-verb-lex &
+  [ STEM < "simiq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_be+spotted_v_rel" ].
+
 pisi := ins-obj-verb-lex &
   [ STEM < "pisi" >,
     SYNSEM.LKEYS.KEYREL.PRED "_buy_v_rel" ].
@@ -1987,14 +2461,27 @@ taa := ins-obj-verb-lex &
   [ STEM < "taa" >,
     SYNSEM.LKEYS.KEYREL.PRED "_call_v_rel" ].
 
-taa_2 := post-obj-verb-lex &
+taa_2 := trans-post-obj-verb-lex &
   [ STEM < "taa" >,
     SYNSEM.LKEYS.KEYREL.PRED "_call_v_rel" ].
+
+;;; CCH 2025-12-06 TODO: temporary solution
+ateqaq := intrans-post-obj-verb-lex &
+  [ STEM < "atəq-qaq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_have+name_v_rel" ].
 
 ;;; CCH 2025-11-16 TODO: maybe this is adj? but at least it seems to be mainly predicative
 ulivkaaq := ins-obj-verb-lex &
   [ STEM < "ulivkaaq" >,
     SYNSEM.LKEYS.KEYREL.PRED "_be+filled_v_rel" ].
+
+pilak := trans_only_v-verb-lex &
+  [ STEM < "pilak" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_flense_v_rel" ].
+
+utaqqi := trans_only_v-verb-lex &
+  [ STEM < "utaqqi" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_await_v_rel" ].
 
 apiri_27_4 := trans_only_v-verb-lex &
   [ STEM < "apirə" >,
@@ -2135,6 +2622,10 @@ suna_2 := ques_sg_abs-determiner-lex &
   [ STEM < "suna" >,
     SYNSEM.LKEYS.KEYREL.PRED "_what+kind+of_q_rel" ].
 
+tamaq := quant-determiner-lex & 
+  [ STEM < "tamaq" >,
+    SYNSEM.LKEYS.KEYREL.PRED "_all-or-every_q_rel" ].
+
 ;;; Adverbs
 
 ;;; 2025-11-12 CCH: temporarily like this, but maybe it can modify S
@@ -2158,6 +2649,11 @@ iqniinnaq := pred-only-adverb-lex &
   [ STEM < "iqniinnaq" >, 
     SYNSEM.LKEYS.KEYREL.PRED "_right+away_a_rel" ].
 
+;;; CCH 2025-11-12 TODO: temporary, could be very wrong; the strangest part is how this gets related to the expressed time if it is adv
+aitcaat := pred-only-adverb-lex & 
+  [ STEM < "aitcaat" >, 
+    SYNSEM.LKEYS.KEYREL.PRED "_only+then_a_rel" ].
+
 ;;; 2025-11-14: Note that only this adverb is actually a confirmed pred-only-adverb by the literature (e.g. Fortescue (1984))
 agsut := pred-only-adverb-lex & 
   [ STEM < "agsut" >, 
@@ -2167,7 +2663,7 @@ iluamik := pred-only-adverb-lex &
   [ STEM < "iluamik" >, 
     SYNSEM.LKEYS.KEYREL.PRED "_properly_a_rel" ].
 
-ilaanni := pred-only-adverb-lex & 
+ilaanni := pred-or-s-int-adverb-lex & 
   [ STEM < "ilaanni" >, 
     SYNSEM.LKEYS.KEYREL.PRED "_sometimes_a_rel" ].
 
@@ -2178,6 +2674,15 @@ kin_27umut := pred-only-adverb-lex &
 immaqa := pred-only-pre-comps-adverb-lex & 
   [ STEM < "immaqa" >, 
     SYNSEM.LKEYS.KEYREL.PRED "_perhaps_a_rel" ].
+
+;;; CCH 2025-12-06 temporary solution
+taamaattumik := pred-only-pre-comps-adverb-lex & 
+  [ STEM < "taima", "ət-ðuq-mik" >, 
+    SYNSEM.LKEYS.KEYREL.PRED "_therefore_a_rel" ].
+
+kiisa := pred-only-pre-comps-adverb-lex & 
+  [ STEM < "kiisa" >, 
+    SYNSEM.LKEYS.KEYREL.PRED "_final_a_rel" ].
 
 taava := pred-only-pre-comps-adverb-lex & 
   [ STEM < "taava" >, 
@@ -2203,6 +2708,10 @@ naagga := sent-adverb-lex &
   [ STEM < "naagga" >, 
     SYNSEM.LKEYS.KEYREL.PRED "_no_a_rel" ].
 
+naamik := sent-adverb-lex & 
+  [ STEM < "naamik" >, 
+    SYNSEM.LKEYS.KEYREL.PRED "_no_a_rel" ].
+
 qujanaq := sent-adverb-lex & 
   [ STEM < "qujanaq" >, 
     SYNSEM.LKEYS.KEYREL.PRED "_thanks_a_rel" ].
@@ -2218,19 +2727,23 @@ qaqugu := fut-wh-adverb-lex &
 ;;;mod   =lu affix
 lu := conj-clitic-lex &
   [ STEM < "lu" >, 
-    SYNSEM.NON-LOCAL.CONJP.LIST.FIRST "_and_coord_rel"].
+    SYNSEM.NON-LOCAL.CONJP.LIST.FIRST.PRED "_and_coord_rel"].
 
 li := conj-clitic-lex &
   [ STEM < "li" >, 
-    SYNSEM.NON-LOCAL.CONJP.LIST.FIRST "_but_coord_rel" ].
+    SYNSEM.NON-LOCAL.CONJP.LIST.FIRST.PRED "_but_coord_rel" ].
 
 aamma := conj-particle-lex &
   [ STEM < "aamma" >, 
-    SYNSEM.NON-LOCAL.CONJP.LIST.FIRST "_and_coord_rel" ].
+    SYNSEM.NON-LOCAL.CONJP.LIST.FIRST.PRED "_and_coord_rel" ].
 
 kisianni := conj-particle-lex &
   [ STEM < "kisianni" >, 
-    SYNSEM.NON-LOCAL.CONJP.LIST.FIRST "_but_coord_rel" ].
+    SYNSEM.NON-LOCAL.CONJP.LIST.FIRST.PRED "_but_coord_rel" ].
+
+guuq := guuq-lex &
+  [ STEM < "guuq" >, 
+    SYNSEM.NON-LOCAL.CONJP.LIST.FIRST.PRED "_ev_guuq_rel" ].
 
 ;;; Complementizers
 
@@ -2239,6 +2752,10 @@ kisianni := conj-particle-lex &
 tassa := tassa-lex & 
   [ STEM < "tassa" >, 
     SYNSEM.LKEYS.KEYREL.PRED "_be_v_id_rel" ].
+
+tassa_2 := pred-only-pre-comps-adverb-lex & 
+  [ STEM < "tassa" >, 
+    SYNSEM.LKEYS.KEYREL.PRED "_that+is_a_rel" ].
 
 suurlu := suurlu-lex & 
   [ STEM < "suurlu" >, 
@@ -2249,6 +2766,20 @@ su_3 := su-lex &
   [ STEM < "su" >, 
     SYNSEM.LKEYS.KEYREL.PRED "_do_v_rel" ].
 
+sumunnaq := sumunnaq-lex &
+  [ STEM < "sumunnaq" >, 
+    SYNSEM.LKEYS.KEYREL.PRED "_go_v_rel" ].
+
 qanuq-it := qanuq-it-lex & 
   [ STEM < "qanuq", "ət" >, 
     SYNSEM.LKEYS.KEYREL.PRED "unspec_adj_a_rel" ].
+
+;;; greetings
+
+kutaa := greet-adv-lex & 
+  [ STEM < "kutaa" >, 
+    SYNSEM.LKEYS.KEYREL.CARG "kutaa" ].
+
+hallo := greet-adv-lex & 
+  [ STEM < "hallo" >, 
+    SYNSEM.LKEYS.KEYREL.CARG "hallo" ].

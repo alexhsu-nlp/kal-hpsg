@@ -3,7 +3,14 @@
 ;     TOKENS.+LIST < [ +CLASS card_ne, +CARG #carg ] >, 
 ;     SYNSEM.LKEYS.KEYREL.CARG #carg ].
 
-generic_card_ne := numeral-adj-lex &
+;;; CCH 2025-11-27 add pl-numeral-adj-lex, although this will make 1-mik not possible, but currently this is the best soln
+;; before extra token mapping can be solved
+generic_card_ne := pl-numeral-adj-lex &
   [ STEM < "_generic_card_ne_" >,
+    TOKENS.+LIST < [ +CLASS card_ne, +CARG #carg ] >, 
+    SYNSEM.LKEYS.KEYREL.CARG #carg ].
+
+generic_dofm_card_ne := date-noun-lex &
+  [ STEM < "_generic_dofm_ne_" >,
     TOKENS.+LIST < [ +CLASS card_ne, +CARG #carg ] >, 
     SYNSEM.LKEYS.KEYREL.CARG #carg ].

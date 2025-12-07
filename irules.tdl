@@ -13,6 +13,22 @@ pl_abs+erg-suffix :=
 %suffix (* -t)
 pl_abs+erg-lex-rule.
 
+3sg-acc-quant-suffix := 
+%suffix (* -at)
+3sg-acc-quant-lex-rule.
+
+3sg-nom-quant-suffix := 
+%suffix (* -mi)
+3sg-nom-quant-lex-rule.
+
+3pl-acc-quant-suffix := 
+%suffix (* -isa)
+3pl-acc-quant-lex-rule.
+
+3pl-nom-quant-suffix := 
+%suffix (* -mik)
+3pl-nom-quant-lex-rule.
+
 ;;;pl_erg-suffix :=
 ;;;%suffix (* -t)
 ;;;pl_erg-lex-rule.
@@ -173,6 +189,10 @@ pl_all-lex-rule.
 %suffix (* -anut)
 3sg_pron_sg_all-lex-rule.
 
+3sg_sg_all-suffix :=
+%suffix (* -anut)
+3sg_sg_all-lex-rule.
+
 1sg_pl_abs-suffix :=
 %suffix (* -kka)
 1sg_pl_abs-lex-rule.
@@ -204,6 +224,10 @@ pl_all-lex-rule.
 4sg_pron_pl_all-suffix :=
 %suffix (* -minut)
 4sg_pron_pl_all-lex-rule.
+
+4pl_pron_sg_all-suffix :=
+%suffix (* -minnut)
+4pl_pron_sg_all-lex-rule.
 
 4pl_pron_pl_ins-suffix :=
 %suffix (* -minnik)
@@ -273,6 +297,10 @@ ind+int_3sg_2sg_verb-suffix :=
 %suffix (* -vaatət)
 ind+int_3sg_2sg_verb-lex-rule.
 
+ind+int_3sg_2pl_verb-suffix :=
+%suffix (* -vaasi)
+ind+int_3sg_2pl_verb-lex-rule.
+
 int_2sg_verb-suffix :=
 %suffix (* -vit)
 int_2sg_verb-lex-rule.
@@ -305,6 +333,18 @@ iter_3sg_verb-suffix :=
 %suffix (* -gaaŋat)
 iter_3sg_verb-lex-rule.
 
+iter_3pl_verb-suffix :=
+%suffix (* -gaaŋata)
+iter_3pl_verb-lex-rule.
+
+iter_1pl_verb-suffix :=
+%suffix (* -gaaŋatta)
+iter_1pl_verb-lex-rule.
+
+iter_4pl_verb-suffix :=
+%suffix (* -gaaŋamik)
+iter_4pl_verb-lex-rule.
+
 patient-part-suffix :=
 %suffix (* -ðaq)
 patient_participle-lex-rule.
@@ -316,6 +356,10 @@ intrans_participle-lex-rule.
 pp_participle-suffix := 
 %suffix (* -f^fik)
 pp_participle-lex-rule.
+
+with_participle-suffix := 
+%suffix (* -qatə)
+with_participle-lex-rule.
 
 part_1sg_3sg_verb-suffix :=
 %suffix (* -gəga)
@@ -344,6 +388,10 @@ cntp_4sg_subj_verb-lex-rule.
 cntp_3sg_obj_verb-suffix :=
 %suffix (* -l^lugu)
 cntp_3sg_obj_verb-lex-rule.
+
+cntp_1sg_obj_verb-suffix :=
+%suffix (* -l^luŋa)
+cntp_1sg_obj_verb-lex-rule.
 
 caus_1sg_verb-suffix :=
 %suffix (* -gama)
@@ -400,6 +448,14 @@ caus_4sg_3sg_verb-lex-rule.
 int_2sg_3sg_verb-suffix :=
 %suffix (* -vijuk)
 int_2sg_3sg_verb-lex-rule.
+
+int_2sg_3pl_verb-suffix :=
+%suffix (* -vigət)
+int_2sg_3pl_verb-lex-rule.
+
+ind+int_3pl_2sg_verb-suffix :=
+%suffix (* -vaattət)
+ind+int_3pl_2sg_verb-lex-rule.
 
 ind+int_3pl_3p_verb-suffix :=
 %suffix (* -vaat)
@@ -654,6 +710,14 @@ ask_valchg-suffix :=
 %suffix (* -qqu)
 ask_valchg-lex-rule.
 
+think_valchg-suffix :=
+%suffix (* -surə)
+think_valchg-lex-rule.
+
+consider_valchg-suffix :=
+%suffix (* -gə)
+consider_valchg-lex-rule.
+
 sima-suffix :=
 %suffix (* -sima)
 sima-lex-rule.
@@ -840,6 +904,10 @@ real-suffix :=
 %suffix (* -vik)
 real-lex-rule.
 
+irrealis-suffix :=
+%suffix (* -kcaq)
+irrealis-lex-rule.
+
 passuit-suffix :=
 %suffix (* -q^vakcuaq)
 passuit-lex-rule.
@@ -884,6 +952,14 @@ part-sg-ins-suffix :=
 %suffix (* -mik)
 part-sg-ins-lex-rule.
 
+part-pl-all-suffix :=
+%suffix (* -nut)
+part-pl-all-lex-rule.
+
+part-pl-ins-suffix :=
+%suffix (* -nik)
+part-pl-ins-lex-rule.
+
 part-1sg-poss-sg-all-suffix :=
 %suffix (* -nnut)
 part-1sg-poss-sg-all-lex-rule.
@@ -920,6 +996,10 @@ sg_abs-dem-suffix :=
 %suffix (* -na)
 sg_abs-dem-lex-rule.
 
+pl_abs-dem-suffix := 
+%suffix (* -ku)
+pl_abs-dem-lex-rule.
+
 sg_erg-dem-suffix := 
 %suffix (* -suma)
 sg_erg-dem-lex-rule.
@@ -931,6 +1011,10 @@ pl_erg-dem-lex-rule.
 sg_abs-dem-pron-suffix := 
 %suffix (* -na)
 sg_abs-dem-pron-lex-rule.
+
+pl_abs-dem-pron-suffix := 
+%suffix (* -ku)
+pl_abs-dem-pron-lex-rule.
 
 sg_erg-dem-pron-suffix := 
 %suffix (* -suma)
@@ -1000,6 +1084,10 @@ vallaaq-suffix :=
 %suffix (* -vallaaq)
 vallaaq-lex-rule.
 
+jaaq-suffix :=
+%suffix (* -jaaq)
+jaaq-lex-rule.
+
 nqik-suffix := 
 %suffix (* -nqik)
 nqik-lex-rule.
@@ -1039,3 +1127,15 @@ sg_equ-lex-rule.
 particle-v-cop-suffix := 
 %suffix (* -u)
 particle-v-cop-lex-rule.
+
+qi-very-suffix := 
+%suffix (* -qə)
+qi-very-lex-rule.
+
+please-suffix :=
+%suffix (* -niaq)
+please-lex-rule.
+
+neq-form-suffix := 
+%suffix (* -nəq)
+neq-form-lex-rule.

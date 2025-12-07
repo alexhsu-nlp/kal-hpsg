@@ -1,7 +1,7 @@
 ;;; modified from erg-2025/tmr/ne?.tdl
 
 card_ne_2_tmr := basic_ne_tmt &
-[ +INPUT < [ +FORM ^([0-9]+)(\-[a-w]+)?$ ] >,
+[ +INPUT < [ +FORM ^([0-9]+)(\-[a-w^]+)*$ ] >,
   +OUTPUT < [ +CLASS card_ne, +CARG "${I1:+FORM:1}" ] > ].
 
 ;;; atuvaq-vaa can pass this rule to get non_ne

@@ -68,6 +68,15 @@ one_one_tmt := basic_one_one_tmt &
 ;               +PRED #pred, +CARG #carg ] >,
 ;   +CONTEXT <> ].
 
+alt_basic_ne_tmt := one_one_tmt &
+[ +INPUT < [ +CLASS no_class, 
+	           +TRAIT [ +LB #lb, +RB #rb, +LD #ld, +RD #rd ],
+             +PRED #pred, +CARG #carg] >,
+  +OUTPUT < [ +CLASS named_entity,
+              +TRAIT [ +LB #lb, +RB #rb, +LD #ld, +RD #rd ],
+              +PRED #pred, +CARG #carg ] >,
+  +CONTEXT <> ].
+
 basic_ne_tmt := one_one_tmt &
 [ +INPUT < [ +FORM #form, +CLASS no_class, 
 	           +TRAIT [ +LB #lb, +RB #rb, +LD #ld, +RD #rd ],

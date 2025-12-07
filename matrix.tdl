@@ -3643,6 +3643,7 @@ base-basic-adj-lex := norm-sem-lex-item &
                                  SPEC < > ] ] ] ] ]
 """The base type of common adjectives and numerals""".
 
+;;; CCH 2025-11-22 TODO: this ref-ind will make derived adverbs not possible to modify verbs with correct MRS.
 base-intersect-adj-lex := base-basic-adj-lex & 
   [ SYNSEM [ LOCAL.CONT.HOOK.XARG ref-ind & #xarg,
              LKEYS.KEYREL.ARG1 #xarg ] ].
@@ -3845,6 +3846,12 @@ base-coord-phrase := phrase &
                                           CAT [ WH.OR #wh, HEAD.MOD #mod,
                                                 VAL #val ] ],
 					 NON-LOCAL [ SLASH #slash, REL #rel, QUE #que2 ] ] ] ].
+
+;;; CCH 2025-12-05 added to check that the coordinated thing has the same semantic type
+base-coord-phrase :+ [ SYNSEM [ LIGHT -, 
+                                LOCAL.CAT.HEAD.MIN #min ], 
+                       LCOORD-DTR.SYNSEM.LOCAL.CAT.HEAD.MIN #min, 
+                       RCOORD-DTR.SYNSEM.LOCAL.CAT.HEAD.MIN #min ].
 
 unexpressed-coord-phrase := base-coord-phrase & unary-phrase & 
   [ LCOORD-DTR [ SYNSEM unexpressed ], 
