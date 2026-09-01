@@ -62,7 +62,7 @@ INFLECTED: a flag to determine whether or not the sign is already
 inflected or still requires to go through a lexical rule.
 <history>
 SSH 2013-04-19 - removed PHON which was previously at the same level as SYNSEM. 
-""" .
+""".
 
 ; C-CONT encodes the semantic contribution of the rule (phrasal
 ; or lexical).
@@ -93,12 +93,14 @@ nocoord := sign &
 
 alts-min := avm
 """A minimal supertype for alts, needed to block lexical rule application.""".
+
 alts := alts-min &
   [ PASSIVE bool ]
 """
 <features>
 PASSIVE: A flag to indicate whether the type can undergo a passive lexical rule.
 """.
+
 no-alts := alts-min
 """A subtype to prevent TODO """.
 
@@ -407,7 +409,8 @@ head := head-min &
 ; just the leaves here.
 
 conj := +mo & +do & +co & +po & +ro & +jo & +vo & +no.
-num := +mo & +dm & +cm & +pm & +rm & +jm & +vm & +nm.
+num := +mo & +dm & +cm & +pm & +rm & +jm & +vm & +nm
+"""number-name""".
 det := +do & +dm & +cd & +pd & +rd & +jd & +vd & +nd.
 comp := +co & +cm & +cd & +pc & +rc & +jc & +vc & +nc
 """Complimentizers.""".
@@ -718,7 +721,9 @@ coord-ref-ind := coord-index & ref-ind.
 relation := avm &
   [ LBL handle,
     WLINK list,
-    PRED predsort ]
+    PRED predsort, 
+    CFROM string, 
+    CTO string ]
 """
 Basic relation type for feature value elements of `RELS.LIST`.
 
@@ -2425,6 +2430,7 @@ basic-head-opt-comp-phrase := unary-nonloc-general-phrase & head-only &
 ;;; Else: should we do something for valency-changing cases?
 
 ;;; 2025-03-30 unary-nonloc-general-phrase
+;;; 2026-06-22 try removing HEAD-DTR...MOD olist
 basic-head-opt-subj-phrase := unary-nonloc-general-phrase & head-only &
   [ INFLECTED #infl,
     SYNSEM canonical-synsem &
@@ -2437,8 +2443,7 @@ basic-head-opt-subj-phrase := unary-nonloc-general-phrase & head-only &
 		             CONT.HOOK [  ] ],
 		     MODIFIED #mod ],
     HEAD-DTR [ INFLECTED #infl & infl-satisfied,
-	       SYNSEM [ LOCAL [ CAT [ HEAD.MOD olist,
-	       	      	      	      VAL [ SUBJ < gap & 
+	       SYNSEM [ LOCAL [ CAT [ VAL [ SUBJ < gap & 
 						   [ OPT +,
 						     LOCAL.CONT.HOOK [ INDEX #index & [ COG-ST in-foc ], 
                                    ICONS-KEY #ikey,
@@ -2813,6 +2818,8 @@ head-adj-scop-phrase := head-adj-phrase & scopal-mod-phrase &
 adj-head-int-phrase := adj-head-phrase & isect-mod-phrase &
   [ NON-HEAD-DTR.SYNSEM.LOCAL.CAT [ POSTHEAD - ] ].
 head-adj-int-phrase := head-adj-phrase & isect-mod-phrase.
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -4275,6 +4282,11 @@ s-coord-phrase := event-coord-phrase &
               NON-LOCAL [ SLASH #slash, QUE #que, REL #rel ] ],
     LCOORD-DTR.SYNSEM [ LOCAL.CAT.HEAD +vj, NON-LOCAL [ SLASH #slash, QUE #que, REL #rel ] ],
     RCOORD-DTR.SYNSEM [ LOCAL.CAT.HEAD +vj, NON-LOCAL [ SLASH #slash, QUE #que, REL #rel ] ] ].
+
+event-coord-phrase :+ 
+  [ SYNSEM [ LOCAL.CAT.HEAD.REL-FY #r ], 
+    LCOORD-DTR.SYNSEM [ LOCAL.CAT.HEAD.REL-FY #r ], 
+    RCOORD-DTR.SYNSEM [ LOCAL.CAT.HEAD.REL-FY #r ] ].
 
 basic-s-top-coord-rule := s-coord-phrase &
   [ C-CONT [ RELS.LIST < >,

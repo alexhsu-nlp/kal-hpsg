@@ -23,7 +23,7 @@ active-lex := active-lex-rule.
 
 sg_abs_attr_adj-lex := sg_abs_attr_adj-lex-rule.
 
-sg_incorp_npred_attr_adj-lex := sg_incorp_npred_attr_adj-lex-rule.
+; sg_incorp_npred_attr_adj-lex := sg_incorp_npred_attr_adj-lex-rule.
 
 ;;;incorp-attr-adj-lex := incorp-attr-adj-lex-rule.
 

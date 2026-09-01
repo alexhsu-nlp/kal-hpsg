@@ -64,3 +64,9 @@ token-form-path     := +FORM.       ; [required] string for lexical lookup
 token-id-path       := +ID.         ; [optional] list of external ids
 token-from-path     := +FROM.       ; [optional] surface start position
 token-to-path       := +TO.         ; [optional] surface end position
+token-postags-path := +TNT +TAGS.
+token-posprobs-path := +TNT +PRBS.
+
+freezer-megabytes := 512.
+
+generation-ignore-rules := "nogen-rules.set".

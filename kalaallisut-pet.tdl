@@ -13,7 +13,7 @@
 :include "matrix".
 :include "kalaallisut".
 :include "mtr".
-
+:include "tmt".
 
 :end :type.
 
@@ -23,6 +23,7 @@
 
 :begin :instance :status lex-entry.
 :include "lexicon".
+:include "punct-lex".
 :end :instance.
 
 ;;
@@ -52,4 +53,8 @@
 
 :begin :instance.
 :include "roots".
+:end :instance.
+
+:begin :instance :status token-mapping-rule.
+:include "tmr".
 :end :instance.

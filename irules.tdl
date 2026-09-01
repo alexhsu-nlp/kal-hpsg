@@ -389,6 +389,10 @@ cntp_3sg_obj_verb-suffix :=
 %suffix (* -l^lugu)
 cntp_3sg_obj_verb-lex-rule.
 
+cntp_3sg_subj_verb-suffix :=
+%suffix (* -l^lugu)
+cntp_3sg_subj_verb-lex-rule.
+
 cntp_1sg_obj_verb-suffix :=
 %suffix (* -l^luŋa)
 cntp_1sg_obj_verb-lex-rule.
@@ -432,6 +436,10 @@ caus_3pl_1pl_verb-lex-rule.
 caus_1sg_3sg_verb-suffix :=
 %suffix (* -gakku)
 caus_1sg_3sg_verb-lex-rule.
+
+caus_1sg_3pl_verb-suffix :=
+%suffix (* -gakkət)
+caus_1sg_3pl_verb-lex-rule.
 
 caus_3sg_3sg_verb-suffix :=
 %suffix (* -m^magit)
@@ -549,6 +557,10 @@ pfv-lex-rule.
 hab-suffix :=
 %suffix (* -ðaq)
 hab-lex-rule.
+
+gajuk-suffix :=
+%suffix (* -gajuk)
+gajuk-lex-rule.
 
 cont-suffix :=
 %suffix (* -juaq)
@@ -762,17 +774,17 @@ pl_ins_attr_adj-suffix :=
 %suffix (* -nik)
 pl_ins_attr_adj-lex-rule.
 
-sg_incorp_real_v_attr_adj-suffix :=
-%suffix (* -mik)
-sg_incorp_real_v_attr_adj-lex-rule.
+; sg_incorp_real_v_attr_adj-suffix :=
+; %suffix (* -mik)
+; sg_incorp_real_v_attr_adj-lex-rule.
 
-pl_incorp_real_v_attr_adj-suffix :=
-%suffix (* -nik)
-pl_incorp_real_v_attr_adj-lex-rule.
+; pl_incorp_real_v_attr_adj-suffix :=
+; %suffix (* -nik)
+; pl_incorp_real_v_attr_adj-lex-rule.
 
-pl_incorp_npred_attr_adj-suffix :=
-%suffix (* -t)
-pl_incorp_npred_attr_adj-lex-rule.
+; pl_incorp_npred_attr_adj-suffix :=
+; %suffix (* -t)
+; pl_incorp_npred_attr_adj-lex-rule.
 
 ;;;mod [TODO: choices]
 sg_loc_attr_adj-suffix :=
@@ -888,9 +900,13 @@ big-suffix :=
 %suffix (* -q^cuaq)
 big-lex-rule.
 
-tit-suffix :=
+tit-intr-suffix :=
 %suffix (* -tət)
-tit-lex-rule.
+tit-intr-lex-rule.
+
+tit-tr-suffix :=
+%suffix (* -tət)
+tit-tr-lex-rule.
 
 new-suffix :=
 %suffix (* -taaq)
@@ -911,6 +927,10 @@ irrealis-lex-rule.
 passuit-suffix :=
 %suffix (* -q^vakcuaq)
 passuit-lex-rule.
+
+paaluk-suffix :=
+%suffix (* -q^vaaluk)
+paaluk-lex-rule.
 
 ;abs_part-suffix :=
 ;%suffix (* -nəq)
@@ -963,6 +983,10 @@ part-pl-ins-lex-rule.
 part-1sg-poss-sg-all-suffix :=
 %suffix (* -nnut)
 part-1sg-poss-sg-all-lex-rule.
+
+part-4sg-poss-sg-all-suffix :=
+%suffix (* -minut)
+part-4sg-poss-sg-all-lex-rule.
 
 part-1sg-poss-sg-abs-suffix :=
 %suffix (* -ga)
@@ -1139,3 +1163,11 @@ please-lex-rule.
 neq-form-suffix := 
 %suffix (* -nəq)
 neq-form-lex-rule.
+
+comp-suffix :=
+%suffix (* -nəq)
+comparative-lex-rule.
+
+app-lex-suffix :=
+%suffix (* -qatəgə)
+app-lex-lex-rule.

@@ -12,6 +12,14 @@ non_ne := regular_class.
 card_ne := named_entity.
 token_min := avm.
 
+tnt_main := *top* &
+[ +TAG string, +PRB string ].
+
+tnt := *top* &
+[ +MAIN tnt_main,
+  +TAGS list,
+  +PRBS list ].
+
 ;; DPF 2018-03-28 - Added +ONSET
 token := token_min &
 [ +FORM string,
@@ -22,7 +30,8 @@ token := token_min &
   +ID diff-list,
   +FROM string,
   +TO string,
-  +TICK bool].
+  +TICK bool, 
+  +TNT tnt ].
 
 token_trait := *top* &
 [ +LB bracket_list, +RB bracket_list,

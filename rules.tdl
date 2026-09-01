@@ -144,9 +144,11 @@ crf-unary := crf-unary-phrase.
 
 num-meas := numeral-measure-phrase.
 
-ext-rel-mod := ext-rel-mod-phrase.
+rel-mod := rel-mod-phrase.
 
-incorp-rel-mod := incorp-rel-mod-phrase.
+; ext-rel-mod := ext-rel-mod-phrase.
+
+; incorp-rel-mod := incorp-rel-mod-phrase.
 
 part-to-noun-with-rel := part-to-noun-with-rel-phrase.
 
@@ -159,6 +161,10 @@ punct-left := punct-left-rule.
 np-frag := np-fragment-phrase.
 
 pp-frag := pp-fragment-phrase.
+
+; subord-frag := subord-claus-fragment-phrase.
+
+scop-adv-frag := scop-adv-fragment-phrase.
 
 month-unary := month-unary-phrase.
 

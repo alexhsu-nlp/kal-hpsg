@@ -72,7 +72,7 @@ head :+ [ FORM string ].
 ;;;mod
 ;;; necessary flags:
 ;;; V_END-OR-V_END_NEG-FLAG (for general verb ending)
-;;; HAB-FLAG (to avoid clashing with -ŋŋit)
+;;; HAB-FLAG (to avoid clashing with -ŋŋit) [update: NOT NEEDED]
 ;;; NEG_V_END_FLAG (to indicate whether the ending should be pos or neg)
 ;;; TRANS_ONLY_V-VERB-FLAG (to prevent it from entering null-htr-rule)
 ;;; INFL_QUES_N-NOUN-FLAG (prevents it from taking abs-lex-rule, although idk why this is necessary)
@@ -83,12 +83,13 @@ head :+ [ FORM string ].
 ;;; NULL_HTR-FLAG (many -'s, but I feel like this is just to flag that something is transitive, 
 ;;;     and that can be well replaced by null_htr-rule-dtr UNLESS something intervenes in between; 
 ;;;     but note the potential "cross-verbal" HTRs)
-;;; TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG (can be represented by null_htr-rule-dtr, or may not)
+;;; TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG (can be represented by null_htr-rule-dtr, or may not) [deleted]
 
 ;;; deletable flags (nothing required in DTR for selection and nothing negative to prevent infl-satisfied):
 ;;; TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG (can be represented by general v_end function)
 ;;; TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG (same)
 ;;; [deleted]
+;;; ANTIPASS-OR-PASS-FLAG (no use)
 ;;; ANTIPASS-OR-PASS-OR-TRANS_CAUS_PASS-FLAG (no use)
 ;;; CLITIC_V-VERB-OR-INTRANS_V-VERB-FLAG (no use)
 ;;; CL_INTRANS_V-VERB-OR-CLITIC_V-VERB-FLAG (no use)
@@ -98,11 +99,8 @@ head :+ [ FORM string ].
 ;;; ARG_CASE-FLAG luk (no use)
 inflected :+ [ TRANS_ONLY_V-VERB-FLAG luk,
     V_END-OR-V_END_NEG-FLAG luk,
-    ANTIPASS-OR-PASS-FLAG luk,
     SG_ABS_QUES_NOUN-NOUN-FLAG luk,
     TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG luk,
-    HAB-FLAG luk,
-    TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG luk,
     TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG luk,
     TRANS_VALCHG-FLAG luk,
     CASE_ENDING-FLAG luk,
@@ -120,11 +118,8 @@ inflected :+ [ TRANS_ONLY_V-VERB-FLAG luk,
 
 infl-satisfied :+ [ TRANS_ONLY_V-VERB-FLAG na-or-+,
     V_END-OR-V_END_NEG-FLAG na-or-+,
-    ANTIPASS-OR-PASS-FLAG na-or-+,
     SG_ABS_QUES_NOUN-NOUN-FLAG na-or-+,
     TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG na-or-+,
-    HAB-FLAG na-or-+,
-    TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG na-or-+,
     TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG na-or-+,
     TRANS_VALCHG-FLAG na-or-+,
     CASE_ENDING-FLAG na-or-+,
@@ -443,7 +438,8 @@ pron-noun-lex := no-spr-noun-lex &
   [ SYNSEM.LOCAL [ CONT.HOOK.INDEX [ COG-ST activ-or-more, 
                                      SPECI + ], 
                    CAT [ HEAD [ PRON +,
-                              POSSESSOR nonpossessive ],
+                              POSSESSOR nonpossessive, 
+                              MIN nontime-noun-relation ],
                        POSSESSUM nonpossessive ] ] ]
 """Mother lexical type of all pronoun stems.""".
 
@@ -568,9 +564,12 @@ rel-noun-lex :+ [ SYNSEM.LOCAL.CAT [ HEAD.POSSESSOR nonpossessive,
 2p_pron-noun-lex := pron-noun-lex &
   [ SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG.PER 2nd ].
 
+;;; CCH 2025-12-07 add nonpossessive constraints
 language-noun-lex := noun-lex & 
-    [ SYNSEM.LOCAL [ CAT.HEAD [ CASE equ,
-                                MIN usual-nontime-non-relation ], 
+    [ SYNSEM.LOCAL [ CAT [ HEAD [ CASE equ,
+                                MIN usual-nontime-non-relation, 
+                                POSSESSOR nonpossessive ], 
+                           POSSESSUM nonpossessive ], 
                      CONT.HOOK.INDEX.PNG [ PER 3rd, NUM sg ] ] ].
 
 language-noun-lex :+ [ SYNSEM.NON-LOCAL [ CRF.LIST < >, CRF-H.LIST < > ] ].
@@ -696,7 +695,6 @@ intransitive-verb-lex := verb-lex & intransitive-lex-item &
 ;;; 2025-03-26 remove adundant cat-sat for second ARG-ST element
 
 base-transitive-verb-lex := verb-lex & transitive-lex-item &
-"""All transitive verbs **plus *tassa***."""
   [ ARG-ST < [ LOCAL.CAT.HEAD noun &
                               [ CASE real-case ] ],
              #comps &
@@ -704,7 +702,8 @@ base-transitive-verb-lex := verb-lex & transitive-lex-item &
                                  COMPS < > ],
                            HEAD noun &
                                 [ CASE real-case ] ] ] >,
-    SYNSEM.LOCAL.CAT.VAL.COMPS < #comps > ].
+    SYNSEM.LOCAL.CAT.VAL.COMPS < #comps > ]
+"""All transitive verbs **plus *tassa***.""".
 
 ;;; CCH 2025-12-06 remove [ SYNSEM.LOCAL.CAT.HEAD.INIT - ]
 ;;; future thoughts: let INIT be a property of the COMPS element, and if it occurs to the right for [ COMPS-INIT + ], then focused (or heavy?)
@@ -823,6 +822,12 @@ intrans_v-verb-lex := intransitive-verb-lex & modal-rule-dtr & aspect-rule-dtr &
                 V_END-OR-V_END_NEG-FLAG -,
                 CL_Q_TRANS_V-VERB-OR-CL_TRANS_V-VERB-FLAG na-or--,
                 TI_NNIK_FLAG na-or-- ] ].
+
+v-end-only-verb-lex := intransitive-verb-lex & v_end-rule-dtr & no-crf-lex-item & 
+  [ SYNSEM.LOCAL [ CAT.VAL.--KEYCOMP non-synsem, 
+                   CONT.HOOK.INDEX.E.TENSE nonfuture ], 
+    INFLECTED [ V_END-OR-V_END_NEG-FLAG -,
+                CL_Q_TRANS_V-VERB-OR-CL_TRANS_V-VERB-FLAG na-or-- ] ].
 
 ;;; abuse --KEYCOMP to save the ditransitive case
 ;;; TODO: KEYCOMP must fail for valchg now. add it later.
@@ -1003,6 +1008,8 @@ ti_htr_nonagent_p_v-verb-lex := nonagent_p_v-verb-lex & ti_htr_v-verb-lex.
 nnik_htr_nonagent_p_v-verb-lex := nonagent_p_v-verb-lex & nnik_htr_v-verb-lex.
 ti_htr_both_p_v-verb-lex := both_p_v-verb-lex & ti_htr_v-verb-lex.
 nnik_htr_both_p_v-verb-lex := both_p_v-verb-lex & nnik_htr_v-verb-lex.
+ti_htr_v-only-verb-lex := ti_htr_v-verb-lex.
+nnik_htr_v-only-verb-lex := nnik_htr_v-verb-lex.
 
 ;;; 2025-11-15 rename pi_v-verb-lex to better match its real intention
 ins-obj-verb-lex := trans_v-verb-lex & null_htr-rule-dtr & null_antipass-rule-dtr & 
@@ -1223,7 +1230,7 @@ verby_adj-adj-lex := attr-adj-lex & stative-pred-adj-lex & tense-rule-dtr & aspe
 """Adjectives that can be directly used as predicates without adding additional affixes.""".
 
 ;;;mod PRD, flag
-nouny_adj-adj-lex := attr-adj-lex & stative-pred-adj-lex & num_case_end-rule-dtr & 
+nouny_adj-adj-lex := attr-adj-lex & stative-pred-adj-lex & num_case_end-rule-dtr & noun-adj-pred-rule-dtr & 
   [ SYNSEM.LOCAL.CAT.HEAD.PRD bool, 
     INFLECTED [ NUM_CASE_END-FLAG -, 
                 NEG_V_END_FLAG na-or-- ] ]
@@ -1275,6 +1282,20 @@ stative-pred-adj-lex := adj-lex &
                          HEAD [ DBT -, DUR - ] ],
                    CONT.HOOK [ XARG #xarg, INDEX #e ] ] ]
 """Adjectives that can be used as sentential predicates.""".
+
+;;; CCH 2026-08-30 TODO: Note that a recent decision to treat the affix as -nəru instead of -nəq-u essentially makes this rule useless.
+comparative-lex-rule := infl-lex-rule & intersect-incorporation-lex-rule & same-head-lex-rule & same-hc-light-lex-rule & same-posthead-lex-rule & same-mc-lex-rule & same-spr-lex-rule & same-spec-lex-rule & same-subj-lex-rule & noun-adj-pred-rule-dtr & 
+  [ SYNSEM.LOCAL.CAT.VAL [ COMPS < [ LOCAL [ CAT cat-sat & [ HEAD noun & [ CASE abl ], 
+                                                           VAL [ SPR < >, 
+                                                                 COMPS < > ] ], 
+                                             CONT.HOOK.INDEX #index ] ] . #comps >, 
+                           --KEYCOMP non-synsem ], 
+    C-CONT.RELS.LIST.FIRST [ PRED "compare_rel", 
+                             ARG0 event, 
+                             ARG2 #index ], 
+    INFLECTED #infl,
+    DTR stative-pred-adj-lex & [ INFLECTED #infl, 
+                                 SYNSEM.LOCAL.CAT.VAL.COMPS #comps ] ].
 
 ;;; Complementizers
 
@@ -1368,34 +1389,45 @@ greet-adv-lex := non-local-none-lex-item & no-crf-lex-item &
              LKEYS.KEYREL #keyrel ] ].
 
 ;;; From the Grammar Matrix
-adverb-lex-item := nonscop-adverb-lex & 
-  [ SYNSEM [ LOCAL [ CAT [ VAL [ SUBJ < >, 
-                                 SPEC < >,
-                                 SPR < >,
-                                 COMPS < > ],
+;;; things in RELS: 1st: preposition; 2nd: noun of question; 3rd: wh_q
+adverb-lex-item := lex-item & 
+  [ SYNSEM [ LOCAL [ CAT [ VAL empty-val,
                            HEAD adv &
-                              [ MOD < [ LOCAL [ CONT.HOOK [ INDEX #arg1, 
-                                                            LTOP #ltop ] ] ] > ] ],
-                     CONT [ RELS.LIST < [ LBL #ltop, 
+                              [ MOD < [ LOCAL.CONT.HOOK.LTOP #ltop1 ] > ] ],
+                     CONT [ RELS.LIST < [ LBL #ltop2, 
                                           ARG0 event,
-                                          ARG1 #arg1, 
                                           ARG2 #ind ],
                                         [ PRED #pred, 
                                           ARG0 #ind, 
                                           LBL #larg ],
                                         [ ARG0 #ind, 
                                           RSTR #harg ] >,
-                          HOOK.LTOP #ltop,
-                          HCONS.LIST < qeq & [ HARG #harg,
-                                               LARG #larg ] > ] ],
+                          HOOK.LTOP #ltop1,
+                          HCONS.LIST.FIRST  qeq & [ HARG #harg,
+                                                     LARG #larg ] ] ],
               LKEYS.KEYREL [ PRED #pred, 
                              ARG0 ref-ind & #ind, 
-                             LBL #ltop ] ] ].
+                             LBL #ltop2 ] ] ].
 
-wh-adverb-lex := basic-wh-word-lex & adverb-lex-item & zero-arg-que &
+;;; your ltop and index should be ones.
+int-adv-lex := adverb-lex-item & nonscop-adverb-lex & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.MOD.FIRST.LOCAL.CONT.HOOK [ INDEX #arg1, LTOP #ltop ], 
+                   CONT [ RELS.LIST.FIRST [ ARG1 #arg1, LBL #ltop ], 
+                          HCONS.LIST < [ ] > ] ] ].
+
+scp-adv-lex := adverb-lex-item &  
+   [ SYNSEM.LOCAL [ CAT.HEAD.MOD.FIRST.LOCAL.CONT.HOOK [ LTOP #larg1, 
+                                                         INDEX #arg1 ], 
+                   CONT [ HOOK.INDEX #arg1, 
+                          RELS.LIST.FIRST.ARG1 #harg1, 
+                          HCONS.LIST < [  ], 
+                                       qeq & [ HARG #harg1, 
+                                               LARG #larg1 ] > ] ] ].
+
+wh-adverb-lex := basic-wh-word-lex & int-adv-lex & zero-arg-que & 
 [ SYNSEM [ LOCAL.CAT [ HEAD.MOD.FIRST.LOCAL intersective-mod & [ CAT.HEAD +vj ], 
                        POSTHEAD - ], 
-           LOCAL.CONT.RELS.LIST < [ PRED "generic_pp_rel" ],
+           LOCAL.CONT.RELS.LIST < [ PRED "generic_p_rel" ],
                                   [ ARG0 #arg0 ], 
                                   quant-relation & [ PRED "wh_q_rel" ] >,
            NON-LOCAL [ QUE.LIST < #arg0 >, 
@@ -1403,6 +1435,17 @@ wh-adverb-lex := basic-wh-word-lex & adverb-lex-item & zero-arg-que &
                        CRF-H.LIST < > ] ] ].
 
 fut-wh-adverb-lex := wh-adverb-lex & [ SYNSEM.LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CONT.HOOK.INDEX.E.TENSE future ].
+
+;;; TODO: "because_of_p" should be ALTKEY
+scopal-wh-adverb-lex := basic-wh-word-lex & scp-adv-lex & zero-arg-que & 
+[ SYNSEM [ LOCAL.CAT [ HEAD.MOD.FIRST.LOCAL scopal-mod & [ CAT.HEAD +vj ], 
+                       POSTHEAD - ], 
+           LOCAL.CONT.RELS.LIST < [ PRED "_because_of_p_rel" ],
+                                  [ ARG0 #arg0 ], 
+                                  quant-relation & [ PRED "wh_q_rel" ] >,
+           NON-LOCAL [ QUE.LIST < #arg0 >, 
+                       CRF.LIST < >, 
+                       CRF-H.LIST < > ] ] ].
 
 ;;; TODO: immaqa does NOT seem to be intersective adverb!
 int-adverb-lex := basic-int-adverb-lex & non-local-none-lex-item & 
@@ -1456,20 +1499,22 @@ sent-adverb-lex := scope-adverb-lex &
 
 ; Adjective Incorporation
 
-intersect-incorporation-lex-rule := add-only-rule &
+intersect-incorporation-lex-rule := cat-change-with-ccont-lex-rule & same-non-local-lex-rule & 
   [ C-CONT [ RELS.LIST < arg1-relation &
                          [ LBL #ltop,
-                           ARG1 #index ] >,
+                           ARG1 #index ] >, 
+             HCONS.LIST < >, 
+             ICONS.LIST < >,
              HOOK #hook ],
     DTR.SYNSEM.LOCAL.CONT.HOOK #hook &
                                [ LTOP #ltop,
                                  INDEX #index ] ].
 
-polite-int-incorp-lex-rule := intersect-incorporation-lex-rule & 
+polite-int-incorp-lex-rule := intersect-incorporation-lex-rule & same-cat-lex-rule & 
  [ C-CONT.RELS.LIST.FIRST arg1-carg-relation, 
    DTR.SYNSEM.LOCAL.CAT.HEAD +vj ].
 
-adj_incorporation-lex-rule := intersect-incorporation-lex-rule & 
+adj_incorporation-lex-rule := intersect-incorporation-lex-rule & same-cat-lex-rule & 
   [ C-CONT.RELS.LIST.FIRST arg1-ev-relation,
     DTR.SYNSEM.LOCAL.CAT.HEAD noun ]
 """Lexical rule for nominal stems which introduces an event relation for an adjective.""".
@@ -1508,6 +1553,23 @@ nonpossessive-lex-rule-1 := add-only-no-ccont-rule &
                               [ POSSESSOR nonpossessive ], 
                        POSSESSUM nonpossessive ] ].
 
+;;; CCH 2025-12-08 TODO: this might still be bad; XARG is assumed to be inherited in adj_incorporation-lex-rule!
+;;; but then where should I include the adjective event index to be connected?
+;;; new idea: put semantics in SPEC; since -rujuk can be repeated indefinitely, it actually needs to 
+;;; repeat linking the semantics
+;;; alternative: hide the nominal semantics elsewhere, e.g. SPEC/SUBJ (but then adj_incorp LR needs to handle something very specifically)
+; rujuk-lex-rule := infl-lex-rule & add-only-rule & 
+;   [ C-CONT [ HOOK [ LTOP #ltop, 
+;                     INDEX #index, 
+;                     XARG #adj-index ], 
+;              RELS.LIST < arg1-ev-relation & [ PRED "_very_a_rel", 
+;                                               LBL #ltop, 
+;                                               ARG1 #adj-index ] >,
+;              HCONS.LIST < >,              
+;              ICONS.LSIT < > ], 
+;     DTR [ SYNSEM.LOCAL.CONT.HOOK [ LTOP #ltop, 
+;                                    INDEX #index ] ] ].
+
 adj_incorp-lex-rule-super := infl-lex-rule & adj_incorporation-lex-rule & num_case-rule-dtr & noun_incorp-rule-dtr & noun_pred_affix-lex-rule-dtr & poss-rule-dtr & 
   [ INFLECTED #inflected, 
     DTR usual_common_n-noun-lex & [ INFLECTED #inflected ] ].
@@ -1517,6 +1579,10 @@ little-lex-rule := adj_incorp-lex-rule-super &
 
 passuit-lex-rule := adj_incorp-lex-rule-super & 
   [ C-CONT.RELS.LIST.FIRST.PRED "_a+great+many_a_rel",
+    SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG.NUM pl ].
+
+paaluk-lex-rule := adj_incorp-lex-rule-super & 
+  [ C-CONT.RELS.LIST.FIRST.PRED "_a+group+of_a_rel",
     SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG.NUM pl ].
 
 big-lex-rule := adj_incorp-lex-rule-super & 
@@ -1565,11 +1631,8 @@ num_case-lex-rule-super := add-only-no-ccont-rule &
                 NUM_CASE-FLAG +,
                 TRANS_ONLY_V-VERB-FLAG #trans_only_v-verb,
                 V_END-OR-V_END_NEG-FLAG #v_end-or-v_end_neg,
-                ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass,
                 SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
                 TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb_neg-or-trans_verb_neg-or-v_end-or-v_end_neg,
-                HAB-FLAG #hab,
-                TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass,
                 TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb-or-trans_clause_verb_neg-or-v_end-or-v_end_neg,
                 TRANS_VALCHG-FLAG #trans_valchg,
                 CASE_ENDING-FLAG #case_ending,
@@ -1582,11 +1645,8 @@ num_case-lex-rule-super := add-only-no-ccont-rule &
     DTR num_case-rule-dtr &
         [ INFLECTED [ TRANS_ONLY_V-VERB-FLAG #trans_only_v-verb,
                       V_END-OR-V_END_NEG-FLAG #v_end-or-v_end_neg,
-                      ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass,
                       SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
                       TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb_neg-or-trans_verb_neg-or-v_end-or-v_end_neg,
-                      HAB-FLAG #hab,
-                      TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass,
                       TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb-or-trans_clause_verb_neg-or-v_end-or-v_end_neg,
                       TRANS_VALCHG-FLAG #trans_valchg,
                       CASE_ENDING-FLAG #case_ending,
@@ -1677,11 +1737,8 @@ poss-lex-rule-super := infl-lex-rule & same-non-local-lex-rule &
   [ INFLECTED [ NUM_CASE-OR-POSS-FLAG +,
                 TRANS_ONLY_V-VERB-FLAG #trans_only_v-verb,
                 V_END-OR-V_END_NEG-FLAG #v_end-or-v_end_neg,
-                ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass,
                 SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
                 TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb_neg-or-trans_verb_neg-or-v_end-or-v_end_neg,
-                HAB-FLAG #hab,
-                TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass,
                 TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb-or-trans_clause_verb_neg-or-v_end-or-v_end_neg,
                 TRANS_VALCHG-FLAG #trans_valchg,
                 CASE_ENDING-FLAG #case_ending,
@@ -1695,11 +1752,8 @@ poss-lex-rule-super := infl-lex-rule & same-non-local-lex-rule &
     DTR poss-rule-dtr &
         [ INFLECTED [ TRANS_ONLY_V-VERB-FLAG #trans_only_v-verb,
                       V_END-OR-V_END_NEG-FLAG #v_end-or-v_end_neg,
-                      ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass,
                       SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
                       TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb_neg-or-trans_verb_neg-or-v_end-or-v_end_neg,
-                      HAB-FLAG #hab,
-                      TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass,
                       TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb-or-trans_clause_verb_neg-or-v_end-or-v_end_neg,
                       TRANS_VALCHG-FLAG #trans_valchg,
                       CASE_ENDING-FLAG #case_ending,
@@ -1975,11 +2029,8 @@ part_num_case-lex-rule-super := cat-change-only-lex-rule &
   [ INFLECTED [ NUM_CASE_END-FLAG +,
                 TRANS_ONLY_V-VERB-FLAG #trans_only_v-verb,
                 V_END-OR-V_END_NEG-FLAG #v_end-or-v_end_neg,
-                ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass,
                 SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
                 TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb_neg-or-trans_verb_neg-or-v_end-or-v_end_neg,
-                HAB-FLAG #hab,
-                TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass,
                 TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb-or-trans_clause_verb_neg-or-v_end-or-v_end_neg,
                 TRANS_VALCHG-FLAG #trans_valchg,
                 CASE_ENDING-FLAG #case_ending,
@@ -1992,11 +2043,8 @@ part_num_case-lex-rule-super := cat-change-only-lex-rule &
                 TENSE-FLAG #tense ],
     DTR [ INFLECTED [ TRANS_ONLY_V-VERB-FLAG #trans_only_v-verb,
                       V_END-OR-V_END_NEG-FLAG #v_end-or-v_end_neg,
-                      ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass,
                       SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
                       TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb_neg-or-trans_verb_neg-or-v_end-or-v_end_neg,
-                      HAB-FLAG #hab,
-                      TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass,
                       TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb-or-trans_clause_verb_neg-or-v_end-or-v_end_neg,
                       TRANS_VALCHG-FLAG #trans_valchg,
                       CASE_ENDING-FLAG #case_ending,
@@ -2010,7 +2058,7 @@ part_num_case-lex-rule-super := cat-change-only-lex-rule &
 
 ;;; 2025-11-13 CCH
 ;;; TODO: this is temporary treatment, as -kcaq hasn't been added to the grammar
-part-nonposs-lex-rule := same-cat-lex-rule & part_num_case-lex-rule-super & 
+part-nonposs-lex-rule := val-change-only-lex-rule & part_num_case-lex-rule-super & 
   [ DTR part_num_case-rule-dtr, 
     C-CONT.HOOK.INDEX.E.TENSE nonfuture ].
 
@@ -2032,65 +2080,75 @@ part-poss-lex-rule := part_num_case-lex-rule-super &
                                                         SPEC < > ] ] ] ].
 
 part-pl-lex-rule := infl-lex-rule & part_num_case-lex-rule-super & 
-  [ SYNSEM.NON-LOCAL.SLASH.LIST.FIRST.CONT.HOOK.INDEX.PNG.NUM pl ].
+  [ SYNSEM.LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CONT.HOOK.INDEX.PNG.NUM pl ].
 
 part-sg-lex-rule := part_num_case-lex-rule-super & 
-  [ SYNSEM.NON-LOCAL.SLASH.LIST.FIRST.CONT.HOOK.INDEX.PNG.NUM sg ].
+  [ SYNSEM.LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CONT.HOOK.INDEX.PNG.NUM sg ].
 
 part-abs-lex-rule := part_num_case-lex-rule-super & 
-  [ SYNSEM.NON-LOCAL.SLASH.LIST.FIRST.CAT.HEAD.CASE abs ].
+  [ SYNSEM.LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.HEAD.CASE abs ].
 
 part-erg-lex-rule := part_num_case-lex-rule-super & 
-  [ SYNSEM.NON-LOCAL.SLASH.LIST.FIRST.CAT.HEAD.CASE erg ].
+  [ SYNSEM.LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.HEAD.CASE erg ].
 
 part-all-lex-rule := part_num_case-lex-rule-super & 
-  [ SYNSEM.NON-LOCAL.SLASH.LIST.FIRST.CAT.HEAD.CASE all ].
+  [ SYNSEM.LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.HEAD.CASE all ].
 
 part-abl-lex-rule := part_num_case-lex-rule-super & 
-  [ SYNSEM.NON-LOCAL.SLASH.LIST.FIRST.CAT.HEAD.CASE abl ].
+  [ SYNSEM.LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.HEAD.CASE abl ].
 
 part-ins-lex-rule := part_num_case-lex-rule-super & 
-  [ SYNSEM.NON-LOCAL.SLASH.LIST.FIRST.CAT.HEAD.CASE ins ].
+  [ SYNSEM.LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.HEAD.CASE ins ].
 
-part-sg-abs-lex-rule := const-lex-rule & part-sg-lex-rule & part-abs-lex-rule & part-nonposs-lex-rule.
+;;; The issue with this approach is that intransitive participles do not have SUBJ
+;;; fixed.
+part-nonposs-nosubj-lex-rule := subj-change-only-lex-rule & part-nonposs-lex-rule & 
+  [ SYNSEM.LOCAL.CAT.VAL [ SUBJ < >, --KEYCOMP #kycmp ], 
+    DTR.SYNSEM.LOCAL.CAT.VAL.--KEYCOMP #kycmp ].
 
-part-sg-erg-lex-rule := infl-lex-rule & part-sg-lex-rule & part-erg-lex-rule & part-nonposs-lex-rule.
+part-sg-abs-lex-rule := const-lex-rule & part-sg-lex-rule & part-abs-lex-rule & part-nonposs-nosubj-lex-rule.
 
-part-pl-abs-lex-rule := part-pl-lex-rule & part-abs-lex-rule & part-nonposs-lex-rule.
+part-sg-erg-lex-rule := infl-lex-rule & part-sg-lex-rule & part-erg-lex-rule & part-nonposs-nosubj-lex-rule.
 
-part-sg-all-lex-rule := infl-lex-rule & part-sg-lex-rule & part-all-lex-rule & part-nonposs-lex-rule.
+part-pl-abs-lex-rule := part-pl-lex-rule & part-abs-lex-rule & part-nonposs-nosubj-lex-rule.
 
-part-pl-all-lex-rule := part-pl-lex-rule & part-all-lex-rule & part-nonposs-lex-rule.
+part-sg-all-lex-rule := infl-lex-rule & part-sg-lex-rule & part-all-lex-rule & part-nonposs-nosubj-lex-rule.
 
-part-sg-ins-lex-rule := infl-lex-rule & part-sg-lex-rule & part-ins-lex-rule & part-nonposs-lex-rule.
+part-pl-all-lex-rule := part-pl-lex-rule & part-all-lex-rule & part-nonposs-nosubj-lex-rule.
 
-part-pl-ins-lex-rule := part-pl-lex-rule & part-ins-lex-rule & part-nonposs-lex-rule.
+part-sg-ins-lex-rule := infl-lex-rule & part-sg-lex-rule & part-ins-lex-rule & part-nonposs-nosubj-lex-rule.
 
-part-1sg-poss-sg-abs-lex-rule := infl-lex-rule & part-sg-lex-rule & part-abs-lex-rule & part-nonposs-lex-rule & 
+part-pl-ins-lex-rule := part-pl-lex-rule & part-ins-lex-rule & part-nonposs-nosubj-lex-rule.
+
+part-1sg-poss-sg-abs-lex-rule := infl-lex-rule & part-sg-lex-rule & part-abs-lex-rule & part-nonposs-lex-rule & same-val-lex-rule & 
   [ SYNSEM.LOCAL.CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX.PNG [ PER 1st, NUM sg ], 
                                   NON-LOCAL.CRF-H.LIST < > ] > ].
 
-part-1sg-poss-pl-abs-lex-rule := part-pl-lex-rule & part-abs-lex-rule & part-nonposs-lex-rule & 
+part-1sg-poss-pl-abs-lex-rule := part-pl-lex-rule & part-abs-lex-rule & part-nonposs-lex-rule & same-val-lex-rule & 
   [ SYNSEM.LOCAL.CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX.PNG [ PER 1st, NUM sg ], 
                                   NON-LOCAL.CRF-H.LIST < > ] > ].
 
-part-1sg-poss-sg-erg-lex-rule := infl-lex-rule & part-sg-lex-rule & part-erg-lex-rule & part-nonposs-lex-rule & 
+part-1sg-poss-sg-erg-lex-rule := infl-lex-rule & part-sg-lex-rule & part-erg-lex-rule & part-nonposs-lex-rule & same-val-lex-rule & 
   [ SYNSEM.LOCAL.CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX.PNG [ PER 1st, NUM sg ], 
                                   NON-LOCAL.CRF-H.LIST < > ] > ].
 
-part-3sg-poss-pl-abs-lex-rule := part-pl-lex-rule & part-abs-lex-rule & part-nonposs-lex-rule & 
+part-3sg-poss-pl-abs-lex-rule := part-pl-lex-rule & part-abs-lex-rule & part-nonposs-lex-rule & same-val-lex-rule & 
   [ SYNSEM.LOCAL.CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX.PNG [ PER 3rd, NUM sg ], 
                                   NON-LOCAL.CRF-H.LIST < > ] > ].
 
-part-3sg-poss-sg-abs-lex-rule := infl-lex-rule & part-sg-lex-rule & part-abs-lex-rule & part-nonposs-lex-rule & 
+part-3sg-poss-sg-abs-lex-rule := infl-lex-rule & part-sg-lex-rule & part-abs-lex-rule & part-nonposs-lex-rule & same-val-lex-rule & 
   [ SYNSEM.LOCAL.CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX.PNG [ PER 3rd, NUM sg ], 
                                   NON-LOCAL.CRF-H.LIST < > ] > ].
 
-part-3sg-poss-sg-abl-lex-rule := infl-lex-rule & part-sg-lex-rule & part-abl-lex-rule & part-nonposs-lex-rule & 
+part-3sg-poss-sg-abl-lex-rule := infl-lex-rule & part-sg-lex-rule & part-abl-lex-rule & part-nonposs-lex-rule & same-val-lex-rule & 
   [ SYNSEM.LOCAL.CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX.PNG [ PER 3rd, NUM sg ], 
                                   NON-LOCAL.CRF-H.LIST < > ] > ].
 
-part-1sg-poss-sg-all-lex-rule := infl-lex-rule & part-sg-lex-rule & part-all-lex-rule & part-nonposs-lex-rule & 
+part-4sg-poss-sg-all-lex-rule := infl-lex-rule & part-sg-lex-rule & part-all-lex-rule & part-nonposs-lex-rule & same-val-lex-rule & 
+  [ SYNSEM.LOCAL.CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX #index & [ PNG [ PER 3rd+4th, NUM sg ] ], 
+                                  NON-LOCAL.CRF-H.LIST < #index > ] > ].
+
+part-1sg-poss-sg-all-lex-rule := infl-lex-rule & part-sg-lex-rule & part-all-lex-rule & part-nonposs-lex-rule & same-val-lex-rule & 
   [ SYNSEM.LOCAL.CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX.PNG [ PER 1st, NUM sg ], 
                                   NON-LOCAL.CRF-H.LIST < > ] > ].
 
@@ -2105,10 +2163,7 @@ v_end-lex-rule-super := lex-rule &
                 TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG +,
                 TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG +,
                 TRANS_ONLY_V-VERB-FLAG #trans_only_v-verb,
-                ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass,
                 SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
-                HAB-FLAG #hab,
-                TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass,
                 TRANS_VALCHG-FLAG #trans_valchg,
                 CASE_ENDING-FLAG #case_ending,
                 NULL_HTR-FLAG #null_htr,
@@ -2121,10 +2176,7 @@ v_end-lex-rule-super := lex-rule &
     DTR v_end-rule-dtr &
         [ INFLECTED [ NEG_V_END_FLAG #nv, 
                       TRANS_ONLY_V-VERB-FLAG #trans_only_v-verb,
-                      ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass,
                       SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
-                      HAB-FLAG #hab,
-                      TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass,
                       TRANS_VALCHG-FLAG #trans_valchg,
                       CASE_ENDING-FLAG #case_ending,
                       NULL_HTR-FLAG #null_htr,
@@ -2153,6 +2205,14 @@ basic-head-opt-subj-phrase :+
 basic-head-opt-comp-phrase :+ 
   [ HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD.FORM "non-neq" ].
 
+;;; CCH 2026-08-25 add FORM constraints to avoid attributive adjectives with -nəq modifying nouns
+;;; Example: Miki-nəq niviaqsiaraq aukpaluk-nəq iglu-mi inuu-ðuq taku-vara
+basic-head-mod-phrase-simple :+ 
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD.FORM "non-neq", 
+    NON-HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD.FORM "non-neq" ].
+
+
+
 v_end_neg-lex-rule := v_end-lex-rule-super & [ DTR.INFLECTED [ NEG_V_END_FLAG + ] ].
 
 v_end_pos-lex-rule := v_end-lex-rule-super & [ DTR.INFLECTED [ NEG_V_END_FLAG - ] ].
@@ -2177,28 +2237,60 @@ trans_clause_verb-lex-rule := infl-lex-rule & v_end-lex-rule-super &
     DTR.INFLECTED [ CL_Q_TRANS_V-VERB-OR-CL_TRANS_V-VERB-FLAG + ],
     INFLECTED.TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG + ].
 
-participle-lex-rule := infl-lex-rule & part_num_case-rule-dtr & v_end-lex-rule-super & same-cont-lex-rule & same-ctxt-lex-rule & same-agr-lex-rule & same-spr-lex-rule & same-spec-lex-rule & same-modified-lex-rule & same-light-lex-rule & same-head-lex-rule & 
-  [ SYNSEM [ LOCAL.CAT [ HEAD verb & [ PRD -, 
+participle-lex-rule := infl-lex-rule & part_num_case-rule-dtr & v_end-lex-rule-super & same-cont-lex-rule & same-ctxt-lex-rule & same-agr-lex-rule & same-spr-lex-rule & same-spec-lex-rule & same-modified-lex-rule & same-light-lex-rule & 
+  [ SYNSEM [ LOCAL.CAT [ HEAD verb & [ MOD cons, 
+                                       PRD -, 
                                        REF -, 
-                                       DUR - ] ], 
-             NON-LOCAL [ SLASH.LIST cons,
+                                       DUR -, 
+                                       KEYS #k, 
+                                       PRON #pron,
+                                       REL-FY -, 
+                                       INCORP #incorp, 
+                           POSSESSOR #poss,
+                           SPEC-INIT #si,
+                           INIT #init, 
+                           NMZ #nmz, 
+                           MIN #min, UXP #uxp, ROOT #rt ] ],
+             NON-LOCAL [ SLASH #slash,
                          QUE #que, 
                          REL #rel, 
-                         CONJP #conjp ] ], 
+                         CONJP #conjp ]
+             ], 
     C-CONT.HOOK.INDEX [ SF prop, 
                         E.MOOD no-mood ], 
-    INFLECTED [ NUM_CASE_END-FLAG - ], 
+    INFLECTED [ NUM_CASE_END-FLAG - ],
     DTR [ SYNSEM.NON-LOCAL [ QUE #que, 
                              REL #rel, 
-                             CONJP #conjp ] ] ].
+                             CONJP #conjp, 
+                             SLASH #slash ], 
+          SYNSEM.LOCAL.CAT.HEAD verb & [ KEYS #k, PRON #pron, DUR -, INCORP #incorp, 
+          POSSESSOR #poss,
+                           SPEC-INIT #si,
+                           INIT #init, 
+                           NMZ #nmz, 
+                           MIN #min, UXP #uxp, ROOT #rt ] ]
+    ].
 
 intrans_participle-lex-rule := participle-lex-rule & same-comps-lex-rule & no-ccont-lex-rule & 
-  [ SYNSEM [ LOCAL.CAT.VAL [ SUBJ < >
+  [ SYNSEM [ LOCAL.CAT.VAL [ SUBJ < >,
+                             
                             ;  --KEYCOMP non-synsem
-                             ], 
-             NON-LOCAL.SLASH.LIST < #slash > ], 
-    DTR [ SYNSEM.LOCAL.CAT.VAL [ SUBJ < gap & [ NON-LOCAL.SLASH.LIST < #slash > ] >, 
-                                 --KEYCOMP non-synsem ] ] ].
+                             INCORP-N #incorp-n
+                             ],
+            ;  NON-LOCAL.SLASH.LIST < #slash >, 
+             LOCAL.CAT.HEAD.MOD < [ LOCAL [ CONT.HOOK [ LTOP #ltop, 
+                                                                   INDEX #index, 
+                                                                   XARG #xarg ], 
+                                            CAT [ HEAD #head, 
+                                                  VAL [ SUBJ #subj, COMPS #comps ] ] ] ] >
+             ], 
+    DTR [ SYNSEM.LOCAL.CAT.VAL [ SUBJ < [ LOCAL [ CONT.HOOK [ LTOP #ltop, 
+                                                                   INDEX #index, 
+                                                                   XARG #xarg ], 
+                                            CAT [ HEAD #head, 
+                                                  VAL [ SUBJ #subj, COMPS #comps ] ] ] ] > , 
+                                 --KEYCOMP non-synsem, 
+                                 INCORP-N #incorp-n ] ] ].
 
 part-poss-rule-dtr := word-or-lexrule.
 
@@ -2210,17 +2302,27 @@ part-poss-rule-dtr := word-or-lexrule.
 
 patient_participle-lex-rule := participle-lex-rule & same-subj-lex-rule & part-poss-rule-dtr & no-ccont-lex-rule & 
   [ SYNSEM [ LOCAL.CAT.VAL.COMPS #rest, 
-             NON-LOCAL.SLASH.LIST < #slash > ], 
+             LOCAL.CAT.HEAD.MOD < [ LOCAL [ CONT.HOOK [ LTOP #ltop, 
+                                                                   INDEX #index, 
+                                                                   XARG #xarg ], 
+                                            CAT [ HEAD #head, 
+                                                  VAL [ SUBJ #subj, COMPS #comps ] ] ] ] >
+            ;  NON-LOCAL.SLASH.LIST < #slash > 
+             ], 
     DTR [ SYNSEM.LOCAL.CAT.VAL [ COMPS < #keycomp . #rest >, 
-                                 --KEYCOMP #keycomp & gap & [ NON-LOCAL.SLASH.LIST < #slash > ] ] ] ].
+                                 --KEYCOMP #keycomp & [ LOCAL [ CONT.HOOK [ LTOP #ltop, 
+                                                                   INDEX #index, 
+                                                                   XARG #xarg ], 
+                                            CAT [ HEAD #head, 
+                                                  VAL [ SUBJ #subj, COMPS #comps ] ] ] ] ] ] ].
 
 ;;; TODO: this sentence has unexpected identification of indices of speak and see: iglu uqaluk-f^fik-a taku-vara
 base-pp_participle-lex-rule := participle-lex-rule & same-subj-lex-rule & same-comps-lex-rule & 
   [ SYNSEM [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL.CAT.HEAD.CASE erg ] >, 
                                --KEYCOMP non-synsem ] ], 
-             NON-LOCAL.SLASH.LIST < [ CAT.HEAD noun, 
+             LOCAL.CAT.HEAD.MOD < [ LOCAL [ CAT.HEAD noun, 
                                       CONT.HOOK [ LTOP #ltop, 
-                                                  INDEX #n-ind ] ] > ], 
+                                                  INDEX #n-ind ] ] ] > ], 
     C-CONT [ HOOK [ LTOP #ltop, 
                     INDEX #ev ], 
              RELS.LIST < arg12-ev-relation & [ LBL #ltop, 
@@ -2489,6 +2591,8 @@ cntp_1sg_subj_verb-lex-rule := 1sg_verb-lex-rule & cntp_mood-lex-rule.
 
 cntp_1pl_subj_verb-lex-rule := 1pl_verb-lex-rule & cntp_mood-lex-rule.
 
+cntp_3sg_subj_verb-lex-rule := 3sg_verb-lex-rule & cntp_mood-lex-rule.
+
 cntp_4sg_subj_verb-lex-rule := 4sg_subj_verb-lex-rule & cntp_mood-lex-rule & intrans_verb-lex-rule.
 
 cntp_1sg_obj_verb-lex-rule := 1sg_obj_verb-lex-rule & cntp_mood-lex-rule & 
@@ -2518,6 +2622,8 @@ caus_4pl_verb-lex-rule := 4pl_verb-lex-rule & caus_mood-lex-rule.
 caus_3pl_1pl_verb-lex-rule := 3pl_1pl_verb-lex-rule & caus_mood-lex-rule.
 
 caus_1sg_3sg_verb-lex-rule := 1sg_3sg_verb-lex-rule & caus_mood-lex-rule.
+
+caus_1sg_3pl_verb-lex-rule := 1sg_3pl_verb-lex-rule & caus_mood-lex-rule.
 
 caus_3sg_3sg_verb-lex-rule := 3sg_3sg_verb-lex-rule & caus_mood-lex-rule.
 
@@ -2629,11 +2735,8 @@ tense-lex-rule-super := cont-change-only-lex-rule & evid-rule-dtr & v_neg-rule-d
                 NEG_V_END_FLAG #negend, 
                 TRANS_ONLY_V-VERB-FLAG #trans_only_v-verb,
                 V_END-OR-V_END_NEG-FLAG #v_end-or-v_end_neg,
-                ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass,
                 SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
                 TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb_neg-or-trans_verb_neg-or-v_end-or-v_end_neg,
-                HAB-FLAG #hab,
-                TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass,
                 TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb-or-trans_clause_verb_neg-or-v_end-or-v_end_neg,
                 TRANS_VALCHG-FLAG #trans_valchg,
                 CASE_ENDING-FLAG #case_ending,
@@ -2649,11 +2752,8 @@ tense-lex-rule-super := cont-change-only-lex-rule & evid-rule-dtr & v_neg-rule-d
                       NEG_V_END_FLAG #negend, 
                       TRANS_ONLY_V-VERB-FLAG #trans_only_v-verb,
                       V_END-OR-V_END_NEG-FLAG #v_end-or-v_end_neg,
-                      ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass,
                       SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
                       TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb_neg-or-trans_verb_neg-or-v_end-or-v_end_neg,
-                      HAB-FLAG #hab,
-                      TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass,
                       TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb-or-trans_clause_verb_neg-or-v_end-or-v_end_neg,
                       TRANS_VALCHG-FLAG #trans_valchg,
                       CASE_ENDING-FLAG #case_ending,
@@ -2679,7 +2779,7 @@ modal-rule-dtr := word-or-lexrule.
 
 ;;; CCH 2025-12-05 add intrans_valchg-rule-dtr because -gi^jaqtuq can appear before -qqu
 ;;; TODO: do we need to distinguish trans and intrans causative?
-modal-lex-rule-super := cont-change-only-lex-rule & tense-rule-dtr & aspect-rule-dtr & intrans_valchg-rule-dtr & 
+modal-lex-rule-super := cont-change-only-lex-rule & tense-rule-dtr & aspect-rule-dtr & intrans_valchg-rule-dtr & trans_valchg-rule-dtr & 
   [ INFLECTED #inflected,
     DTR modal-rule-dtr &
         [ INFLECTED #inflected ] ].
@@ -2732,7 +2832,7 @@ go-and-lex-rule := base-modal-lex-rule &
 
 ;;; 2025-11-12 CCH: note that -laaq-sinnau but -yunnaaq-l^luaq and -sinnau-yunnaaq
 ;;; also relax the DTR constraint to accept adjectives (but is that wanted? e.g. for -lluaq)
-adv_incorporation-lex-rule := intersect-incorporation-lex-rule & 
+adv_incorporation-lex-rule := intersect-incorporation-lex-rule & same-cat-lex-rule & 
   [ C-CONT.RELS.LIST.FIRST arg1-ev-relation,
     DTR.SYNSEM.LOCAL.CAT.HEAD +vj ].
 
@@ -2778,40 +2878,33 @@ aspect-lex-rule-super := add-only-no-ccont-rule & tense-rule-dtr &
   [ INFLECTED #infl,
     DTR aspect-rule-dtr & [ INFLECTED #infl ] ].
 
-same-hab-flag-lex-rule := lex-rule & 
-  [ INFLECTED.HAB-FLAG #hab,
-    DTR.INFLECTED.HAB-FLAG #hab ].
-
 hab-lex-rule := aspect-lex-rule-super & infl-lex-rule &
-  [ INFLECTED.HAB-FLAG +,
-    SYNSEM.LOCAL.CONT.HOOK.INDEX.E.ASPECT habitual ].
+  [ SYNSEM.LOCAL.CONT.HOOK.INDEX.E.ASPECT habitual ].
+
+gajuk-lex-rule := aspect-lex-rule-super & infl-lex-rule &
+  [ SYNSEM.LOCAL.CONT.HOOK.INDEX.E.ASPECT habitual ].
 
 cont-lex-rule := aspect-lex-rule-super & infl-lex-rule &
-  [ INFLECTED.HAB-FLAG +,
-    SYNSEM.LOCAL.CONT.HOOK.INDEX.E.ASPECT continuative ].
+  [ SYNSEM.LOCAL.CONT.HOOK.INDEX.E.ASPECT continuative ].
 
 yunnaaq-lex-rule := aspect-lex-rule-super & infl-lex-rule &
-  [ INFLECTED.HAB-FLAG +,
-    SYNSEM.LOCAL.CONT.HOOK.INDEX.E.ASPECT terminative ].
+  [ SYNSEM.LOCAL.CONT.HOOK.INDEX.E.ASPECT terminative ].
 
-pfv-lex-rule := aspect-lex-rule-super & infl-lex-rule & same-hab-flag-lex-rule & 
+pfv-lex-rule := aspect-lex-rule-super & infl-lex-rule & 
   [ SYNSEM.LOCAL.CONT.HOOK.INDEX.E.ASPECT perfective ].
 
-incep-lex-rule := aspect-lex-rule-super & infl-lex-rule & same-hab-flag-lex-rule & 
+incep-lex-rule := aspect-lex-rule-super & infl-lex-rule & 
   [ SYNSEM.LOCAL.CONT.HOOK.INDEX.E.ASPECT inceptive ].
 
-pfv_tord-lex-rule := aspect-lex-rule-super & infl-lex-rule & same-hab-flag-lex-rule & 
+pfv_tord-lex-rule := aspect-lex-rule-super & infl-lex-rule & 
   [ SYNSEM.LOCAL.CONT.HOOK.INDEX.E.ASPECT perfective ].
 
 v_neg-lex-rule-super := cont-change-only-lex-rule & dub-rule-dtr & v_end-rule-dtr & v_end_neg-rule-dtr & qi-very-rule-dtr & 
   [ INFLECTED [ TI_NNIK_FLAG #pp,
                 TRANS_ONLY_V-VERB-FLAG #trans_only_v-verb,
                 V_END-OR-V_END_NEG-FLAG #v_end-or-v_end_neg,
-                ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass,
                 SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
                 TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb_neg-or-trans_verb_neg-or-v_end-or-v_end_neg,
-                HAB-FLAG #hab,
-                TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass,
                 TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb-or-trans_clause_verb_neg-or-v_end-or-v_end_neg,
                 TRANS_VALCHG-FLAG #trans_valchg,
                 CASE_ENDING-FLAG #case_ending,
@@ -2827,11 +2920,8 @@ v_neg-lex-rule-super := cont-change-only-lex-rule & dub-rule-dtr & v_end-rule-dt
         [ INFLECTED [ TI_NNIK_FLAG #pp,
                       TRANS_ONLY_V-VERB-FLAG #trans_only_v-verb,
                       V_END-OR-V_END_NEG-FLAG #v_end-or-v_end_neg,
-                      ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass,
                       SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
                       TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb_neg-or-trans_verb_neg-or-v_end-or-v_end_neg,
-                      HAB-FLAG #hab,
-                      TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass,
                       TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb-or-trans_clause_verb_neg-or-v_end-or-v_end_neg,
                       TRANS_VALCHG-FLAG #trans_valchg,
                       CASE_ENDING-FLAG #case_ending,
@@ -2867,8 +2957,7 @@ neg-add-lex-rule := lex-rule &
                          CAT.HEAD +vj ] ] ].
 
 neg-lex-rule := infl-lex-rule & neg-add-lex-rule & v_neg-lex-rule-super & 
-  [ INFLECTED.NEG_V_END_FLAG +,
-    DTR.INFLECTED.HAB-FLAG na ].
+  [ INFLECTED.NEG_V_END_FLAG + ].
 
 
 ind+int_1sg_verb_neg-lex-rule := 1sg_verb-lex-rule & ind+int-mood_neg-lex-rule.
@@ -2935,7 +3024,6 @@ null_htr-lex-rule-super := modal-rule-dtr & aspect-rule-dtr & tense-rule-dtr & v
                 V_END-OR-V_END_NEG-FLAG #v_end-or-v_end_neg,
                 SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
                 TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb_neg-or-trans_verb_neg-or-v_end-or-v_end_neg,
-                HAB-FLAG #hab,
                 TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb-or-trans_clause_verb_neg-or-v_end-or-v_end_neg,
                 TRANS_VALCHG-FLAG #trans_valchg,
                 CASE_ENDING-FLAG #case_ending,
@@ -2951,7 +3039,6 @@ null_htr-lex-rule-super := modal-rule-dtr & aspect-rule-dtr & tense-rule-dtr & v
                       V_END-OR-V_END_NEG-FLAG #v_end-or-v_end_neg,
                       SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
                       TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb_neg-or-trans_verb_neg-or-v_end-or-v_end_neg,
-                      HAB-FLAG #hab,
                       TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb-or-trans_clause_verb_neg-or-v_end-or-v_end_neg,
                       TRANS_VALCHG-FLAG #trans_valchg,
                       CASE_ENDING-FLAG #case_ending,
@@ -2972,25 +3059,21 @@ antipass-lex-rule := no-crt-h-contrib-lex-rule & val-change-only-lex-rule &
                            SPEC #spec, 
                            COMPS #comps & [ FIRST [ LOCAL.CAT.HEAD.CASE ins, 
                                                     NON-LOCAL.CRF-H.LIST < > ] ], 
-                           --KEYCOMP non-synsem ], 
+                           --KEYCOMP non-synsem, 
+                           INCORP-N #incorp-n ], 
     DTR.SYNSEM.LOCAL.CAT.VAL [ SUBJ #subj, 
                                SPR #spr, 
                                SPEC #spec, 
                                COMPS #comps, 
-                               --KEYCOMP synsem-min ] ].
+                               --KEYCOMP synsem-min, 
+                               INCORP-N #incorp-n ] ].
 
 null_antipass-lex-rule := const-lex-rule & antipass-lex-rule & 
-  [ DTR null_antipass-rule-dtr & [ INFLECTED [ TRANS_ONLY_V-VERB-FLAG na, 
-                                               TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass ] ],
-    INFLECTED [ ANTIPASS-OR-PASS-FLAG +, 
-                TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass ] ].
+  [ DTR null_antipass-rule-dtr & [ INFLECTED [ TRANS_ONLY_V-VERB-FLAG na ] ] ].
 
 ;;; 2025-03-31 add intransitives to here for participles
 intrans-active-lex-rule := add-only-no-ccont-rule & const-lex-rule & null_htr-lex-rule-super &
-  [ INFLECTED [ TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG +,
-                ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass ],
-    DTR.INFLECTED [ PI_V-VERB-FLAG na,
-                    ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass ],
+  [ DTR.INFLECTED [ PI_V-VERB-FLAG na ],
     DTR null_htr-rule-dtr, 
     SYNSEM.LOCAL.CAT.VAL [ COMPS < >, 
                            --KEYCOMP non-synsem ] ].
@@ -2998,20 +3081,14 @@ intrans-active-lex-rule := add-only-no-ccont-rule & const-lex-rule & null_htr-le
 clitic-active-rule-dtr := word-or-lexrule.
 
 clitic-active-lex-rule := add-only-no-ccont-rule & const-lex-rule & null_htr-lex-rule-super &
-  [ INFLECTED [ TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG +,
-                ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass ],
-    DTR.INFLECTED [ PI_V-VERB-FLAG na,
-                    ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass ],
+  [ DTR.INFLECTED [ PI_V-VERB-FLAG na ],
     DTR clitic-active-rule-dtr, 
     SYNSEM.LOCAL.CAT.VAL [ COMPS cons, 
                            --KEYCOMP non-synsem ] ].
 
 ;;; CCH 2025-12-03 change cases
 active-lex-rule := add-only-no-ccont-rule & const-lex-rule & null_htr-lex-rule-super &
-  [ INFLECTED [ TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG +,
-                ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass ],
-    DTR.INFLECTED [ PI_V-VERB-FLAG na,
-                    ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass ],
+  [ DTR.INFLECTED [ PI_V-VERB-FLAG na ],
     DTR null_htr-rule-dtr, 
     SYNSEM.LOCAL.CAT.VAL [ SUBJ.FIRST.LOCAL.CAT.HEAD.CASE erg-nom,
                            COMPS.FIRST #keycomp, 
@@ -3022,10 +3099,7 @@ active-lex-rule := add-only-no-ccont-rule & const-lex-rule & null_htr-lex-rule-s
 ;;; not really, it requires a nonempty COMPS in SYNSEM, but here we can't
 ;;; 2025-11-09 it is now unclear which element in COMPS should be deleted for double-transitive
 patient-pass-lex-rule := val-change-only-lex-rule & const-lex-rule & null_htr-lex-rule-super & subj-and-comps-change-only-lex-rule &
-  [ INFLECTED [ TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG +,
-                ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass ],
-    DTR.INFLECTED [ PI_V-VERB-FLAG na,
-                    ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass ],
+  [ DTR.INFLECTED [ PI_V-VERB-FLAG na ],
     DTR patient-pass-lex-rule-dtr & [ SYNSEM.LOCAL.CAT.VAL.--KEYCOMP.LOCAL #local ], 
     SYNSEM.LOCAL.CAT.VAL [ SUBJ.FIRST.LOCAL #local, 
                            --KEYCOMP non-synsem ] ].
@@ -3048,10 +3122,7 @@ both_p_reflex-lex-rule-dtr := word-or-lexrule.
 
 ;;; 2025-09-27: the reflexive `imminut` hasn't been allowed yet
 both_p_reflex-lex-rule := val-change-only-lex-rule & const-lex-rule & null_htr-lex-rule-super & subj-and-comps-change-only-lex-rule &
-  [ INFLECTED [ TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG +,
-                ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass ],
-    DTR.INFLECTED [ PI_V-VERB-FLAG na,
-                    ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass ],
+  [ DTR.INFLECTED [ PI_V-VERB-FLAG na ],
     DTR both_p_reflex-lex-rule-dtr & [SYNSEM.LOCAL.CAT.VAL [ SUBJ < #subj & [LOCAL.CONT.HOOK #hook] >,
                                                              COMPS < [LOCAL.CONT.HOOK #hook] > ] ], 
     SYNSEM.LOCAL.CAT.VAL [ SUBJ < #subj >,
@@ -3060,10 +3131,7 @@ both_p_reflex-lex-rule := val-change-only-lex-rule & const-lex-rule & null_htr-l
 
 ;;; CCH 2025-12-03 change cases
 ditrans-active-lex-rule := add-only-no-ccont-rule & const-lex-rule & null_htr-lex-rule-super &
-  [ INFLECTED [ TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG +,
-                ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass ],
-    DTR.INFLECTED [ PI_V-VERB-FLAG na,
-                    ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass ],
+  [ DTR.INFLECTED [ PI_V-VERB-FLAG na ],
     DTR ditrans-null_htr-rule-dtr, 
     SYNSEM.LOCAL.CAT.VAL [ SUBJ.FIRST.LOCAL.CAT.HEAD.CASE erg-nom,
                            COMPS [ FIRST [ LOCAL.CAT.HEAD.CASE ins, 
@@ -3073,10 +3141,7 @@ ditrans-active-lex-rule := add-only-no-ccont-rule & const-lex-rule & null_htr-le
 
 ;;; CCH 2025-12-03 change cases
 ditrans-active-pp-lex-rule := add-only-no-ccont-rule & const-lex-rule & null_htr-lex-rule-super &
-  [ INFLECTED [ TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG +,
-                ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass ],
-    DTR.INFLECTED [ PI_V-VERB-FLAG na,
-                    ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass ],
+  [ DTR.INFLECTED [ PI_V-VERB-FLAG na ],
     DTR ditrans-pp-null_htr-rule-dtr, 
     SYNSEM.LOCAL.CAT.VAL [ SUBJ.FIRST.LOCAL.CAT.HEAD.CASE erg-nom,
                            COMPS.REST [ FIRST [ LOCAL.CAT.HEAD.CASE all, 
@@ -3098,49 +3163,35 @@ ditrans-active-pp-lex-rule := add-only-no-ccont-rule & const-lex-rule & null_htr
 ;     SYNSEM.LOCAL.CAT.VAL.--KEYCOMP non-synsem ].
 
 passive-lex-rule := subj-dem-to-arg1of2-op-lex-rule & obj-prom-from-arg1of2-op-lex-rule & infl-lex-rule & local-change-only-lex-rule & no-crt-h-contrib-lex-rule & same-cont-lex-rule & xarg-change-only-ccont-lex-rule &
-  [ DTR pass-rule-dtr & [ INFLECTED [ PI_V-VERB-FLAG na, 
-                                      TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass ] ],
-    INFLECTED [ ANTIPASS-OR-PASS-FLAG +, 
-                TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass ],
+  [ DTR pass-rule-dtr & [ INFLECTED [ PI_V-VERB-FLAG na ] ], 
     SYNSEM.LOCAL.CAT.VAL [ COMPS.FIRST.LOCAL.CAT.HEAD.CASE abl, 
                            --KEYCOMP non-synsem ] ].
 
 
 ti_antipass-lex-rule := infl-lex-rule & antipass-lex-rule & 
-  [ INFLECTED [ ANTIPASS-OR-PASS-FLAG +,
-                TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG + ],
-    DTR ti_antipass-rule-dtr & [ INFLECTED [ TI_NNIK_FLAG + ] ] ].
+  [ DTR ti_antipass-rule-dtr & [ INFLECTED [ TI_NNIK_FLAG + ] ] ].
 
 trans_caus_pass-lex-rule := subj-dem-to-arg3of3-op-lex-rule & obj-prom-from-arg3of3-op-lex-rule & infl-lex-rule & local-change-only-lex-rule & same-cont-lex-rule & no-crt-h-contrib-lex-rule & xarg-change-only-ccont-lex-rule &
-  [ INFLECTED [ TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG +,
-                ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass ],
-    DTR ditrans_pass-rule-dtr & 
-      [ INFLECTED [ TRANS_VALCHG-FLAG +,
-                    ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass ] ],
+  [ DTR ditrans_pass-rule-dtr & 
+      [ INFLECTED [ TRANS_VALCHG-FLAG + ] ],
     SYNSEM.LOCAL.CAT.VAL [ COMPS.REST.FIRST.LOCAL.CAT.HEAD.CASE abl, 
                            --KEYCOMP non-synsem ] ].
 
 ;;;antipass-obj-lex-rule := lex-rule & [ SYNSEM.LOCAL.CAT.VAL.COMPS.FIRST.LOCAL.CONT.HOOK.INDEX.COG-ST type-id ].
 
 nnik_antipass-lex-rule := infl-lex-rule & antipass-lex-rule & 
-  [ INFLECTED [ ANTIPASS-OR-PASS-FLAG +, 
-                TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass ],
-    DTR nnik_antipass-rule-dtr & [ INFLECTED [ TI_NNIK_FLAG +, 
-                                               TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass ] ] ].
+  [ DTR nnik_antipass-rule-dtr & [ INFLECTED [ TI_NNIK_FLAG + ] ] ].
 
 intrans_valchg-rule-dtr := word-or-lexrule.
 
-intrans_valchg-lex-rule-super := infl-lex-rule & null_htr-rule-dtr & ti_antipass-rule-dtr & val-change-with-ccont-lex-rule & pass-rule-dtr & 
+intrans_valchg-lex-rule-super := infl-lex-rule & null_htr-rule-dtr & ti_antipass-rule-dtr & val-change-with-ccont-lex-rule & c-cont-icons-subj-link-lex-rule & pass-rule-dtr & 
     [ SYNSEM.LOCAL.CAT.VAL.--KEYCOMP.LOCAL #keycomp, 
       INFLECTED [ TI_NNIK_FLAG +,
                 NEG_V_END_FLAG #neg_v_end, 
                 TRANS_ONLY_V-VERB-FLAG #trans_only_v-verb,
                 V_END-OR-V_END_NEG-FLAG #v_end-or-v_end_neg,
-                ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass,
                 SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
                 TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb_neg-or-trans_verb_neg-or-v_end-or-v_end_neg,
-                HAB-FLAG #hab,
-                TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass,
                 TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb-or-trans_clause_verb_neg-or-v_end-or-v_end_neg,
                 TRANS_VALCHG-FLAG #trans_valchg,
                 CASE_ENDING-FLAG #case_ending,
@@ -3157,11 +3208,8 @@ intrans_valchg-lex-rule-super := infl-lex-rule & null_htr-rule-dtr & ti_antipass
           INFLECTED [ NEG_V_END_FLAG #neg_v_end, 
                       TRANS_ONLY_V-VERB-FLAG #trans_only_v-verb,
                       V_END-OR-V_END_NEG-FLAG #v_end-or-v_end_neg,
-                      ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass,
                       SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
                       TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb_neg-or-trans_verb_neg-or-v_end-or-v_end_neg,
-                      HAB-FLAG #hab,
-                      TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass,
                       TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb-or-trans_clause_verb_neg-or-v_end-or-v_end_neg,
                       TRANS_VALCHG-FLAG #trans_valchg,
                       CASE_ENDING-FLAG #case_ending,
@@ -3188,6 +3236,36 @@ consider_valchg-lex-rule := causative-to-arg2-itr-op-lex-rule & intrans_valchg-l
 think_valchg-lex-rule := causative-to-arg2-itr-op-lex-rule & intrans_valchg-lex-rule-super & same-non-local-lex-rule &
   [ C-CONT.RELS.LIST < [ PRED "_think_v_rel" ] > ].
 
+app-lex-rule-super := infl-lex-rule & val-change-with-ccont-lex-rule & aspect-rule-dtr & tense-rule-dtr & modal-rule-dtr & 
+  [ INFLECTED #infl,
+    DTR intrans_v-verb-lex &
+        [ INFLECTED #infl ] ].
+
+app-lex-lex-rule := added-arg2of2-applicative-lex-rule & added-arg2of2-np-head-lex-rule & app-lex-rule-super & same-cont-lex-rule & same-non-local-lex-rule & 
+  [ C-CONT.RELS.LIST < [ PRED "with_p_rel" ] > ].
+
+basic-applicative-lex-rule := comps-change-only-lex-rule & 
+  [ C-CONT [ RELS.LIST < event-relation &
+                         [ ARG1 #evt ] >,
+             HCONS.LIST < > ],
+    DTR.SYNSEM.LOCAL.CONT.HOOK.INDEX #evt ].
+
+;;; CCH 2025-12-06 add --KEYCOMP constraint, fix LTOP
+added-arg2of2-applicative-lex-rule := basic-applicative-lex-rule & added-arg2of2-non-local-lex-rule &
+  [ SYNSEM.LOCAL.CAT.VAL [ COMPS < #comps &  [ LOCAL [ CAT.VAL [ SPR < >,
+                                                                 COMPS < > ],
+                                                      CONT.HOOK [ LTOP #ltop, 
+                                                                  INDEX #nind ] ] ] >, 
+                           --KEYCOMP #comps ],
+    C-CONT.RELS.LIST < [ LBL #ltop, 
+                         ARG2 #nind ] >,
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < > ].
+
+added-arg2of2-non-local-lex-rule := lex-rule.
+
+added-arg2of2-np-head-lex-rule := lex-rule &
+  [ SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.HEAD noun ] > ].
+
 evid-lex-rule-super := cont-change-only-lex-rule & infl-lex-rule & v_neg-rule-dtr & dub-rule-dtr & v_end_neg-rule-dtr & v_end-rule-dtr & qi-very-rule-dtr & 
   [ INFLECTED #infl,
     DTR evid-rule-dtr &
@@ -3213,17 +3291,14 @@ nonfirsthand-evidential-lex-rule := evidential-lex-rule &
 
 sima-lex-rule := evid-lex-rule-super & nonfirsthand-evidential-lex-rule.
 
-trans_valchg-lex-rule-super := infl-lex-rule & null_htr-rule-dtr & ditrans_pass-rule-dtr & val-change-with-ccont-lex-rule &
+trans_valchg-lex-rule-super := infl-lex-rule & null_htr-rule-dtr & ditrans_pass-rule-dtr & val-change-with-ccont-lex-rule & c-cont-icons-subj-link-lex-rule & 
   [ SYNSEM.LOCAL.CAT.VAL.--KEYCOMP #keycomp, 
     INFLECTED [ TI_NNIK_FLAG +,
                 TRANS_VALCHG-FLAG +,
                 TRANS_ONLY_V-VERB-FLAG #trans_only_v-verb,
                 V_END-OR-V_END_NEG-FLAG #v_end-or-v_end_neg,
-                ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass,
                 SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
                 TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb_neg-or-trans_verb_neg-or-v_end-or-v_end_neg,
-                HAB-FLAG #hab,
-                TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass,
                 TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb-or-trans_clause_verb_neg-or-v_end-or-v_end_neg,
                 CASE_ENDING-FLAG #case_ending,
                 NULL_HTR-FLAG #null_htr,
@@ -3238,11 +3313,8 @@ trans_valchg-lex-rule-super := infl-lex-rule & null_htr-rule-dtr & ditrans_pass-
         [ SYNSEM.LOCAL.CAT.VAL.--KEYCOMP #keycomp, 
           INFLECTED [ TRANS_ONLY_V-VERB-FLAG #trans_only_v-verb,
                       V_END-OR-V_END_NEG-FLAG #v_end-or-v_end_neg,
-                      ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass,
                       SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
                       TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb_neg-or-trans_verb_neg-or-v_end-or-v_end_neg,
-                      HAB-FLAG #hab,
-                      TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass,
                       TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb-or-trans_clause_verb_neg-or-v_end-or-v_end_neg,
                       CASE_ENDING-FLAG #case_ending,
                       NULL_HTR-FLAG #null_htr,
@@ -3254,32 +3326,28 @@ trans_valchg-lex-rule-super := infl-lex-rule & null_htr-rule-dtr & ditrans_pass-
                       NUM_CASE-FLAG #num_case,
                       TENSE-FLAG #tense ] ] ].
 
+;;; CCH 2025-12-07 remove TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG for these two, and then remove all
 trans_caus_valchg-lex-rule := causative-to-arg2-tr-op-lex-rule & same-non-local-lex-rule & trans_valchg-lex-rule-super & patient-pass-lex-rule-dtr & 
-  [ INFLECTED.TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG -,
-    C-CONT.RELS.LIST < [ PRED "causative_rel" ] >,
+  [ C-CONT.RELS.LIST < [ PRED "causative_rel" ] >,
     SYNSEM.LOCAL.CAT.VAL.COMPS.REST.FIRST [ LOCAL.CAT.HEAD.CASE all, 
                                             NON-LOCAL.CRF-H.LIST < > ], 
     DTR.SYNSEM.LOCAL.CAT.VAL [ --KEYCOMP #mark-obj, 
                                COMPS.FIRST #mark-obj ] ].
 
 trans_ask_valchg-lex-rule := causative-to-arg2-tr-op-lex-rule & same-non-local-lex-rule & trans_valchg-lex-rule-super & patient-pass-lex-rule-dtr & 
-  [ INFLECTED.TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG -,
-    C-CONT.RELS.LIST < [ PRED "ask_v_rel" ] >,
+  [ C-CONT.RELS.LIST < [ PRED "ask_v_rel" ] >,
     SYNSEM.LOCAL.CAT.VAL.COMPS.REST.FIRST [ LOCAL.CAT.HEAD.CASE all, 
                                             NON-LOCAL.CRF-H.LIST < > ], 
     DTR.SYNSEM.LOCAL.CAT.VAL [ --KEYCOMP #mark-obj, 
                                COMPS.FIRST #mark-obj ] ].
 
 ;;; TODO: it seems that the head type will be lost, if we do like this
-dub-lex-rule-super := head-change-only-lex-rule & infl-lex-rule & v_end-rule-dtr & 
+dub-lex-rule-super := cat-change-only-lex-rule & infl-lex-rule & v_end-rule-dtr & 
   [ INFLECTED [ NEG_V_END_FLAG -,
                 TRANS_ONLY_V-VERB-FLAG #trans_only_v-verb,
                 V_END-OR-V_END_NEG-FLAG #v_end-or-v_end_neg,
-                ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass,
                 SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
                 TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb_neg-or-trans_verb_neg-or-v_end-or-v_end_neg,
-                HAB-FLAG #hab,
-                TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass,
                 TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb-or-trans_clause_verb_neg-or-v_end-or-v_end_neg,
                 TRANS_VALCHG-FLAG #trans_valchg,
                 CASE_ENDING-FLAG #case_ending,
@@ -3302,11 +3370,8 @@ dub-lex-rule-super := head-change-only-lex-rule & infl-lex-rule & v_end-rule-dtr
     DTR dub-rule-dtr &
         [ INFLECTED [ TRANS_ONLY_V-VERB-FLAG #trans_only_v-verb,
                       V_END-OR-V_END_NEG-FLAG #v_end-or-v_end_neg,
-                      ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass,
                       SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
                       TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb_neg-or-trans_verb_neg-or-v_end-or-v_end_neg,
-                      HAB-FLAG #hab,
-                      TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass,
                       TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb-or-trans_clause_verb_neg-or-v_end-or-v_end_neg,
                       TRANS_VALCHG-FLAG #trans_valchg,
                       CASE_ENDING-FLAG #case_ending,
@@ -3328,14 +3393,23 @@ dub-lex-rule-super := head-change-only-lex-rule & infl-lex-rule & v_end-rule-dtr
                             INCORP #incorp ] ] ].
 
 ;;;mod
-niq-lex-rule := dub-lex-rule-super &
+niq-lex-rule := dub-lex-rule-super & head-change-only-lex-rule & 
   [ SYNSEM.LOCAL [ CAT [ MC -,
                          HEAD.DBT + ],
                    CONT.HOOK.INDEX.SF ques ] ].
 
-tit-lex-rule := dub-lex-rule-super &
+;;; CCH 2025-12-07 TODO: temporarily solved, but still need to remove the ICONS for the dummy subject (maybe remove SUBJ altogether?)
+tit-lex-rule := dub-lex-rule-super & same-hc-light-lex-rule & same-posthead-lex-rule & same-mc-lex-rule & 
   [ SYNSEM.LOCAL.CAT [ MC -, 
                        HEAD.DUR + ] ].
+
+tit-intr-lex-rule := tit-lex-rule & formulaic-causative-to-arg-intr-op-lex-rule & 
+  [ SYNSEM.LOCAL.CAT.VAL [ SUBJ.FIRST.LOCAL.CAT.HEAD.CASE erg, 
+                           --KEYCOMP non-synsem ] ].
+
+tit-tr-lex-rule := tit-lex-rule & formulaic-causative-to-arg-tr-op-lex-rule & 
+  [ SYNSEM.LOCAL.CAT.VAL [ SUBJ.FIRST.LOCAL.CAT.HEAD.CASE erg, 
+                           COMPS.REST.FIRST.LOCAL.CAT.HEAD.CASE all ] ].
 
 qi-very-rule-dtr := word-or-lexrule.
 
@@ -3354,11 +3428,8 @@ case_ending-lex-rule-super := add-only-no-ccont-rule & infl-lex-rule &
   [ INFLECTED [ CASE_ENDING-FLAG +,
                 TRANS_ONLY_V-VERB-FLAG #trans_only_v-verb,
                 V_END-OR-V_END_NEG-FLAG #v_end-or-v_end_neg,
-                ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass,
                 SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
                 TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb_neg-or-trans_verb_neg-or-v_end-or-v_end_neg,
-                HAB-FLAG #hab,
-                TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass,
                 TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb-or-trans_clause_verb_neg-or-v_end-or-v_end_neg,
                 TRANS_VALCHG-FLAG #trans_valchg,
                 NULL_HTR-FLAG #null_htr,
@@ -3372,11 +3443,8 @@ case_ending-lex-rule-super := add-only-no-ccont-rule & infl-lex-rule &
     DTR ques-determiner-lex &
         [ INFLECTED [ TRANS_ONLY_V-VERB-FLAG #trans_only_v-verb,
                       V_END-OR-V_END_NEG-FLAG #v_end-or-v_end_neg,
-                      ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass,
                       SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
                       TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb_neg-or-trans_verb_neg-or-v_end-or-v_end_neg,
-                      HAB-FLAG #hab,
-                      TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass,
                       TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb-or-trans_clause_verb_neg-or-v_end-or-v_end_neg,
                       TRANS_VALCHG-FLAG #trans_valchg,
                       NULL_HTR-FLAG #null_htr,
@@ -3429,11 +3497,8 @@ basic-num_case_end-lex-rule-super := head-change-only-lex-rule &
                        VAL.SUBJ empty-slash-list ], 
     INFLECTED [ TRANS_ONLY_V-VERB-FLAG #trans_only_v-verb,
                 V_END-OR-V_END_NEG-FLAG #v_end-or-v_end_neg,
-                ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass,
                 SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
                 TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb_neg-or-trans_verb_neg-or-v_end-or-v_end_neg,
-                HAB-FLAG #hab,
-                TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass,
                 TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb-or-trans_clause_verb_neg-or-v_end-or-v_end_neg,
                 TRANS_VALCHG-FLAG #trans_valchg,
                 CASE_ENDING-FLAG #case_ending,
@@ -3447,11 +3512,8 @@ basic-num_case_end-lex-rule-super := head-change-only-lex-rule &
     DTR num_case_end-rule-dtr &
         [ INFLECTED [ TRANS_ONLY_V-VERB-FLAG #trans_only_v-verb,
                       V_END-OR-V_END_NEG-FLAG #v_end-or-v_end_neg,
-                      ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass,
                       SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
                       TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb_neg-or-trans_verb_neg-or-v_end-or-v_end_neg,
-                      HAB-FLAG #hab,
-                      TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass,
                       TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb-or-trans_clause_verb_neg-or-v_end-or-v_end_neg,
                       TRANS_VALCHG-FLAG #trans_valchg,
                       CASE_ENDING-FLAG #case_ending,
@@ -3505,7 +3567,8 @@ sg_erg_attr_adj-lex-rule := erg_attr_adj-lex-rule & sg_attr_adj-lex-rule.
 
 pl_erg_attr_adj-lex-rule := erg_attr_adj-lex-rule & pl_attr_adj-lex-rule.
 
-ins_attr_adj-lex-rule := same-head-lex-rule & infl-lex-rule & posthead-plus-lex-rule &
+;;; 2026-09-01 remove POSTHEAD +
+ins_attr_adj-lex-rule := same-head-lex-rule & infl-lex-rule &
   [ SYNSEM.LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.HEAD.CASE ins ].
 
 sg_ins_attr_adj-lex-rule := ins_attr_adj-lex-rule & sg_attr_adj-lex-rule.
@@ -3516,46 +3579,48 @@ pl_ins_attr_adj-lex-rule := ins_attr_adj-lex-rule & pl_attr_adj-lex-rule.
 loc_attr_adj-lex-rule := same-head-lex-rule & infl-lex-rule & posthead-plus-lex-rule &
   [ SYNSEM.LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.HEAD.CASE loc ].
 
-incorp_attr_adj-lex-rule := num_case_end-lex-rule-super &
-  [ SYNSEM.LOCAL.CAT.HEAD adj & [ INCORP +, 
-                            MOD #mod, 
-                            PRD #prd, 
-                            KEYS #keys, 
-                            PRON #pron, 
-                            POSSESSOR #possessor,
-                            SPEC-INIT #specinit, 
-                            INIT #init ], 
-    DTR.SYNSEM.LOCAL.CAT.HEAD [ MOD #mod, 
-                                PRD #prd, 
-                                KEYS #keys, 
-                                PRON #pron, 
-                                POSSESSOR #possessor,
-                                SPEC-INIT #specinit, 
-                                INIT #init ] ].
+; incorp_attr_adj-lex-rule := num_case_end-lex-rule-super &
+;   [ SYNSEM.LOCAL.CAT.HEAD adj & [ INCORP +, 
+;                             MOD #mod, 
+;                             PRD #prd, 
+;                             KEYS #keys, 
+;                             PRON #pron, 
+;                             POSSESSOR #possessor,
+;                             SPEC-INIT #specinit, 
+;                             INIT #init ], 
+;     DTR.SYNSEM.LOCAL.CAT.HEAD [ MOD #mod, 
+;                                 PRD #prd, 
+;                                 KEYS #keys, 
+;                                 PRON #pron, 
+;                                 POSSESSOR #possessor,
+;                                 SPEC-INIT #specinit, 
+;                                 INIT #init ] ].
 
-sg_incorp_attr_adj-lex-rule := incorp_attr_adj-lex-rule & sg_attr_adj-lex-rule.
+; sg_incorp_attr_adj-lex-rule := incorp_attr_adj-lex-rule & sg_attr_adj-lex-rule.
 
-pl_incorp_attr_adj-lex-rule := incorp_attr_adj-lex-rule & pl_attr_adj-lex-rule.
+; pl_incorp_attr_adj-lex-rule := incorp_attr_adj-lex-rule & pl_attr_adj-lex-rule.
 
-sg_incorp_real_v_attr_adj-lex-rule := infl-lex-rule & sg_incorp_attr_adj-lex-rule & 
-  [ SYNSEM.LOCAL.CAT.POSTHEAD - ]. 
+; sg_incorp_real_v_attr_adj-lex-rule := infl-lex-rule & sg_incorp_attr_adj-lex-rule & 
+;   [ SYNSEM.LOCAL.CAT.POSTHEAD - ]. 
 
-pl_incorp_real_v_attr_adj-lex-rule := pl_incorp_attr_adj-lex-rule & 
-  [ SYNSEM.LOCAL.CAT.POSTHEAD - ]. 
+; pl_incorp_real_v_attr_adj-lex-rule := pl_incorp_attr_adj-lex-rule & 
+;   [ SYNSEM.LOCAL.CAT.POSTHEAD - ]. 
 
-sg_incorp_npred_attr_adj-lex-rule := const-lex-rule & sg_incorp_attr_adj-lex-rule & posthead-plus-lex-rule.
+; sg_incorp_npred_attr_adj-lex-rule := const-lex-rule & sg_incorp_attr_adj-lex-rule & posthead-plus-lex-rule.
 
-pl_incorp_npred_attr_adj-lex-rule := pl_incorp_attr_adj-lex-rule & posthead-plus-lex-rule.
+; pl_incorp_npred_attr_adj-lex-rule := pl_incorp_attr_adj-lex-rule & posthead-plus-lex-rule.
 
 sg_loc_attr_adj-lex-rule := loc_attr_adj-lex-rule & sg_attr_adj-lex-rule.
 
 pl_loc_attr_adj-lex-rule := loc_attr_adj-lex-rule & pl_attr_adj-lex-rule.
 ;;;endmod
 
+noun-adj-pred-rule-dtr := word-or-lexrule.
+
 ;;;mod
 nouny_adj_pred_affix-lex-rule-super := add-only-no-ccont-rule & infl-lex-rule & tense-rule-dtr & 
   [ INFLECTED #inflected,
-    DTR nouny_adj-adj-lex & [ INFLECTED #inflected ] ].
+    DTR noun-adj-pred-rule-dtr & [ INFLECTED #inflected ] ].
 
 adj_pred_u-lex-rule := nouny_adj_pred_affix-lex-rule-super.
 
@@ -3591,9 +3656,8 @@ scopal-rel-lex-rule := lex-rule &
     DTR.SYNSEM.LOCAL [ CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX #arg2 ] >,
                        CONT.HOOK.LTOP #scoped ] ].
 
-;;;mod   SUBJ and COMPS.FIRST now has noun HEAD
-causative-to-arg2-itr-op-lex-rule := scopal-rel-lex-rule & same-spr-lex-rule & same-spec-lex-rule &
-  [ SYNSEM.LOCAL.CAT.VAL [ SUBJ < [ LOCAL.CAT [ VAL [ SPR < >,
+formulaic-causative-to-arg-intr-op-lex-rule := same-spr-lex-rule & same-spec-lex-rule &
+[ SYNSEM.LOCAL.CAT.VAL [ SUBJ < [ LOCAL.CAT [ VAL [ SPR < >,
                                                       COMPS < > ], 
                                                 HEAD noun ] ] >,
                            COMPS < [ LOCAL [ CONT.HOOK.INDEX #arg2,
@@ -3607,6 +3671,9 @@ causative-to-arg2-itr-op-lex-rule := scopal-rel-lex-rule & same-spr-lex-rule & s
                                                       VAL #val ] ],
                                         NON-LOCAL #nl ] >,
                                COMPS < > ] ].
+
+;;;mod   SUBJ and COMPS.FIRST now has noun HEAD
+causative-to-arg2-itr-op-lex-rule := scopal-rel-lex-rule & formulaic-causative-to-arg-intr-op-lex-rule.
 
 ;;;mod   SUBJ now has empty SPR and noun HEAD
 obj-prom-from-arg1of2-op-lex-rule := subj-and-comps-change-only-lex-rule &
@@ -3634,7 +3701,7 @@ obj-prom-from-arg1of2-op-lex-rule := subj-and-comps-change-only-lex-rule &
 ;                                         NON-LOCAL #nl ] >,
 ;                                COMPS < #comp > ] ].
 
-causative-to-arg2-tr-op-lex-rule := scopal-rel-lex-rule & same-spr-lex-rule & same-spec-lex-rule &
+formulaic-causative-to-arg-tr-op-lex-rule := same-spr-lex-rule & same-spec-lex-rule &
   [ SYNSEM.LOCAL.CAT.VAL [ SUBJ < [ LOCAL.CAT [ VAL [ SPR < >,
                                                       COMPS < > ], 
                                                 HEAD noun ] ] >,
@@ -3649,6 +3716,8 @@ causative-to-arg2-tr-op-lex-rule := scopal-rel-lex-rule & same-spr-lex-rule & sa
                                                       VAL #val ] ],
                                         NON-LOCAL #nl ] >,
                                COMPS < #comp > ] ].
+
+causative-to-arg2-tr-op-lex-rule := scopal-rel-lex-rule & formulaic-causative-to-arg-tr-op-lex-rule.
 
 ;;; March 6th, 2025: add empty SPR to new SUBJ
 obj-prom-from-arg3of3-op-lex-rule := subj-and-comps-change-only-lex-rule &
@@ -3892,7 +3961,8 @@ morphological-subord-clause-phrase-1 := unary-phrase & unary-nonloc-phrase &
                                   VAL [ SUBJ #subj,
                                         SPR < >,
                                         COMPS < > ] ],
-                            CONT.HOOK.LTOP #scl,
+                            CONT.HOOK [ LTOP #scl, 
+                                        INDEX.SF prop ],
                             COORD - ] ] > ].
 
 ;;;mod   delete #feat
@@ -4029,6 +4099,8 @@ head-mod-phrase :+ [ NON-HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD.UXP - ].
 unexpr-np-top-coord-rule := base-basic-np-top-coord-rule & unexpressed-coord-phrase.
 unexpr-apoly-top-coord-rule := base-apoly-top-coord-rule & unexpressed-coord-phrase.
 
+
+;; TODO: NON-LOCAL.CONJP is not correct here
 unexpr-3rd-np-top-coord-rule := unexpr-np-top-coord-rule & unexpr-apoly-top-coord-rule & same-crf-unary-phrase & 
   [ SYNSEM.LOCAL [ COORD-STRAT "1", 
                    CONT.HOOK.INDEX.PNG [ PER #per & 1st+2nd, NUM pl ], 
@@ -4037,10 +4109,11 @@ unexpr-3rd-np-top-coord-rule := unexpr-np-top-coord-rule & unexpr-apoly-top-coor
                               UXP + ] ], 
     C-CONT.ICONS.LIST < #ikey & non-focus & [ IARG1 #ckey,
 					                                    IARG2 #index ] >,
-    LCOORD-DTR.SYNSEM.LOCAL.CONT.HOOK [ INDEX #index & [ PNG [ PER #per, NUM sg ], 
+    LCOORD-DTR.SYNSEM [ LOCAL.CONT.HOOK [ INDEX #index & [ PNG [ PER #per, NUM sg ], 
                                                          COG-ST in-foc ], 
                                         ICONS-KEY #ikey,
-		                                    CLAUSE-KEY #ckey ],
+		                                    CLAUSE-KEY #ckey ], 
+                        NON-LOCAL.CONJP.LIST < > ],
     RCOORD-DTR.SYNSEM.LOCAL [ CONT.HOOK.INDEX.PNG [ PER 3rd, NUM sg ], 
                               CAT.HEAD.CASE #case ] ].
 
@@ -4148,6 +4221,9 @@ right-cntp-s2-top-coord-rule := s2-top-coord-rule &
     RCOORD-DTR.SYNSEM.LOCAL.CONT.HOOK.INDEX [ E.MOOD contemporative,
                                               SF #sf ] ].
 
+right-cntp-s2-top-coord-rule :+ 
+  [ RCOORD-DTR.SYNSEM.LOCAL.CAT.HEAD.PRD na-or-+ ].
+
 both-ind-s1-top-coord-rule := s1-top-coord-rule & 
   [ SYNSEM.PUNCT.MPUNCT #rpunct,
     LCOORD-DTR.SYNSEM [ LOCAL.CONT.HOOK.INDEX.E.MOOD indicative, 
@@ -4162,6 +4238,8 @@ runon-top-coord-rule := basic-s-top-coord-rule & apoly-top-coord-rule &
                         PUNCT.RPUNCT comma-punct ], 
     RCOORD-DTR.SYNSEM [ LOCAL.CONT.HOOK.INDEX.E.MOOD matrix_mood, 
                         PUNCT.LPUNCT no-punct ] ].
+
+s-coord-phrase :+ [ C-CONT.ICONS.LIST < > ].
 
 ;;; CCH 2025-11-15 banning DUR explosion
 basic-s-top-coord-rule :+ [ SYNSEM.LOCAL.CAT.HEAD.DUR - ].
@@ -4221,6 +4299,8 @@ s-bottom-coord-phrase_2 :+
   [ SYNSEM.LOCAL.COORD-REL.R-HNDL #ltop, 
     NONCONJ-DTR.SYNSEM.LOCAL.CONT.HOOK.LTOP #ltop ].
 
+s-bottom-coord-phrase_2 :+ [ C-CONT.ICONS.LIST < > ].
+
 vp1-bottom-coord-rule :+ 
   [ SYNSEM.LOCAL.COORD-REL.R-HNDL #ltop, 
     NONCONJ-DTR.SYNSEM.LOCAL.CONT.HOOK.LTOP #ltop ].
@@ -4268,7 +4348,7 @@ adj1-top-coord-rule :+
   ;                                INDEX #mainev ] ].
 
 ;;; CCH 2025-12-06 temporarily put the long-distance dependency of =guuq in CONJP; might rename it to CLTC-R (clitic relation) if necessary
-guuq-lex := zero-arg-conjp & no-crf-lex-item & basic-non-wh-word-lex & 
+guuq-lex := zero-arg-conjp & no-crf-lex-item & basic-non-wh-word-lex & no-icons-lex-item & 
   [ SYNSEM [ LOCAL [ CAT [ HEAD adv & [ MOD < [ LIGHT +, 
                                                 LOCAL intersective-mod, 
                                                 L-PERIPH + ] > ], 
@@ -4315,7 +4395,7 @@ evid-unary-phrase := same-crf-unary-phrase &
                                   SLASH #slash, 
                                   QUE #que ] ] ] > ].
 
-base-conj-lex := no-hcons-lex-item & zero-arg-conjp & no-crf-lex-item & 
+base-conj-lex := no-hcons-lex-item & zero-arg-conjp & no-crf-lex-item & no-icons-lex-item & 
   [ SYNSEM [ LOCAL [ CAT [ VAL [ SPR < >,
                                 COMPS < >,
                                 SUBJ < >,
@@ -4355,11 +4435,6 @@ basic-filler-phrase :+ [ SYNSEM.NON-LOCAL [ CONJP.LIST < >,
 
 basic-extracted-adj-phrase :+ [ SYNSEM.NON-LOCAL.CONJP #conjp,
                                 HEAD-DTR.SYNSEM.NON-LOCAL.CONJP #conjp ].
-
-coord-phrase :+ 
-  [ SYNSEM.NON-LOCAL.CONJP.APPEND < #conjp1, #conjp2 >,
-    LCOORD-DTR.SYNSEM.NON-LOCAL.CONJP #conjp1,
-    RCOORD-DTR.SYNSEM.NON-LOCAL.CONJP #conjp2 ].
 
 basic-binary-phrase :+ 
   [ SYNSEM [ L-PERIPH #periph,
@@ -4426,6 +4501,7 @@ pp-phrase := unary-phrase &
 		   [ LBL #ltop,
 		     ARG0 #index,
 		     ARG1 #xarg,
+       
 		     ARG2 #dtr ] >,
 	     HCONS.LIST < >  ],
 	  ARGS < [ SYNSEM [ NON-LOCAL #nl,
@@ -4452,7 +4528,7 @@ abs-time-pp-phrase := pp-phrase &
                                          MIN time-relation,
                                          PRON -, 
                                          NMZ - ] ],
-                        NON-LOCAL non-local-none ] ].
+                        NON-LOCAL non-local-sqr-none ] ].
 
 locative-pp-phrase := pp-phrase & 
   [ C-CONT.RELS.LIST.FIRST.PRED "_loc_p_rel", 
@@ -4485,7 +4561,6 @@ head-adj-int-phrase2 := head-adj-int-phrase &
     HEAD-DTR.SYNSEM [ LOCAL.CAT.POSSESSUM #possessum, 
                       NON-LOCAL.CONJP.LIST < > ], 
     NON-HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD [ PRD na-or--, 
-                                         INCORP na-or--, 
                                          DBT na-or--, 
                                          DUR na-or-- ] ].
 
@@ -4509,14 +4584,17 @@ base-unary-bottom-coord-rule :+ [ SYNSEM.NON-LOCAL.CONJP.LIST < > ].
 ;;; 2025-11-12 add phr-synsem because we want [LIGHT -] for punct-phrase
 adj-head-int-phrase2 := adj-head-int-phrase & 
   [ SYNSEM phr-synsem, 
-    NON-HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD [ INCORP na-or--, 
-                                         PRD na-or--, 
+    NON-HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD [ PRD na-or--, 
                                          DBT na-or--,
                                          DUR na-or-- ] ].
+
+adj-head-int-phrase2 :+ 
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD +vj ].
 
 ;;; Noun incorporation and Adjective modification
 
 ;;;mod NP Pred  & non-local-none
+;;; CCH 2026-08-26 remove CASE abs requirement of SUBJ
 noun_pred_affix-lex-rule-super := same-non-local-lex-rule & infl-lex-rule & tense-rule-dtr & modal-rule-dtr & 
   [ INFLECTED [ TENSE-FLAG -,
                 NEG_V_END_FLAG na-or--, 
@@ -4537,7 +4615,7 @@ noun_pred_affix-lex-rule-super := same-non-local-lex-rule & infl-lex-rule & tens
                                                                           SPEC #spec ] ], 
                                                               CONT #n-cont ],
                                             NON-LOCAL #nl ] >, 
-                               SUBJ < [ LOCAL [ CAT cat-sat & [ HEAD noun & [ CASE abs ], 
+                               SUBJ < [ LOCAL [ CAT cat-sat & [ HEAD noun, 
                                                                 VAL.SPR < > ],
                                                 CONT.HOOK.INDEX #xarg ] ] > ] ],
              NON-LOCAL #nl ],
@@ -4576,87 +4654,70 @@ noun_pred_irute-lex-rule := noun_pred_affix-lex-rule-super &
 incorp-verb-dtr := word-or-lexrule.
 
 ;;; 2025-11-13 add [PRD na-or--]
-incorp-lex-rule := lex-rule & 
+incorp-lex-rule := same-non-local-lex-rule & 
   [ SYNSEM [ LOCAL [ CAT [ HEAD verb & [ INCORP +, 
-                                         MOD null, 
+                                        ;  MOD null, 
                                          SPEC-INIT +, 
                                          PRD na-or--, 
                                          DUR - ], 
                            VAL [ SPR < >, 
                                  SPEC < >,
-                                 INCORP-N < [ LOCAL [ CAT [ HEAD #n-hd, 
-                                                            VAL [ SUBJ #subj, 
-                                                                  SPR #spr, 
-                                                                  SPEC #spec ] ], 
-                                                      CONT #n-cont & [ HOOK [LTOP #larg, INDEX #arg2 ] ] ],
-                                              NON-LOCAL #nl ] > ] ] ] ], 
-    DTR noun_incorp-rule-dtr & [ SYNSEM [ LOCAL [ CAT [ HEAD #n-hd, 
-                                                        VAL [ SUBJ #subj, 
-                                                              SPR #spr, 
-                                                              SPEC #spec ] ], 
-                                                  CONT #n-cont & [ HOOK [LTOP #larg, INDEX #arg2 ] ] ],
-                                          NON-LOCAL #nl ] ] ].
+                                 INCORP-N < [ LOCAL.CONT.HOOK #hook ] > ] ] ] ], 
+    C-CONT [ RELS.LIST.REST.FIRST quant-relation & [ PRED "exist_q_rel",
+                                                          ARG0 #incorp-arg,
+                                                          RSTR #harg ], 
+              HCONS.LIST < qeq & [ HARG #harg, LARG #larg ] >,
+              ICONS.LIST < > ],
+    DTR noun_incorp-rule-dtr & [ SYNSEM [ LOCAL [ CAT.HEAD noun, 
+                                                  CONT.HOOK #hook & [ LTOP #larg, 
+                                                                    INDEX #incorp-arg ] ] ] ] ].
+
 
 ;;2025-11-10 add COMPS from noun
-common-incorp-lex-rule := incorp-lex-rule & 
+intrans-incorp-lex-rule := incorp-lex-rule & 
   [ SYNSEM.LOCAL.CAT.VAL [ COMPS #comps, 
                            INCORP-N < [ LOCAL.CAT.VAL.COMPS < > ] >,
                            --KEYCOMP non-synsem ], 
     C-CONT [  HOOK [ LTOP #lbl,
                      XARG #xarg,
                      INDEX #ind ],
-              RELS.LIST < arg12-ev-relation &
+              RELS.LIST.FIRST arg12-ev-relation &
                   [ LBL #lbl,
                     ARG0 #ind,
                     ARG1 #xarg,
-                    ARG2 #arg2],
-                  quant-relation & [ PRED "exist_q_rel",
-                                     ARG0 #arg2,
-                                     RSTR #harg ] >,
-              HCONS.LIST < qeq & [ HARG #harg, LARG #larg ] >,
-              ICONS.LIST < > ], 
-    DTR.SYNSEM.LOCAL [ CONT.HOOK [ LTOP #larg, INDEX #arg2 ], 
+                    ARG2 #arg2] ], 
+    DTR.SYNSEM.LOCAL [ CONT.HOOK.INDEX #arg2, 
                        CAT.VAL.COMPS #comps ] ].
 
 ;;; 2025-03-25 this [ SPEC-INIT + ] should be temporary
 incorp-lex-rule-super := infl-lex-rule & incorp-lex-rule & 
-  [ INFLECTED [ NEG_V_END_FLAG na-or--, 
+  [ SYNSEM.NON-LOCAL.SLASH.LIST < >,
+    INFLECTED [ NEG_V_END_FLAG na-or--, 
                 CL_Q_TRANS_V-VERB-OR-CL_TRANS_V-VERB-FLAG na ] ].
 
-incorp-verb-lex-rule := incorp-lex-rule-super & tense-rule-dtr & same-non-local-lex-rule & aspect-rule-dtr & modal-rule-dtr & 
+incorp-verb-lex-rule := incorp-lex-rule-super & 
   [ SYNSEM [ LOCAL.CAT [ HEAD [ DBT -, 
-                                DUR - ], 
-                         VAL.INCORP-N.FIRST.NON-LOCAL.QUE #que ], 
-             NON-LOCAL [ SLASH.LIST < >,
-                         REL.LIST < >,    
-                         QUE #que,                      
+                                MOD null, 
+                                DUR - ] ], 
+             NON-LOCAL [ REL.LIST < >,                      
                          CONJP.LIST < > ] ], 
     INFLECTED [ TENSE-FLAG -, 
                 V_END-OR-V_END_NEG-FLAG - ] ].
 
-incorp-part-lex-rule := incorp-lex-rule-super & common-incorp-lex-rule & part_num_case-rule-dtr & 
+;;; 2026-06-22 remove SPR <> in SLASH/MOD
+incorp-part-lex-rule := incorp-lex-rule-super & intrans-incorp-lex-rule & part_num_case-rule-dtr & 
   [ INFLECTED.NUM_CASE_END-FLAG -, 
     SYNSEM [ LOCAL.CAT.HEAD.PRD -, 
-             NON-LOCAL [ QUE #que, 
-                         REL #rel, 
-                         CRF.LIST #crf, 
-                         CRF-H.LIST #crf-h, 
-                         SLASH.LIST < [ CAT cat-sat & [ HEAD noun, 
-                                                      VAL.SPR < > ] ] >, 
-                         CONJP #conjp ] ],
-    C-CONT.HOOK.INDEX.SF prop, 
-    DTR.SYNSEM.NON-LOCAL [ QUE #que, 
-                           REL #rel, 
-                           CRF.LIST #crf & < >, 
-                           CRF-H.LIST #crf-h & < >, 
-                           SLASH.LIST < > ], 
-    DTR [ SYNSEM [ NON-LOCAL [ SLASH.LIST < >, 
-                               CONJP #conjp ] ] ]    ].
+             LOCAL.CAT.HEAD.REL-FY -, 
+             LOCAL.CAT.HEAD.MOD < [ LOCAL.CAT cat-sat & [ HEAD noun ] ] >,
+             NON-LOCAL [ CRF.LIST < >, 
+                         CRF-H.LIST < > ] ],
+    C-CONT.HOOK.INDEX.SF prop ].
 
 intrans-part-like-incorp-lex-rule := incorp-part-lex-rule & 
   [ SYNSEM [ LOCAL.CAT [ HEAD.REF -, 
                          VAL.SUBJ < > ], 
-             NON-LOCAL.SLASH.LIST < [ CONT.HOOK.INDEX #xarg ] > ], 
+             LOCAL.CAT.HEAD.MOD < [ LOCAL.CONT.HOOK.INDEX #xarg ] > ], 
     C-CONT.HOOK.XARG #xarg ].
 
 pass-part-like-incorp-lex-rule := incorp-part-lex-rule & 
@@ -4664,7 +4725,7 @@ pass-part-like-incorp-lex-rule := incorp-part-lex-rule &
                          VAL.SUBJ < [ LOCAL [ CAT cat-sat & [ HEAD noun & [ CASE erg ], 
                                                             VAL.SPR < > ],
                                             CONT.HOOK.INDEX #xarg ] ] > ], 
-             NON-LOCAL.SLASH.LIST < [ CONT.HOOK.INDEX #arg2 ] >], 
+             LOCAL.CAT.HEAD.MOD < [ LOCAL.CONT.HOOK.INDEX #arg2 ] >], 
     C-CONT.HOOK.XARG #xarg, 
     DTR.SYNSEM.LOCAL.CONT.HOOK.INDEX #arg2 ].
 
@@ -4677,8 +4738,14 @@ siaq-part-lex-rule := pass-part-like-incorp-lex-rule &
 lijaq-part-lex-rule := pass-part-like-incorp-lex-rule & 
   [ C-CONT.RELS.LIST.FIRST.PRED "_make_v_rel" ].
 
-common-incorp-verb-lex-rule := incorp-verb-lex-rule & common-incorp-lex-rule & 
-  [ SYNSEM.LOCAL.CAT.VAL [ SUBJ < [ LOCAL [ CAT cat-sat & [ HEAD noun & [ CASE abs ], 
+c-cont-icons-subj-link-lex-rule := lex-rule & 
+  [ C-CONT.HOOK.INDEX #ind, 
+    SYNSEM.LOCAL.CAT.VAL.SUBJ.FIRST.LOCAL.CONT.HOOK [ ICONS-KEY.IARG1 #ind,
+                                                      CLAUSE-KEY #ind] ].
+
+;;; CCH 2026-08-26 remove CASE abs requirement on SUBJ
+intrans-incorp-verb-lex-rule := incorp-verb-lex-rule & intrans-incorp-lex-rule & tense-rule-dtr & aspect-rule-dtr & modal-rule-dtr & 
+  [ SYNSEM.LOCAL.CAT.VAL [ SUBJ < [ LOCAL [ CAT cat-sat & [ HEAD noun, 
                                                             VAL.SPR < > ],
                                             CONT.HOOK [ INDEX #xarg, 
                                                         ICONS-KEY.IARG1 #ind, 
@@ -4695,19 +4762,12 @@ trans-incorp-verb-lex-rule := incorp-verb-lex-rule & null_htr-rule-dtr &
                                                   CONT.HOOK [ ICONS-KEY.IARG1 #ind, 
                                                               CLAUSE-KEY #ind ] ] ] >, 
                              --KEYCOMP #mark-obj ] ],
-    C-CONT [  HOOK.INDEX #ind,
-              RELS.LIST.REST.FIRST quant-relation & [ PRED "exist_q_rel",
-                                                          ARG0 #incorp-n,
-                                                          RSTR #harg ], 
-              HCONS.LIST < qeq & [ HARG #harg, LARG #larg ] >,
-              ICONS.LIST < > ], 
-    DTR.SYNSEM.LOCAL.CONT.HOOK [ LTOP #larg, 
-                                 INDEX #incorp-n ] ].
+    C-CONT.HOOK.INDEX #ind ].
 
 ;;; TODO: incorporating complements of rel-noun or not?
 ;;; Alternative: adj must MOD noun with COMPS < >. this ensures first complementing.
 ;;; for incorp, there is a special case of head-complement and head-opt-comp (???)
-incorp-poss-verb-lex-rule := trans-incorp-verb-lex-rule & 
+incorp-poss-verb-lex-rule := trans-incorp-verb-lex-rule & nnik_antipass-rule-dtr & 
   [ SYNSEM.LOCAL.CAT [ VAL [ SUBJ < [ LOCAL.CONT.HOOK [ INDEX #subj-arg, 
                                                         ICONS-KEY.IARG1 #poss-e,
                                                         CLAUSE-KEY #poss-e ] ] >, 
@@ -4752,25 +4812,25 @@ normal-trans-incorp-verb-lex-rule := trans-incorp-verb-lex-rule &
 liq-provide-lex-rule := normal-trans-incorp-verb-lex-rule & both_p_reflex-lex-rule-dtr & 
  [ C-CONT.RELS.LIST.FIRST.PRED "_provide+with_v_rel" ].
 
-qaq-incorp-lex-rule := common-incorp-verb-lex-rule & 
+qaq-incorp-lex-rule := intrans-incorp-verb-lex-rule & 
  [ C-CONT.RELS.LIST.FIRST.PRED "_have_v_rel" ].
 
-tuq-incorp-lex-rule := common-incorp-verb-lex-rule & 
+tuq-incorp-lex-rule := intrans-incorp-verb-lex-rule & 
  [ C-CONT.RELS.LIST.FIRST.PRED "_consume_v_rel" ].
 
-siuq-incorp-lex-rule := common-incorp-verb-lex-rule & 
+siuq-incorp-lex-rule := intrans-incorp-verb-lex-rule & 
  [ C-CONT.RELS.LIST.FIRST.PRED "_search+for_v_rel" ].
 
-si-incorp-lex-rule := common-incorp-verb-lex-rule & 
+si-incorp-lex-rule := intrans-incorp-verb-lex-rule & 
  [ C-CONT.RELS.LIST.FIRST.PRED "_buy_v_rel" ].
 
-t-catch-incorp-lex-rule := common-incorp-verb-lex-rule & 
+t-catch-incorp-lex-rule := intrans-incorp-verb-lex-rule & 
  [ C-CONT.RELS.LIST.FIRST.PRED "_catch_v_rel" ].
 
-liaq-incorp-lex-rule := common-incorp-verb-lex-rule & 
+liaq-incorp-lex-rule := intrans-incorp-verb-lex-rule & 
  [ C-CONT.RELS.LIST.FIRST.PRED "_travel+to_v_rel" ].
 
-liuq-incorp-lex-rule := common-incorp-verb-lex-rule & 
+liuq-incorp-lex-rule := intrans-incorp-verb-lex-rule & 
  [ C-CONT.RELS.LIST.FIRST.PRED "_make_v_rel" ].
 
 ;;; INCORP-N is the incorporated noun to be exposed to modification.
@@ -4840,6 +4900,13 @@ incorp-head-mod-phrase-simple := head-mod-phrase & binary-nonloc-phrase & binary
 
 incorp-head-mod-phrase-simple :+ [ SYNSEM.LIGHT - ].
 
+incorp-head-mod-phrase-simple :+ [ NON-HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD.REL-FY + ].
+
+;;; CCH 2026-08-25 add
+incorp-head-mod-phrase-simple :+ 
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD.FORM "non-neq", 
+    NON-HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD.FORM "non-neq" ].
+
 incorp-adj-head-phrase := incorp-head-mod-phrase-simple & head-final &
   [ SYNSEM.LOCAL.CAT.VAL.INCORP-N.FIRST [ LOCAL.CAT.POSTHEAD #ph,
 	     MODIFIED lmod & [ PERIPH #periph ] ],
@@ -4863,33 +4930,44 @@ incorp-head-adj-phrase := incorp-head-mod-phrase-simple & head-initial & phrasal
     NON-HEAD-DTR.SYNSEM [ LOCAL.CAT [ VAL.SPR olist,
                                       POSTHEAD + ] ] ].
 
+incorp-adj-head-phrase :+ 
+  [ NON-HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL.CAT.HEAD.CASE ins ] > ].
+
+incorp-head-adj-phrase :+ 
+  [ NON-HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL.CAT.HEAD.CASE abs ] > ].
+
 incorp-adj-head-int-phrase := incorp-adj-head-phrase & incorp-isect-mod-phrase &
   [ HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD verb & [ INCORP +, PRD na-or-- ], 
     NON-HEAD-DTR.SYNSEM.LOCAL.CAT [ POSTHEAD -, 
-                                    HEAD +nvj & [ INCORP + ] ] ].
+                                    HEAD +nvj ] ].
 
 incorp-head-adj-int-phrase := incorp-head-adj-phrase & incorp-isect-mod-phrase &
   [ HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD verb & [ INCORP +, PRD + ], 
     NON-HEAD-DTR.SYNSEM.LOCAL.CAT [ POSTHEAD +, 
-                                    HEAD adj & [ INCORP + ] ] ].
+                                    HEAD adj ] ].
 
-ext-rel-mod-phrase := rel-mod-phrase &
-  [ SYNSEM.LOCAL.CAT [ HEAD.INCORP -, 
-                       POSTHEAD + ] ].
+; ext-rel-mod-phrase := rel-mod-phrase &
+;   [ SYNSEM.LOCAL.CAT [ HEAD.INCORP -, 
+;                        POSTHEAD + ] ].
 
-incorp-rel-mod-phrase := rel-mod-phrase & 
-  [ SYNSEM.LOCAL.CAT [ HEAD [ INCORP +, 
-                              MOD.FIRST.LOCAL.CAT.HEAD.CASE ins ], 
-                       POSTHEAD - ] ].
+; incorp-rel-mod-phrase := rel-mod-phrase & 
+;   [ SYNSEM.LOCAL.CAT [ HEAD [ INCORP +, 
+;                               MOD.FIRST.LOCAL.CAT.HEAD.CASE ins ], 
+;                        POSTHEAD - ] ].
+
+head-min :+ [ REL-FY bool ].
+adj :+ [ REL-FY + ].
 
 ;;; CCH 2025-12-06 TODO: avoid [ DUB + ]?
 rel-mod-phrase := unary-slash-phrase & same-crf-unary-phrase &
-  [ SYNSEM [ LOCAL [ CAT [ HEAD verb & [ PRD -, 
+  [ SYNSEM [ LOCAL no-mod-local & [ CAT.HEAD.REL-FY +, 
+                                    CAT [ HEAD verb & [ PRD -, 
                                        INIT #init, 
-                                       MOD < [ LOCAL [ CONT.HOOK [ LTOP #m-ltop, 
-                                                                   INDEX #m-index, 
-                                                                   XARG #m-xarg ], 
-                                                         CAT [ HEAD noun & #m-head, 
+                                       MOD #mod & < [ LOCAL [ 
+                                                                  ;  CONT.HOOK [ LTOP #m-ltop, 
+                                                                  ;  INDEX #m-index, 
+                                                                  ;  XARG #m-xarg ], 
+                                                         CAT [ HEAD noun,
                                                                VAL [ SUBJ < >, 
                                                                      COMPS < >, 
                                                                      SPR < [ LOCAL.CAT.HEAD det ] >, 
@@ -4914,7 +4992,7 @@ rel-mod-phrase := unary-slash-phrase & same-crf-unary-phrase &
              SYNSEM.LOCAL.CONT.HOOK [ LTOP #ltop, 
                                       INDEX #index, 
                                       XARG #xarg ],
-             SYNSEM [ LOCAL [ CAT [ HEAD verb & [ PRD -, 
+             SYNSEM [ LOCAL no-mod-local & [ CAT.HEAD.REL-FY -, CAT [ HEAD verb & [ PRD -, MOD #mod, 
                                                   INIT #init ], 
                                   VAL [ SUBJ #subj, 
                                         COMPS #comps, 
@@ -4922,11 +5000,9 @@ rel-mod-phrase := unary-slash-phrase & same-crf-unary-phrase &
                                         SPEC #spec, 
                                         INCORP-N #incorp-n ] ], 
                               COORD - ], 
-                      NON-LOCAL [ SLASH.LIST < [ CONT.HOOK [ LTOP #m-ltop, 
-                                                             INDEX #m-index, 
-                                                             XARG #m-xarg ], 
-                                                 CAT.HEAD #m-head ] >, 
-                                  CONJP #conjp ] ] ] > ].
+                      NON-LOCAL [ CONJP #conjp ] ] ] > ].
+
+basic-head-mod-phrase-simple :+ [ NON-HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD.REL-FY + ].
 
 ;;; TODO: this part-to-noun-phrase can be incorporated, so must be a lexical rule, or parallel forms must exist (?!)
 ;;; another: for -(v)vik, the possessor can "penetrate" through the noun to the prior verb; how is that possible?
@@ -4949,15 +5025,15 @@ part-to-noun-phrase := unary-slash-phrase & same-crf-unary-phrase & phrasal &
                     XARG #xarg ], 
              HCONS.LIST < >, 
              ICONS.LIST < > ],
-    ARGS < [ SYNSEM [ LOCAL [ CAT [ HEAD verb & [ PRD - ],
+    ARGS < [ SYNSEM [ LOCAL [ CAT [ HEAD verb & [ PRD -, REL-FY - ],
                                     VAL [ SUBJ < >, 
                                           COMPS < > ] ], 
                               COORD - ], 
-                      NON-LOCAL [ SLASH.LIST < [ CAT.HEAD #head, 
+                      LOCAL.CAT.HEAD.MOD < [ LOCAL [ CAT.HEAD #head, 
                                                  CONT.HOOK [ LTOP #ltop, 
                                                              INDEX #index, 
-                                                             XARG #xarg ] ] >, 
-                                  CONJP #conjp ] ] ] > ].
+                                                             XARG #xarg ] ] ] >, 
+                       NON-LOCAL.CONJP #conjp ] ] > ].
 
 part-to-noun-with-rel-phrase := part-to-noun-phrase & 
   [ SYNSEM.LOCAL [ CAT.VAL.SPR < [ LOCAL.CAT.HEAD det ] >, 
@@ -5317,14 +5393,12 @@ A compound-relation is introduced.
 """.
 
 noun-mod-unary-phrase := noun-compound-unary-phrase & 
-  [ SYNSEM.LOCAL.CAT [ HEAD [ INCORP - ], 
-                       POSTHEAD +, 
+  [ SYNSEM.LOCAL.CAT [ POSTHEAD +, 
                        HEAD.MOD.FIRST.LOCAL.CAT.HEAD.CASE #case ], 
     ARGS.FIRST.SYNSEM.LOCAL.CAT.HEAD.CASE #case ].
 
 noun-mod-incorp-unary-phrase := noun-compound-unary-phrase & 
-  [ SYNSEM.LOCAL.CAT [ HEAD.INCORP +, 
-                       POSTHEAD - ], 
+  [ SYNSEM.LOCAL.CAT [ POSTHEAD - ], 
     ARGS.FIRST.SYNSEM.LOCAL.CAT.HEAD.CASE ins ].
     
 
@@ -5360,11 +5434,8 @@ demonstr-end-lex-rule-super := add-only-no-ccont-rule &
     INFLECTED [ NUM_CASE_END-FLAG +,
                 TRANS_ONLY_V-VERB-FLAG #trans_only_v-verb,
                 V_END-OR-V_END_NEG-FLAG #v_end-or-v_end_neg,
-                ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass,
                 SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
                 TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb_neg-or-trans_verb_neg-or-v_end-or-v_end_neg,
-                HAB-FLAG #hab,
-                TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass,
                 TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb-or-trans_clause_verb_neg-or-v_end-or-v_end_neg,
                 TRANS_VALCHG-FLAG #trans_valchg,
                 CASE_ENDING-FLAG #case_ending,
@@ -5378,11 +5449,8 @@ demonstr-end-lex-rule-super := add-only-no-ccont-rule &
     DTR demonstr-end-rule-dtr &
         [ INFLECTED [ TRANS_ONLY_V-VERB-FLAG #trans_only_v-verb,
                       V_END-OR-V_END_NEG-FLAG #v_end-or-v_end_neg,
-                      ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass,
                       SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
                       TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb_neg-or-trans_verb_neg-or-v_end-or-v_end_neg,
-                      HAB-FLAG #hab,
-                      TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass,
                       TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb-or-trans_clause_verb_neg-or-v_end-or-v_end_neg,
                       TRANS_VALCHG-FLAG #trans_valchg,
                       CASE_ENDING-FLAG #case_ending,
@@ -5434,11 +5502,8 @@ demonstr-pron-end-lex-rule-super := add-only-no-ccont-rule &
                 NUM_CASE_END-FLAG #num_case_end,
                 TRANS_ONLY_V-VERB-FLAG #trans_only_v-verb,
                 V_END-OR-V_END_NEG-FLAG #v_end-or-v_end_neg,
-                ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass,
                 SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
                 TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb_neg-or-trans_verb_neg-or-v_end-or-v_end_neg,
-                HAB-FLAG #hab,
-                TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass,
                 TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb-or-trans_clause_verb_neg-or-v_end-or-v_end_neg,
                 TRANS_VALCHG-FLAG #trans_valchg,
                 CASE_ENDING-FLAG #case_ending,
@@ -5451,11 +5516,8 @@ demonstr-pron-end-lex-rule-super := add-only-no-ccont-rule &
     DTR demonstr-pron-end-dtr &
         [ INFLECTED [ TRANS_ONLY_V-VERB-FLAG #trans_only_v-verb,
                       V_END-OR-V_END_NEG-FLAG #v_end-or-v_end_neg,
-                      ANTIPASS-OR-PASS-FLAG #antipass-or-nnik_null_pass,
                       SG_ABS_QUES_NOUN-NOUN-FLAG #sg_abs_ques_noun-noun,
                       TRANS_CLAUSE_VERB_NEG-OR-TRANS_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb_neg-or-trans_verb_neg-or-v_end-or-v_end_neg,
-                      HAB-FLAG #hab,
-                      TI_ANTIPASS-OR-NORMAL-OR-TRANS_CAUS_PASS-FLAG #ti_antipass-or-ti_normal-or-trans_caus_pass,
                       TRANS_CLAUSE_VERB-OR-TRANS_CLAUSE_VERB_NEG-OR-V_END-OR-V_END_NEG-FLAG #trans_clause_verb-or-trans_clause_verb_neg-or-v_end-or-v_end_neg,
                       TRANS_VALCHG-FLAG #trans_valchg,
                       CASE_ENDING-FLAG #case_ending,
@@ -5590,6 +5652,12 @@ extracted-subj-phrase := basic-extracted-subj-phrase &
 non-local :+ [ CRF append-list, 
                CRF-H append-list ].
 
+;;; CCH 2025-12-08 change coord-phrase to base-coord-phrase
+base-coord-phrase :+ 
+  [ SYNSEM.NON-LOCAL.CONJP.APPEND < #conjp1, #conjp2 >,
+    LCOORD-DTR.SYNSEM.NON-LOCAL.CONJP #conjp1,
+    RCOORD-DTR.SYNSEM.NON-LOCAL.CONJP #conjp2 ].
+
 coord-phrase :+ 
   [ SYNSEM.NON-LOCAL [ CRF-H.APPEND < #crf-h1, #crf-h2>, 
                        CRF.APPEND < #crf1, #crf2 > ],
@@ -5688,6 +5756,7 @@ local-min :+ [ CRF-UP logical-or ].
 ;;; but they are also [ HEAD.MOD < > ] before the attach-mod-cl. 
 ;;; Probably go for CRF instead, with crf-h-unary always applied (but wasted).
 
+;;; 2026-06-22 remove ARGS.FIRST...MOD < >
 crf-h-unary-phrase := unary-phrase & 
 """
 For 4th person resolution binding to the subject in a *higher* level clause.
@@ -5705,7 +5774,7 @@ This phrase should be involved before becoming the object of a verb taking a cla
              RELS.LIST < >, 
              HCONS.LIST < >, 
              ICONS.LIST < > ], 
-    ARGS.FIRST.SYNSEM [ LOCAL [ CAT #cat & [ HEAD verb & [ MOD < > ], 
+    ARGS.FIRST.SYNSEM [ LOCAL [ CAT #cat & [ HEAD verb, 
                                              VAL [ SUBJ < >, COMPS < > ] ], 
                                 CONT.HOOK #hook, 
                                 COORD - ], 
@@ -6067,8 +6136,13 @@ qanuq-it-lex := wh-q-verb-lex &
 
 ;;;;;;;;;;;;;; NP-Fragment
 
-non-mod-local := local
+no-mod-local := local
 """A local that doesn't allow intersective and scopal mod.""".
+
+can-mod-local := local.
+
+basic-head-mod-phrase-simple :+ 
+  [ HEAD-DTR.SYNSEM.LOCAL can-mod-local ].
 
 head :+ [ ROOT bool ].
 
@@ -6138,14 +6212,32 @@ pp-fragment-phrase := fragment-phrase &
     ARGS.FIRST.SYNSEM.LOCAL [ CAT.HEAD adp & [ MOD.FIRST.LOCAL.CONT.HOOK.INDEX #v-ind ], 
                               CONT.HOOK [ LTOP #ltop ] ] ].
 
+scop-adv-fragment-phrase := fragment-phrase & 
+  [ C-CONT.HOOK [ LTOP #ltop, 
+                  INDEX #v-ind ],
+    ARGS.FIRST.SYNSEM.LOCAL [ CAT.HEAD adv & [ MOD.FIRST root-synsem & [ LOCAL scopal-mod & [ CONT.HOOK.INDEX #v-ind ] ] ], 
+                              CONT.HOOK [ LTOP #ltop ] ] ].
+
+; subord-claus-fragment-phrase := fragment-phrase & 
+;   [ ARGS.FIRST.SYNSEM.LOCAL [ CAT [ MC -,
+;                                     HEAD adp &
+;                                           [ MOD < [ LOCAL scopal-mod &
+;                                                           [ CAT [ HEAD +vj & [ PRD na-or-+ ],
+;                                                                   VAL.COMPS < > ], 
+;                                                             CONT.HOOK.INDEX #mcl ] ] > ] ],
+;                               CONT.HOOK [ LTOP #ltop,
+;                                           INDEX.E.MOOD causative ] ], 
+;     C-CONT.HOOK [ LTOP #ltop, INDEX #mcl ] ].
+
 ;;; -nəq ajuq-
 ;;; TODO: move negation from this thing to ajuq
 ;;; TODO: how to inhibit head-comp before inf-verb-lex? LIGHT? but this unintentionally bans -nerlu ajor-
 ;;; OR maybe we can combique everything before the verb, and just pass something with [ COMPS < > ] to it? [BAD SOLUTION]
 ;;; TODO: position class of -neq wrong? it should not be v_end-rule-dtr, or at least it should not go to aspect-rule-dtr
-inf-verb-lex := trans-first-arg-raising-lex-item & no-icons-lex-item & no-crf-lex-item & non-mod-lex-item & v_end-rule-dtr & 
-  [ SYNSEM.LOCAL [ CAT [ HEAD [ INIT -, 
-                                SPEC-INIT + ], 
+;;; CCH 2025-12-07 remove habitual in more specific lextype and move PRED down to lexicon (at present habitual is controlled by rule-dtr)
+inf-verb-lex := trans-first-arg-raising-lex-item & no-icons-lex-item & no-crf-lex-item & non-mod-lex-item & norm-ltop-lex-item & v_end-rule-dtr & v_neg-rule-dtr & 
+  [ SYNSEM.LOCAL [ CAT [ HEAD verb & [ INIT -, 
+                                       SPEC-INIT + ], 
                          VAL [ SUBJ #subj & cons, 
                               SPR < >, 
                               SPEC < >,
@@ -6158,19 +6250,15 @@ inf-verb-lex := trans-first-arg-raising-lex-item & no-icons-lex-item & no-crf-le
                                                             INDEX #ind ] ], 
                                         LIGHT + ] . #comps >, 
                               --KEYCOMP #kycmp ] ], 
-                   CONT [ HOOK [ LTOP #ltop, 
-                                 XARG #xarg, 
+                   CONT [ HOOK [ XARG #xarg, 
                                  INDEX #ind ], 
-                          RELS.LIST < event-relation &
-                                      [ PRED "neg_rel",
-                                        LBL #ltop,
-                                        ARG1 #harg ] >,
+                          RELS.LIST < event-relation & 
+                                      [ ARG1 #harg ] >,
                           HCONS.LIST < qeq &
                                         [ HARG #harg,
-                                          LARG #larg ] > ] ] ].
-
-ajuq-verb-lex := inf-verb-lex & 
-  [ SYNSEM.LOCAL.CONT.HOOK.INDEX.E.ASPECT habitual ].
+                                          LARG #larg ] > ] ], 
+    INFLECTED [ NEG_V_END_FLAG na-or--, 
+                V_END-OR-V_END_NEG-FLAG - ] ].
 
 ;;; CCH 2025-12-04 C-CONT.HOOK.INDEX is identified with that of MOD because of scopal-mod-phrase.
 ;;; CCH 2025-12-05 TODO: constraining named-relation in this fasion forbids the possibility of calling two persons together
